@@ -10,7 +10,6 @@ from sklearn.svm import SVC
 print("")
 
 filenames = ["features_MAV.csv","features_SSC.csv","features_VAR.csv","features_WL.csv","features_ZC.csv"]
-test_size=0.5
 
 for filename in filenames:
     print("")

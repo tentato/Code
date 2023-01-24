@@ -14,7 +14,6 @@ matplotlib.style.use('ggplot')
 
 # filenames = ["features_WL.csv"]
 filenames = ["features_MAV.csv","features_SSC.csv","features_VAR.csv","features_WL.csv","features_ZC.csv"]
-# filename = "features_WL.csv"
 
 for filename in filenames:
     dataset = pd.read_csv("Code/results/"+filename, sep=",", decimal=".", header=None, 
