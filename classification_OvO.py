@@ -5,7 +5,7 @@ from sklearn.multiclass import OneVsOneClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
-from sklearn.model_selection import StratifiedKFold, train_test_split
+from sklearn.model_selection import RepeatedStratifiedKFold, StratifiedKFold, train_test_split
 from sklearn.svm import SVC
 print("")
 
@@ -17,7 +17,7 @@ for filename in filenames:
     dataset = pd.read_csv("Code/results/"+filename, sep=",", decimal=".", header=None)
     X = dataset.iloc[:, 0:-1].values
     y = dataset.iloc[:, -1].values.astype(int)
-    kfold = StratifiedKFold(n_splits=5,shuffle=True,random_state=11)
+    kfold = RepeatedStratifiedKFold(n_splits=2, n_repeats=5,random_state=11)
     splits = kfold.split(X,y)
 
     model = SVC()
