@@ -4,11 +4,13 @@ import numpy as np
 from sklearn import metrics
 from sklearn.decomposition import PCA
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+from sklearn.multiclass import OneVsOneClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
 from sklearn.model_selection import RepeatedStratifiedKFold, StratifiedKFold, train_test_split
 from sklearn.feature_selection import SelectKBest
+from sklearn.svm import SVC
 print("")
 matplotlib.style.use('ggplot')
 
@@ -72,14 +74,15 @@ for filename in filenames:
         kfold = RepeatedStratifiedKFold(n_splits=2, n_repeats=5,random_state=11)
         splits = kfold.split(X_l,y_f)
 
-        GNB = GaussianNB()
+        # model = GaussianNB()
+        model = SVC()
 
         for n,(train_index,test_index) in enumerate(splits):
             X_prain_fold, X_pest_fold = X_l[train_index], X_l[test_index]
             y_train_fold, y_test_fold = y_f[train_index], y_f[test_index]
-            GNB.fit(X_prain_fold, y_train_fold)
-            predict = GNB.predict(X_pest_fold)
-            print("NB Acc: ",metrics.balanced_accuracy_score(y_test_fold, predict))
+            model.fit(X_prain_fold, y_train_fold)
+            predict = model.predict(X_pest_fold)
+            print("SVC Acc: ",metrics.balanced_accuracy_score(y_test_fold, predict))
 
     ax[0,0].set_title("1")
     ax[0,0].set_ylabel("1")

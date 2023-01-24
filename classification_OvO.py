@@ -31,4 +31,4 @@ for filename in filenames:
         # score = ovo.score(x_test_fold, y_test_fold)
         # print(score)
         ###Evaluating Prediction Accuracy
-        print("NB Acc: ",metrics.accuracy_score(y_test_fold, predict))
+        print("SVC OvO Acc: ",metrics.accuracy_score(y_test_fold, predict))
