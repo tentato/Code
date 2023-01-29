@@ -6,15 +6,12 @@ import pysiology.electromyography as electromyography
 
 print(" ")
 
-results_folder = 'results/'
-main_folder = 'C:/Users/alepa/Desktop/MGR/ProfKurzynski/KrzysztofJ_all/KrzysztofJ_all/'
+results_folder = 'results/KrzysztofJ_all/'
+main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/KrzysztofJ_all/'
 classes_array = ['1', '2', '3', '4', '5', '6','7', '8', '9']
-
-# WL_all_df = pd.DataFrame()
-# ZC_all_df = pd.DataFrame()
-# VAR_all_df = pd.DataFrame()
-# MAV_all_df = pd.DataFrame()
-# SSC_all_df = pd.DataFrame()
+# results_folder = 'results/MK/'
+# main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/MK_10_03_2022/'
+# classes_array = ['1', '2', '3', '4', '5', '6','7', '8']
 
 WL_table = []
 ZC_table = []
@@ -60,21 +57,6 @@ for class_number in classes_array:
         MAV_table.append(MAV_arr)
         SSC_table.append(SSC_arr)
 
-
-    # WL_all_df = pd.concat(WL_all_df, WL_df)
-    # ZC_all_df = pd.concat(ZC_all_df, WL_df)
-    # VAR_all_df = pd.concat(VAR_all_df, WL_df)
-    # MAV_all_df = pd.concat(MAV_all_df, WL_df)
-    # SSC_all_df = pd.concat(SSC_all_df, WL_df)
-
-    # folder_path = results_folder+class_number+"/"
-    # os.makedirs(folder_path, exist_ok=True)  
-    # WL_df.to_csv(folder_path+"features_WL.csv", header=False, index=False)
-    # ZC_df.to_csv(folder_path+"features_ZC.csv", header=False, index=False)
-    # VAR_df.to_csv(folder_path+"features_VAR.csv", header=False, index=False)
-    # MAV_df.to_csv(folder_path+"features_MAV.csv", header=False, index=False)
-    # SSC_df.to_csv(folder_path+"features_SSC.csv", header=False, index=False)
-
     print("Class ",class_number," processed...")
 
 
@@ -84,7 +66,7 @@ VAR_df = pd.DataFrame(data=VAR_table)
 MAV_df = pd.DataFrame(data=MAV_table)
 SSC_df = pd.DataFrame(data=SSC_table)
 
-folder_path = results_folder+"/"
+folder_path = results_folder
 os.makedirs(folder_path, exist_ok=True)  
 WL_df.to_csv(folder_path+"features_WL.csv", header=False, index=False)
 ZC_df.to_csv(folder_path+"features_ZC.csv", header=False, index=False)

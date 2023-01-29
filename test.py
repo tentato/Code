@@ -6,17 +6,9 @@ import pysiology.electromyography as electromyography
 
 print(" ")
 
-# Kolumny odpowiadają kolejnym kanałom zarejestrowanego sygnału. 
-#   	Kolumny o numerach parzystych (0,2,4) są związane z sygnałami __MMG__.
-#   	Kolumny o numerach nieparzystych (1,3,5) są związane z sygnałami __EMG__.
-#   	Kanałów jest 16 -- 8 MMG i 8 EMG
-# Kolejne wiersze pliku __.csv__ reprezentują kolejne próbki sygnału. 
-
 results_folder = 'results/'
 main_folder = 'C:/Users/alepa/Desktop/MGR/ProfKurzynski/KrzysztofJ_all/KrzysztofJ_all/'
-# classes_array = ['1']
-classes_array = ['2', '3', '4', '5', '6','7', '8', '9']
-# FILES_NUMBER = 1
+classes_array = ['1', '2', '3', '4', '5', '6','7', '8', '9']
 
 for class_number in classes_array:
     for file_index, filename in enumerate(os.listdir(main_folder+class_number)):
