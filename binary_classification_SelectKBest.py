@@ -14,11 +14,11 @@ from sklearn.svm import SVC
 print("")
 matplotlib.style.use('ggplot')
 
-# filenames = ["features_WL.csv"]
+main_folder = 'results/KrzysztofJ_all/'
 filenames = ["features_MAV.csv","features_SSC.csv","features_VAR.csv","features_WL.csv","features_ZC.csv"]
 
 for filename in filenames:
-    dataset = pd.read_csv("Code/results/"+filename, sep=",", decimal=".", header=None, 
+    dataset = pd.read_csv(main_folder+filename, sep=",", decimal=".", header=None, 
         names=["c0", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "c12", "c13", "c14", "c15", "c16"])
     X = dataset.iloc[:, 0:-1].values
     y = dataset.iloc[:, -1].values.astype(int)
@@ -31,21 +31,6 @@ for filename in filenames:
                 break
             class_pairs.append([a,b]) #(NumClasses * (NumClasses – 1)) / 2
 
-    # LDA all
-    fig, ax = plt.subplots(1,1, figsize=(8,8))
-    lda = LDA(n_components=2)
-    X_l = lda.fit(X, y).transform(X)
-    ax.scatter(*X_l.T, c=y, cmap="hsv")
-    plt.tight_layout()
-    plt.savefig("LDA/"+filename.split(".")[0]+"_LDA.png")
-
-    # PCA all
-    fig, ax = plt.subplots(1,1, figsize=(8,8))
-    X_p = PCA(n_components=2).fit_transform(X)
-    ax.scatter(*X_p.T, c=y, cmap="hsv")
-    plt.tight_layout()
-    plt.savefig("PCA/"+filename.split(".")[0]+"_PCA.png")
-
     ### Reject worst feature/s
     fig, ax = plt.subplots(9,9, figsize=(100,100))
     for pair2 in class_pairs:
@@ -53,7 +38,6 @@ for filename in filenames:
         filtered_df = dataset[(dataset['c16'] == pair2[0]) | (dataset['c16'] == pair2[1])] 
         X_f = filtered_df.iloc[:, 0:-1].values
         y_f = filtered_df.iloc[:, -1].values.astype(int)
-        k=13
         k_2=1
         X_new = SelectKBest()
         new_X = X_new.fit_transform(X_f, y_f)
@@ -93,5 +77,5 @@ for filename in filenames:
     ax[0,0].set_title("1")
     ax[0,0].set_ylabel("1")
     plt.tight_layout()
-    fig_file_name = filename.split(".")[0]+"_PCA_LDA_K_Best_Features.png"
+    fig_file_name = "PCA_LDA/"+filename.split(".")[0]+"_PCA_LDA_K_Best_Features.png"
     plt.savefig(fig_file_name)
