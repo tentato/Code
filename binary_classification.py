@@ -14,10 +14,11 @@ from sklearn.svm import SVC
 print("")
 matplotlib.style.use('ggplot')
 
+main_folder = 'results/KrzysztofJ_all/'
 filenames = ["features_MAV.csv","features_SSC.csv","features_VAR.csv","features_WL.csv","features_ZC.csv"]
 
 for filename in filenames:
-    dataset = pd.read_csv("Code/results/"+filename, sep=",", decimal=".", header=None, 
+    dataset = pd.read_csv(main_folder+filename, sep=",", decimal=".", header=None, 
         names=["c0", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "c12", "c13", "c14", "c15", "c16"])
     X = dataset.iloc[:, 0:-1].values
     y = dataset.iloc[:, -1].values.astype(int)
@@ -45,8 +46,6 @@ for filename in filenames:
     plt.tight_layout()
     plt.savefig("PCA/"+filename.split(".")[0]+"_PCA.png")
 
-
-    ### Original
     fig, ax = plt.subplots(9, 9, figsize=(100,100))
     for pair in class_pairs:
         print(pair)
