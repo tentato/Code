@@ -14,7 +14,6 @@ from sklearn.svm import SVC
 print("")
 matplotlib.style.use('ggplot')
 
-# filenames = ["features_WL.csv"]
 filenames = ["features_MAV.csv","features_SSC.csv","features_VAR.csv","features_WL.csv","features_ZC.csv"]
 
 for filename in filenames:
