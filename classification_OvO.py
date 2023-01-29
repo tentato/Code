@@ -8,6 +8,7 @@ from sklearn.svm import SVC
 print("")
 
 main_folder = 'results/KrzysztofJ_all/'
+main_folder = 'results/MK/'
 
 filenames = ["features_MAV.csv","features_SSC.csv","features_VAR.csv","features_WL.csv","features_ZC.csv"]
 
@@ -20,7 +21,9 @@ for filename in filenames:
     kfold = RepeatedStratifiedKFold(n_splits=2, n_repeats=5,random_state=11)
     splits = kfold.split(X,y)
 
-    model = SVC()
+    # model = SVC()
+    # model = GaussianNB()
+    model = KNeighborsClassifier() #best
     ovo = OneVsOneClassifier(model)
 
     for n,(train_index,test_index) in enumerate(splits):
