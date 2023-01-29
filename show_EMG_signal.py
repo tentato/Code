@@ -9,6 +9,9 @@ print(" ")
 ### This script prints EMG and MMG signal visualization for all sensors.
 ### One plot per one class.
 
+# results_folder = 'results/MK/'
+# main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/MK_10_03_2022/'
+# classes_array = ['1', '2', '3', '4', '5', '6','7', '8']
 results_folder = 'results/KrzysztofJ_all/'
 main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/KrzysztofJ_all/'
 classes_array = ['1', '2', '3', '4', '5', '6','7', '8', '9']
@@ -20,7 +23,8 @@ for class_number in classes_array:
         dataset = pd.read_csv(main_folder+class_number+'/'+filename, sep=";", decimal=",", header=None)
 
         fig, ax = plt.subplots(8, 2, figsize=(10, 13))
-        x = np.linspace(start = 0, stop = 3000, num = 3000)
+        # x = np.linspace(start = 0, stop = 2000, num = 2000) # for MK
+        x = np.linspace(start = 0, stop = 3000, num = 3000) # for KJ
         WL_arr = np.zeros(16)
         ZC_arr = np.zeros(16).astype(int)
         VAR_arr = np.zeros(16)
