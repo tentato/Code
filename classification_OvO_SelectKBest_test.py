@@ -9,8 +9,8 @@ from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.svm import SVC
 print("")
 
-# main_folder = 'results/KrzysztofJ_all/'
-main_folder = 'results/MK/'
+main_folder = 'results/KrzysztofJ_all/'
+# main_folder = 'results/MK/'
 
 filenames = ["features_MAV.csv","features_SSC.csv","features_VAR.csv","features_WL.csv","features_ZC.csv"]
 
@@ -22,12 +22,13 @@ clfs = {
 
 file_object = open('results_ovo_kbest_GNB.txt', 'w')
 
-for filename in filenames:
-    print("")
-    # print(filename)
-    file_object.write(filename+"\n")
-    dataset = pd.read_csv(main_folder+filename, sep=",", decimal=".", header=None)
-    for k in range(0, 16):
+scores = []
+
+for k in range(0, 16):
+    method_val = []
+    for filename in filenames: 
+        # file_object.write(filename+"\n")
+        dataset = pd.read_csv(main_folder+filename, sep=",", decimal=".", header=None)
         X = dataset.iloc[:, 0:-1].values
         y = dataset.iloc[:, -1].values.astype(int)
 
@@ -53,6 +54,12 @@ for filename in filenames:
             ovo.fit(x_train_fold, y_train_fold)
             predict = ovo.predict(x_test_fold)
             mean_arr = np.append(mean_arr, metrics.accuracy_score(y_test_fold, predict))
-        file_object.write(f'Number of features = {16-k} \t Score = {round(np.mean(mean_arr),2)}\n')
+        method_val.append(round(np.mean(mean_arr),2))
+    # print(method_val)
+    scores.append(method_val)
+
+    file_object.write(f'{method_val}\n')
+
+
 
 file_object.close()
