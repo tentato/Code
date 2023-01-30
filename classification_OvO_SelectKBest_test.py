@@ -64,15 +64,16 @@ for k in range(0, 16):
 
 alfa = .05
 
-print(f'test: {scores[0]}')
+# print(f'test: {scores[0]}')
 
-for k in range(16, 1, -1):
+for k in range(15, 0, -1):
+    score = scores[k]
     t_statistic = np.zeros((len(filenames), len(filenames)))
     p_value = np.zeros((len(filenames), len(filenames)))
 
     for i in range(len(filenames)):
         for j in range(len(filenames)):
-            t_statistic[i, j], p_value[i, j] = ttest_rel(scores[k][i], scores[k][j])
+            t_statistic[i, j], p_value[i, j] = ttest_rel(score[i], score[j])
     # print("\n\nt-statistic for k = {k}\n", t_statistic, "\n\np-value:\n", p_value)
     file_object.write(f'\n\nt-statistic for k = {k}\n{t_statistic}\n\np-value:\n {p_value}')
 
