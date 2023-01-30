@@ -21,8 +21,8 @@ for filename in filenames:
     kfold = RepeatedStratifiedKFold(n_splits=2, n_repeats=5,random_state=11)
     splits = kfold.split(X,y)
 
-    # model = SVC()
-    # model = GaussianNB()
+    model = SVC()
+    model = GaussianNB()
     model = KNeighborsClassifier() #best
     ovo = OneVsOneClassifier(model)
 
