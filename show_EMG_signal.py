@@ -9,12 +9,15 @@ print(" ")
 ### This script prints EMG and MMG signal visualization for all sensors.
 ### One plot per one class.
 
+results_folder = 'results/Barbara_13_05_2022_AB/'
+main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/Barbara_13_05_2022_AB/'
+classes_array = ['1', '2', '3', '4', '5']
 # results_folder = 'results/MK/'
 # main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/MK_10_03_2022/'
 # classes_array = ['1', '2', '3', '4', '5', '6','7', '8']
-results_folder = 'results/KrzysztofJ_all/'
-main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/KrzysztofJ_all/'
-classes_array = ['1', '2', '3', '4', '5', '6','7', '8', '9']
+# results_folder = 'results/KrzysztofJ_all/'
+# main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/KrzysztofJ_all/'
+# classes_array = ['1', '2', '3', '4', '5', '6','7', '8', '9']
 FILES_NUMBER = 1
 
 for class_number in classes_array:
@@ -24,7 +27,8 @@ for class_number in classes_array:
 
         fig, ax = plt.subplots(8, 2, figsize=(10, 13))
         # x = np.linspace(start = 0, stop = 2000, num = 2000) # for MK
-        x = np.linspace(start = 0, stop = 3000, num = 3000) # for KJ
+        # x = np.linspace(start = 0, stop = 3000, num = 3000) # for KJ
+        x = np.linspace(start = 0, stop = 1000, num = 1000) # for AB
         WL_arr = np.zeros(16)
         ZC_arr = np.zeros(16).astype(int)
         VAR_arr = np.zeros(16)

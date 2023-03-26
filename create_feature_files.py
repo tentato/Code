@@ -6,9 +6,12 @@ import pysiology.electromyography as electromyography
 
 print(" ")
 
-results_folder = 'results/KrzysztofJ_all/'
-main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/KrzysztofJ_all/'
-classes_array = ['1', '2', '3', '4', '5', '6','7', '8', '9']
+results_folder = 'results/Barbara_13_05_2022_AB/'
+main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/Barbara_13_05_2022_AB/'
+classes_array = ['1', '2', '3', '4', '5']
+# results_folder = 'results/KrzysztofJ_all/'
+# main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/KrzysztofJ_all/'
+# classes_array = ['1', '2', '3', '4', '5', '6','7', '8', '9']
 # results_folder = 'results/MK/'
 # main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/MK_10_03_2022/'
 # classes_array = ['1', '2', '3', '4', '5', '6','7', '8']
