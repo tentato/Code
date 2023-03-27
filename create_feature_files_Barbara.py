@@ -91,11 +91,4 @@ for comb_id, comb in enumerate(list_combinations_names):
         comb_df = comb_df.loc[:,~comb_df.T.duplicated(keep='last')] #remove duplicate columns except last
         comb_df.to_csv(f'{folder_path}features_{comb_name}.csv', header=False, index=False)
 
-
 print("\n\nFINISHED SUCCESSFULLY")
-
-# WL_df.to_csv(folder_path+"features_WL.csv", header=False, index=False)
-# ZC_df.to_csv(folder_path+"features_ZC.csv", header=False, index=False)
-# VAR_df.to_csv(folder_path+"features_VAR.csv", header=False, index=False)
-# MAV_df.to_csv(folder_path+"features_MAV.csv", header=False, index=False)
-# SSC_df.to_csv(folder_path+"features_SSC.csv", header=False, index=False)
