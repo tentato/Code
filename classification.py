@@ -29,29 +29,3 @@ for filename in filenames:
         predict = GNB.predict(x_test_fold)
         ###Evaluating Prediction Accuracy
         print("NB Acc: ",metrics.accuracy_score(y_test_fold, predict))
-
-    ########################################################################################
-
-
-    # Ks = [2,3,5,7,9]
-
-    # for k in Ks:
-    #     # dataset = pd.read_csv("Code/results/"+filename, sep=",", decimal=".", header=None)
-    #     # X = dataset.iloc[:, 0:-1]
-    #     # y = dataset.iloc[:, -1]
-    #     kfold = StratifiedKFold(n_splits=5,shuffle=True,random_state=11)
-    #     splits = kfold.split(X,y)
-
-    #     knn = KNeighborsClassifier(n_neighbors=k)
-
-    #     for n,(train_index,test_index) in enumerate(splits):
-    #         x_train_fold, x_test_fold = X[train_index], X[test_index]
-    #         y_train_fold, y_test_fold = y[train_index], y[test_index]
-    #         knn.fit(x_train_fold, y_train_fold)
-
-    #         predict = knn.predict(x_test_fold)
-
-    #         ###Evaluating Prediction Accuracy
-    #         print("KNN Acc for k =",k,": ",metrics.balanced_accuracy_score(y_test_fold, predict))
-
-        

@@ -1,0 +1,63 @@
+
+
+features_MAV.csvSVC OvO Acc: 0.41SVC OvO Acc: 0.47SVC OvO Acc: 0.42SVC OvO Acc: 0.45SVC OvO Acc: 0.41SVC OvO Acc: 0.44SVC OvO Acc: 0.44SVC OvO Acc: 0.39SVC OvO Acc: 0.43SVC OvO Acc: 0.41
+
+features_MAV_SSC.csvSVC OvO Acc: 0.3SVC OvO Acc: 0.37SVC OvO Acc: 0.33SVC OvO Acc: 0.33SVC OvO Acc: 0.32SVC OvO Acc: 0.33SVC OvO Acc: 0.31SVC OvO Acc: 0.31SVC OvO Acc: 0.32SVC OvO Acc: 0.29
+
+features_SSC.csvSVC OvO Acc: 0.31SVC OvO Acc: 0.37SVC OvO Acc: 0.33SVC OvO Acc: 0.33SVC OvO Acc: 0.32SVC OvO Acc: 0.33SVC OvO Acc: 0.31SVC OvO Acc: 0.31SVC OvO Acc: 0.32SVC OvO Acc: 0.29
+
+features_VAR.csvSVC OvO Acc: 0.34SVC OvO Acc: 0.45SVC OvO Acc: 0.35SVC OvO Acc: 0.34SVC OvO Acc: 0.33SVC OvO Acc: 0.29SVC OvO Acc: 0.37SVC OvO Acc: 0.27SVC OvO Acc: 0.35SVC OvO Acc: 0.38
+
+features_VAR_MAV.csvSVC OvO Acc: 0.35SVC OvO Acc: 0.49SVC OvO Acc: 0.39SVC OvO Acc: 0.41SVC OvO Acc: 0.38SVC OvO Acc: 0.41SVC OvO Acc: 0.43SVC OvO Acc: 0.35SVC OvO Acc: 0.4SVC OvO Acc: 0.42
+
+features_VAR_MAV_SSC.csvSVC OvO Acc: 0.3SVC OvO Acc: 0.37SVC OvO Acc: 0.33SVC OvO Acc: 0.33SVC OvO Acc: 0.32SVC OvO Acc: 0.33SVC OvO Acc: 0.31SVC OvO Acc: 0.31SVC OvO Acc: 0.32SVC OvO Acc: 0.29
+
+features_VAR_SSC.csvSVC OvO Acc: 0.3SVC OvO Acc: 0.37SVC OvO Acc: 0.33SVC OvO Acc: 0.33SVC OvO Acc: 0.32SVC OvO Acc: 0.33SVC OvO Acc: 0.31SVC OvO Acc: 0.31SVC OvO Acc: 0.32SVC OvO Acc: 0.29
+
+features_WL.csvSVC OvO Acc: 0.5SVC OvO Acc: 0.48SVC OvO Acc: 0.46SVC OvO Acc: 0.49SVC OvO Acc: 0.47SVC OvO Acc: 0.5SVC OvO Acc: 0.47SVC OvO Acc: 0.51SVC OvO Acc: 0.47SVC OvO Acc: 0.46
+
+features_WL_MAV.csvSVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.43SVC OvO Acc: 0.47SVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.45SVC OvO Acc: 0.49SVC OvO Acc: 0.45SVC OvO Acc: 0.45
+
+features_WL_MAV_SSC.csvSVC OvO Acc: 0.48SVC OvO Acc: 0.45SVC OvO Acc: 0.42SVC OvO Acc: 0.47SVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.45SVC OvO Acc: 0.51SVC OvO Acc: 0.45SVC OvO Acc: 0.45
+
+features_WL_SSC.csvSVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.43SVC OvO Acc: 0.47SVC OvO Acc: 0.47SVC OvO Acc: 0.46SVC OvO Acc: 0.45SVC OvO Acc: 0.49SVC OvO Acc: 0.45SVC OvO Acc: 0.45
+
+features_WL_VAR.csvSVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.43SVC OvO Acc: 0.47SVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.45SVC OvO Acc: 0.49SVC OvO Acc: 0.45SVC OvO Acc: 0.45
+
+features_WL_VAR_MAV.csvSVC OvO Acc: 0.48SVC OvO Acc: 0.45SVC OvO Acc: 0.42SVC OvO Acc: 0.47SVC OvO Acc: 0.46SVC OvO Acc: 0.45SVC OvO Acc: 0.45SVC OvO Acc: 0.51SVC OvO Acc: 0.44SVC OvO Acc: 0.45
+
+features_WL_VAR_MAV_SSC.csvSVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.42SVC OvO Acc: 0.47SVC OvO Acc: 0.46SVC OvO Acc: 0.44SVC OvO Acc: 0.45SVC OvO Acc: 0.51SVC OvO Acc: 0.44SVC OvO Acc: 0.45
+
+features_WL_VAR_SSC.csvSVC OvO Acc: 0.48SVC OvO Acc: 0.45SVC OvO Acc: 0.42SVC OvO Acc: 0.47SVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.45SVC OvO Acc: 0.51SVC OvO Acc: 0.45SVC OvO Acc: 0.45
+
+features_WL_ZC.csvSVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.43SVC OvO Acc: 0.48SVC OvO Acc: 0.47SVC OvO Acc: 0.46SVC OvO Acc: 0.45SVC OvO Acc: 0.49SVC OvO Acc: 0.46SVC OvO Acc: 0.45
+
+features_WL_ZC_MAV.csvSVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.42SVC OvO Acc: 0.47SVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.45SVC OvO Acc: 0.49SVC OvO Acc: 0.45SVC OvO Acc: 0.45
+
+features_WL_ZC_MAV_SSC.csvSVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.43SVC OvO Acc: 0.47SVC OvO Acc: 0.46SVC OvO Acc: 0.45SVC OvO Acc: 0.45SVC OvO Acc: 0.49SVC OvO Acc: 0.45SVC OvO Acc: 0.45
+
+features_WL_ZC_SSC.csvSVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.43SVC OvO Acc: 0.47SVC OvO Acc: 0.47SVC OvO Acc: 0.46SVC OvO Acc: 0.45SVC OvO Acc: 0.48SVC OvO Acc: 0.46SVC OvO Acc: 0.45
+
+features_WL_ZC_VAR.csvSVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.42SVC OvO Acc: 0.47SVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.45SVC OvO Acc: 0.49SVC OvO Acc: 0.45SVC OvO Acc: 0.45
+
+features_WL_ZC_VAR_MAV.csvSVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.43SVC OvO Acc: 0.47SVC OvO Acc: 0.46SVC OvO Acc: 0.45SVC OvO Acc: 0.45SVC OvO Acc: 0.49SVC OvO Acc: 0.45SVC OvO Acc: 0.45
+
+features_WL_ZC_VAR_MAV_SSC.csvSVC OvO Acc: 0.46SVC OvO Acc: 0.45SVC OvO Acc: 0.43SVC OvO Acc: 0.47SVC OvO Acc: 0.46SVC OvO Acc: 0.45SVC OvO Acc: 0.45SVC OvO Acc: 0.49SVC OvO Acc: 0.45SVC OvO Acc: 0.45
+
+features_WL_ZC_VAR_SSC.csvSVC OvO Acc: 0.47SVC OvO Acc: 0.45SVC OvO Acc: 0.43SVC OvO Acc: 0.47SVC OvO Acc: 0.46SVC OvO Acc: 0.45SVC OvO Acc: 0.45SVC OvO Acc: 0.49SVC OvO Acc: 0.45SVC OvO Acc: 0.45
+
+features_ZC.csvSVC OvO Acc: 0.32SVC OvO Acc: 0.33SVC OvO Acc: 0.31SVC OvO Acc: 0.29SVC OvO Acc: 0.31SVC OvO Acc: 0.28SVC OvO Acc: 0.34SVC OvO Acc: 0.27SVC OvO Acc: 0.27SVC OvO Acc: 0.33
+
+features_ZC_MAV.csvSVC OvO Acc: 0.32SVC OvO Acc: 0.33SVC OvO Acc: 0.31SVC OvO Acc: 0.29SVC OvO Acc: 0.31SVC OvO Acc: 0.29SVC OvO Acc: 0.34SVC OvO Acc: 0.27SVC OvO Acc: 0.27SVC OvO Acc: 0.33
+
+features_ZC_MAV_SSC.csvSVC OvO Acc: 0.3SVC OvO Acc: 0.34SVC OvO Acc: 0.33SVC OvO Acc: 0.31SVC OvO Acc: 0.32SVC OvO Acc: 0.29SVC OvO Acc: 0.31SVC OvO Acc: 0.27SVC OvO Acc: 0.27SVC OvO Acc: 0.34
+
+features_ZC_SSC.csvSVC OvO Acc: 0.3SVC OvO Acc: 0.34SVC OvO Acc: 0.33SVC OvO Acc: 0.31SVC OvO Acc: 0.32SVC OvO Acc: 0.29SVC OvO Acc: 0.31SVC OvO Acc: 0.27SVC OvO Acc: 0.27SVC OvO Acc: 0.34
+
+features_ZC_VAR.csvSVC OvO Acc: 0.32SVC OvO Acc: 0.33SVC OvO Acc: 0.31SVC OvO Acc: 0.29SVC OvO Acc: 0.31SVC OvO Acc: 0.29SVC OvO Acc: 0.34SVC OvO Acc: 0.27SVC OvO Acc: 0.27SVC OvO Acc: 0.33
+
+features_ZC_VAR_MAV.csvSVC OvO Acc: 0.32SVC OvO Acc: 0.33SVC OvO Acc: 0.31SVC OvO Acc: 0.29SVC OvO Acc: 0.31SVC OvO Acc: 0.29SVC OvO Acc: 0.34SVC OvO Acc: 0.27SVC OvO Acc: 0.27SVC OvO Acc: 0.33
+
+features_ZC_VAR_MAV_SSC.csvSVC OvO Acc: 0.3SVC OvO Acc: 0.33SVC OvO Acc: 0.33SVC OvO Acc: 0.31SVC OvO Acc: 0.32SVC OvO Acc: 0.29SVC OvO Acc: 0.31SVC OvO Acc: 0.27SVC OvO Acc: 0.27SVC OvO Acc: 0.34
+
+features_ZC_VAR_SSC.csvSVC OvO Acc: 0.3SVC OvO Acc: 0.34SVC OvO Acc: 0.33SVC OvO Acc: 0.31SVC OvO Acc: 0.32SVC OvO Acc: 0.29SVC OvO Acc: 0.31SVC OvO Acc: 0.27SVC OvO Acc: 0.27SVC OvO Acc: 0.34
