@@ -27,14 +27,15 @@ for n in range(2, len(classes) + 1):
 list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
 
 file_object = open(f'{main_folder}results_OvO_RFC_class_combinations.txt', 'w')
+target_accuracy = 0.6
 
 for filename in filenames:
     if "features_" in filename:
         print("\n\n")
         print(filename)
-        file_object.write(f'\n\n{filename}')
+        # file_object.write(f'\n\n{filename}')
         for idx, class_combination in enumerate(list_combinations_classes):
-            file_object.write(f'\n\nClass combination: {str(class_combination)}')
+            # file_object.write(f'\n\nClass combination: {str(class_combination)}')
             dataset = pd.read_csv(main_folder+filename, sep=",", decimal=".", header=None)
             dataset = dataset[dataset.iloc[:, -1].isin(class_combination)]
             X = dataset.iloc[:, 0:-1].values
@@ -55,11 +56,11 @@ for filename in filenames:
                 ovo.fit(x_train_fold, y_train_fold)
                 predict = ovo.predict(x_test_fold)
                 ###Evaluating Prediction Accuracy
-                if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < 0.6:
-                    file_object.write(f'\nAccuracy too low, skipping...: {round(metrics.balanced_accuracy_score(y_test_fold, predict),2)}')
+                if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
+                    file_object.write(f'\nAccuracy too lower than {target_accuracy}, skipping...')
                     break
-                file_object.write(f'\nRFC OvO Acc: {round(metrics.balanced_accuracy_score(y_test_fold, predict),2)}')
+                # file_object.write(f'\nRFC OvO Acc: {round(metrics.balanced_accuracy_score(y_test_fold, predict),2)}')
                 print("RFC OvO Acc: ",round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
                 balanced_accuraccy_array.append(round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
             if len(balanced_accuraccy_array) > 0:
-                file_object.write(f'\nMean Accuracy: {round(np.mean(balanced_accuraccy_array),2)}')
+                file_object.write(f'\nFile {filename} class combination {str(class_combination)} Mean Accuracy: {round(np.mean(balanced_accuraccy_array),2)}')
