@@ -57,7 +57,7 @@ for filename in filenames:
                 predict = ovo.predict(x_test_fold)
                 ###Evaluating Prediction Accuracy
                 if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
-                    file_object.write(f'\nAccuracy too lower than {target_accuracy}, skipping...')
+                    file_object.write(f'\nFile {filename} class combination {str(class_combination)}. Accuracy lower than {target_accuracy}, skipping...')
                     break
                 # file_object.write(f'\nRFC OvO Acc: {round(metrics.balanced_accuracy_score(y_test_fold, predict),2)}')
                 print("RFC OvO Acc: ",round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
