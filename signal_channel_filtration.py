@@ -4,6 +4,7 @@ import pandas as pd
 import os
 import pysiology.electromyography as electromyography
 from itertools import combinations
+import PyWavelets as pywt
 
 # This data set contains only 8 channels of EMG signals (no MMG data)
 
@@ -14,6 +15,7 @@ main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/Barbara_13_05_2022_AB/'
 folder_path = results_folder
 os.makedirs(folder_path, exist_ok=True)  
 classes_array = ['1', '2', '3', '4', '5']
+
 
 
 for class_number in classes_array:
