@@ -59,7 +59,7 @@ for class_number in classes_array:
         MAV_table.append(MAV_arr)
         SSC_table.append(SSC_arr)
 
-    print("Class ",class_number," processed...")
+    print(f"Class {class_number} processed...")
 
 headers = ["1", "2", "3", "4", "5", "6", "7", "8", "class"]
 WL_df = pd.DataFrame(columns=headers, data=WL_table)
