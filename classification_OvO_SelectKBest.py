@@ -3,10 +3,8 @@ from sklearn import metrics
 from sklearn.feature_selection import SelectKBest
 from sklearn.multiclass import OneVsOneClassifier
 from sklearn.naive_bayes import GaussianNB
-from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
 from sklearn.model_selection import RepeatedStratifiedKFold
-from sklearn.svm import SVC
 print("")
 
 # main_folder = 'results/KrzysztofJ_all/'

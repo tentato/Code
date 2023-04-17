@@ -1,15 +1,10 @@
 from matplotlib import pyplot as plt
 import matplotlib
-import numpy as np
 from sklearn import metrics
 from sklearn.decomposition import PCA
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
-from sklearn.multiclass import OneVsOneClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
-from sklearn.model_selection import RepeatedStratifiedKFold, StratifiedKFold, train_test_split
-from sklearn.feature_selection import SelectKBest
+from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.svm import SVC
 print("")
 matplotlib.style.use('ggplot')

@@ -1,11 +1,4 @@
-import numpy as np
-from sklearn import metrics
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import KFold
-from sklearn.model_selection import StratifiedKFold
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 print("")

@@ -1,10 +1,7 @@
 from sklearn import metrics
 from sklearn.multiclass import OneVsOneClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
 from sklearn.model_selection import RepeatedStratifiedKFold
-from sklearn.svm import SVC
 import os
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np

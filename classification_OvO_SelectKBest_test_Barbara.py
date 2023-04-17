@@ -7,8 +7,6 @@ from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.svm import SVC
-from tabulate import tabulate
-from scipy.stats import ttest_rel
 import os
 print("")
 
