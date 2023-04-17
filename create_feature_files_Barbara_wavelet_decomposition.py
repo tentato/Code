@@ -25,10 +25,7 @@ size = 33
 
 for class_number in classes_array:
     for file_index, filename in enumerate(os.listdir(main_folder+class_number)):
-
         dataset = pd.read_csv(main_folder+class_number+'/'+filename, sep=",", decimal=".", header=None)
-        print(dataset)
-        exit()
 
         WL_arr = np.zeros(size)
         ZC_arr = np.zeros(size).astype(int)
@@ -39,8 +36,6 @@ for class_number in classes_array:
         for idx, col in enumerate(dataset.columns):
             column = dataset.loc[:, col]
             y = column.to_numpy()
-            print(y[0].type)
-            exit()
 
             # Get the waveform length of the signal, a measure of complexity of the EMG Signal.
             WL_arr[idx] = electromyography.getWL(y)
@@ -67,11 +62,11 @@ for class_number in classes_array:
 
     print(f"Class {class_number} processed...")
 
-headers_array = [str(x) for x in range(1, size-1)]
+headers_array = [str(x) for x in range(1, size)]
+headers_array.append('class')
 print(headers_array)
-exit()
 
-headers = ["1", "2", "3", "4", "5", "6", "7", "8", "class"]
+headers = headers_array
 WL_df = pd.DataFrame(columns=headers, data=WL_table)
 WL_df = WL_df.astype({"class": int})
 ZC_df = pd.DataFrame(columns=headers, data=ZC_table)
@@ -100,5 +95,12 @@ for comb_id, comb in enumerate(list_combinations_names):
         comb_df = pd.concat(list_combinations_tables[comb_id], axis=1)
         comb_df = comb_df.loc[:,~comb_df.T.duplicated(keep='last')] #remove duplicate columns except last
         comb_df.to_csv(f'{folder_path}features_{comb_name}.csv', header=False, index=False)
+
+# single features
+comb_df.to_csv(f'{folder_path}features_WL.csv', header=False, index=False)
+comb_df.to_csv(f'{folder_path}features_ZC.csv', header=False, index=False)
+comb_df.to_csv(f'{folder_path}features_VAR.csv', header=False, index=False)
+comb_df.to_csv(f'{folder_path}features_MAV.csv', header=False, index=False)
+comb_df.to_csv(f'{folder_path}features_SSC.csv', header=False, index=False)
 
 print("\n\nFINISHED SUCCESSFULLY")
