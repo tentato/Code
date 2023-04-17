@@ -30,18 +30,24 @@ for class_number in classes_array:
         for (columnName, columnData) in dataset.items():
             # convert array to column
             coeffs = pywt.wavedec(columnData, 'db1', level=3)
-            fig, ax = plt.subplots(4, 1, figsize=(10, 13))
+            fig, ax = plt.subplots(5, 1, figsize=(10, 13))
 
             new_len = 1000
             f1 = interp1d(np.linspace(0, 1, len(coeffs[0])), coeffs[0], kind='linear')
             rescaled_arr1 = f1(np.linspace(0, 1, new_len))
+            f2 = interp1d(np.linspace(0, 1, len(coeffs[1])), coeffs[1], kind='linear')
+            rescaled_arr2 = f2(np.linspace(0, 1, new_len))
+            f3 = interp1d(np.linspace(0, 1, len(coeffs[2])), coeffs[2], kind='linear')
+            rescaled_arr3 = f3(np.linspace(0, 1, new_len))
+            f4 = interp1d(np.linspace(0, 1, len(coeffs[3])), coeffs[3], kind='linear')
+            rescaled_arr4 = f4(np.linspace(0, 1, new_len))
             
             x = np.linspace(start = 0, stop = 1000, num = 1000) # for AB
             ax[0].plot(x, columnData)
             ax[1].plot(x, rescaled_arr1)
-            # ax[1].plot(x, coeffs[1])
-            # ax[2].plot(x, coeffs[2])
-            # ax[3].plot(x, coeffs[3])
+            ax[2].plot(x, rescaled_arr2)
+            ax[3].plot(x, rescaled_arr3)
+            ax[4].plot(x, rescaled_arr4)
             ax[0].set_title("EMG")
             plt.tight_layout()
             plt.savefig("test.png")
