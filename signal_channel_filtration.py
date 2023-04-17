@@ -2,11 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import os
-import pysiology.electromyography as electromyography
 from itertools import combinations
 import pywt
 
-# This data set contains only 8 channels of EMG signals (no MMG data)
+# This data set contains only 8 channels of EMG signals (no MMG data).
+# This script performs wavelet transfor on all signals in dataset.
 
 print(" ")
 # print(pywt.wavelist(kind='discrete'))
@@ -26,15 +26,14 @@ for class_number in classes_array:
         new_df = pd.DataFrame()
         new_df_arr = []
         i=0
-        for (columnName, columnData) in dataset.iteritems():
-            # new_df[str(i)] = columnData
-            # new_df[str(i+1)] = columnData
-            # i+=2
+        for (columnName, columnData) in dataset.items():
             # convert array to column
-            
-
-            new_arr = pywt.wavedec(columnData, 'coif1', level=3)
-            print(len(new_arr[1]))
+            coeffs = pywt.wavedec(columnData, 'db1', level=3)
+            # coeffs_array, sec = pywt.coeffs_to_array(coeffs)
+            print(len(coeffs[0]))
+            print(len(coeffs[1]))
+            print(len(coeffs[2]))
+            print(len(coeffs[3]))
             exit()
             new_arr = np.array(new_arr)
             new_df_arr.append(new_arr)
