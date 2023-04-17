@@ -8,7 +8,8 @@ import numpy as np
 from itertools import combinations
 print("")
 
-main_folder = 'results/Barbara_13_05_2022_AB/'
+main_folder = 'results/Barbara_13_05_2022_AB_wavdec/'
+# main_folder = 'results/Barbara_13_05_2022_AB/'
 # main_folder = 'results/KrzysztofJ_all/'
 # main_folder = 'results/MK/'
 # filenames = ["features_MAV.csv","features_SSC.csv","features_VAR.csv","features_WL.csv","features_ZC.csv"]
@@ -24,7 +25,7 @@ for n in range(2, len(classes) + 1):
 list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
 
 file_object = open(f'{main_folder}results_OvO_RFC_class_combinations.txt', 'w')
-target_accuracy = 0.6
+target_accuracy = 0.7
 
 for filename in filenames:
     if "features_" in filename:
