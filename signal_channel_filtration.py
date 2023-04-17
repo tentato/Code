@@ -4,6 +4,7 @@ import pandas as pd
 import os
 from itertools import combinations
 import pywt
+from scipy.interpolate import interp1d
 
 # This data set contains only 8 channels of EMG signals (no MMG data).
 # This script performs wavelet transfor on all signals in dataset.
@@ -29,11 +30,21 @@ for class_number in classes_array:
         for (columnName, columnData) in dataset.items():
             # convert array to column
             coeffs = pywt.wavedec(columnData, 'db1', level=3)
-            # coeffs_array, sec = pywt.coeffs_to_array(coeffs)
-            print(len(coeffs[0]))
-            print(len(coeffs[1]))
-            print(len(coeffs[2]))
-            print(len(coeffs[3]))
+            fig, ax = plt.subplots(4, 1, figsize=(10, 13))
+
+            new_len = 1000
+            f1 = interp1d(np.linspace(0, 1, len(coeffs[0])), coeffs[0], kind='linear')
+            rescaled_arr1 = f1(np.linspace(0, 1, new_len))
+            
+            x = np.linspace(start = 0, stop = 1000, num = 1000) # for AB
+            ax[0].plot(x, columnData)
+            ax[1].plot(x, rescaled_arr1)
+            # ax[1].plot(x, coeffs[1])
+            # ax[2].plot(x, coeffs[2])
+            # ax[3].plot(x, coeffs[3])
+            ax[0].set_title("EMG")
+            plt.tight_layout()
+            plt.savefig("test.png")
             exit()
             new_arr = np.array(new_arr)
             new_df_arr.append(new_arr)
