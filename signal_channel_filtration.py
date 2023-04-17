@@ -31,6 +31,7 @@ for class_number in classes_array:
             # new_df[str(i+1)] = columnData
             # i+=2
             # convert array to column
+            
 
             new_arr = pywt.wavedec(columnData, 'coif1', level=3)
             print(len(new_arr[1]))
