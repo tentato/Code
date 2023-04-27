@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import os
 import pandas as pd
 import numpy as np
+from problexity import classification as c
 
 
 # WL - MAV, 1,4,5 
@@ -16,10 +17,10 @@ main_folder = 'results/Barbara_13_05_2022_AB_wavdec/'
 # main_folder = 'results/MK/'
 # filenames = ["features_MAV.csv","features_SSC.csv","features_VAR.csv","features_WL.csv","features_ZC.csv"]
 
-# filename = "features_WL_MAV.csv"
-filename = "features_ZC_MAV_SSC.csv"
-# classes = [1,4,5]
-classes = [1,3,4]
+filename = "features_WL_MAV.csv"
+# filename = "features_ZC_MAV_SSC.csv"
+classes = [1,4,5]
+# classes = [1,3,4]
 number_of_classes = len(classes)
 
 fig = plt.figure(figsize=(7,7))
@@ -32,17 +33,15 @@ dataset = dataset[dataset.iloc[:, -1].isin(classes)]
 X = dataset.iloc[:, 0:-1].values
 y = dataset.iloc[:, -1].values.astype(int)
 
-# print(y)
-# exit()
-
 # Initialize CoplexityCalculator with default parametrization
-cc = px.ComplexityCalculator(metrics='f1', colors=['#FD0100', '#F76915', '#EEDE04', '#A0D636', '#2FA236', '#333ED4'], ranges={'FB': 5, 'LR': 3, 'NB': 6, 'NE': 3, 'DM': 3, 'CI': 2}, weights=np.ones((22)))
+# cc = px.ComplexityCalculator(metrics='f1', colors=['#FD0100'], ranges={'FB': 1}, weights=np.ones((1)))
 # cc = px.ComplexityCalculator(metrics='f1')
+cc = px.ComplexityCalculator()
 
 # Fit model with data
 cc.fit(X,y)
-# print(f"Report: \n{cc.report()}\n")
-print(f"Met: {cc._metrics()}\n")
+print(f"Report: \n{cc.report()}\n")
+print(f"Met: {len(cc._metrics())}\n")
 cc.plot(fig, (1,1,1))
 
 plt.tight_layout()
