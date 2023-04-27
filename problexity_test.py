@@ -17,10 +17,10 @@ main_folder = 'results/Barbara_13_05_2022_AB_wavdec/'
 # main_folder = 'results/MK/'
 # filenames = ["features_MAV.csv","features_SSC.csv","features_VAR.csv","features_WL.csv","features_ZC.csv"]
 
-filename = "features_WL_MAV.csv"
-# filename = "features_ZC_MAV_SSC.csv"
-classes = [1,4,5]
-# classes = [1,3,4]
+# filename = "features_WL_MAV.csv"
+filename = "features_ZC_MAV_SSC.csv"
+# classes = [1,4,5]
+classes = [1,3,4]
 number_of_classes = len(classes)
 
 fig = plt.figure(figsize=(7,7))
