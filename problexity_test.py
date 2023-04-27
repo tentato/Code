@@ -2,6 +2,7 @@ import problexity as px
 import matplotlib.pyplot as plt
 import os
 import pandas as pd
+import numpy as np
 
 
 # WL - MAV, 1,4,5 
@@ -35,14 +36,15 @@ y = dataset.iloc[:, -1].values.astype(int)
 # exit()
 
 # Initialize CoplexityCalculator with default parametrization
-cc = px.ComplexityCalculator()
+cc = px.ComplexityCalculator(metrics='f1', 
+                             colors=['#FD0100', '#F76915', '#EEDE04', '#A0D636', '#2FA236', '#333ED4'],
+                             ranges={'FB': 5, 'LR': 3, 'NB': 6, 'NE': 3, 'DM': 3, 'CI': 2},
+                             weights=np.ones((22)))
 
 # Fit model with data
 cc.fit(X,y)
-print(f"Complexity{cc.complexity}\n")
-print(f"Metrics{cc._metrics()}\n")
-print(f"Score{cc.score()}\n")
-print(f"Report{cc.report()}\n")
+# print(f"Report: \n{cc.report()}\n")
+print(f"Met: {cc._metrics()}\n")
 cc.plot(fig, (1,1,1))
 
 plt.tight_layout()
