@@ -41,10 +41,10 @@ for filename in filenames:
             kfold = RepeatedStratifiedKFold(n_splits=2, n_repeats=5,random_state=11)
             splits = kfold.split(X,y)
 
-            model = RandomForestClassifier(max_depth=2, random_state=11)
+            model = RandomForestClassifier(max_depth=2, random_state=11) # the best
             # model = SVC()
             # model = GaussianNB()
-            # model = KNeighborsClassifier() #best
+            # model = KNeighborsClassifier() #better
             ovo = OneVsOneClassifier(model)
 
             balanced_accuraccy_array = []
