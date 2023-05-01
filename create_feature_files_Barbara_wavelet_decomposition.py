@@ -28,10 +28,10 @@ for class_number in classes_array:
         dataset = pd.read_csv(main_folder+class_number+'/'+filename, sep=",", decimal=".", header=None)
 
         WL_arr = np.zeros(size)
-        ZC_arr = np.zeros(size).astype(int)
+        ZC_arr = np.zeros(size)
         VAR_arr = np.zeros(size)
         MAV_arr = np.zeros(size)
-        SSC_arr = np.zeros(size).astype(int)
+        SSC_arr = np.zeros(size)
 
         for idx, col in enumerate(dataset.columns):
             column = dataset.loc[:, col]
@@ -71,16 +71,16 @@ WL_df = pd.DataFrame(columns=headers, data=WL_table)
 WL_df = WL_df.astype(float)
 WL_df = WL_df.astype({"class": int})
 ZC_df = pd.DataFrame(columns=headers, data=ZC_table)
-ZC_df = WL_df.astype(float)
+ZC_df = ZC_df.astype(float)
 ZC_df = ZC_df.astype({"class": int})
 VAR_df = pd.DataFrame(columns=headers, data=VAR_table)
-VAR_df = WL_df.astype(float)
+VAR_df = VAR_df.astype(float)
 VAR_df = VAR_df.astype({"class": int})
 MAV_df = pd.DataFrame(columns=headers, data=MAV_table)
-MAV_df = WL_df.astype(float)
+MAV_df = MAV_df.astype(float)
 MAV_df = MAV_df.astype({"class": int})
 SSC_df = pd.DataFrame(columns=headers, data=SSC_table)
-SSC_df = WL_df.astype(float)
+SSC_df = SSC_df.astype(float)
 SSC_df = SSC_df.astype({"class": int})
 
 list_combinations_tables = list()
@@ -94,7 +94,7 @@ for n in range(len(list_of_methods_names) + 1):
     list_combinations_names += list(combinations(list_of_methods_names, n))
 
 for comb_id, comb in enumerate(list_combinations_names):
-    if len(comb) > 1:
+    if len(comb) >= 1:
         comb_name = '_'.join(comb)
         print(comb_name)
         comb_df = pd.concat(list_combinations_tables[comb_id], axis=1)
@@ -102,10 +102,10 @@ for comb_id, comb in enumerate(list_combinations_names):
         comb_df.to_csv(f'{folder_path}features_{comb_name}.csv', header=False, index=False)
 
 # single features
-comb_df.to_csv(f'{folder_path}features_WL.csv', header=False, index=False)
-comb_df.to_csv(f'{folder_path}features_ZC.csv', header=False, index=False)
-comb_df.to_csv(f'{folder_path}features_VAR.csv', header=False, index=False)
-comb_df.to_csv(f'{folder_path}features_MAV.csv', header=False, index=False)
-comb_df.to_csv(f'{folder_path}features_SSC.csv', header=False, index=False)
+# WL_df.to_csv(f'{folder_path}features_WL.csv', header=False, index=False)
+# ZC_df.to_csv(f'{folder_path}features_ZC.csv', header=False, index=False)
+# VAR_df.to_csv(f'{folder_path}features_VAR.csv', header=False, index=False)
+# MAV_df.to_csv(f'{folder_path}features_MAV.csv', header=False, index=False)
+# SSC_df.to_csv(f'{folder_path}features_SSC.csv', header=False, index=False)
 
 print("\n\nFINISHED SUCCESSFULLY")
