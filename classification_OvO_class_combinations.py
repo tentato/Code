@@ -25,7 +25,7 @@ for n in range(2, len(classes) + 1):
 list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
 
 file_object = open(f'{main_folder}results_OvO_RFC_class_combinations.txt', 'w')
-target_accuracy = 0.7
+target_accuracy = 0.1
 
 for filename in filenames:
     if "features_" in filename:
