@@ -44,8 +44,12 @@ for class_number in classes_array:
             # Number of times the slope of the EMG signal changes sign.
             SSC_arr[idx] = electromyography.getSSC(y, threshold=1)
 
-            ax[idx].plot(x, y)
-            ax[0].set_title("EMG")
+            if idx % 2 == 0:
+                ax[int(idx/2), 0].plot(x, y)
+                ax[0,0].set_title("MMG")
+            else:
+                ax[int(idx/2), 1].plot(x, y)
+                ax[0,1].set_title("EMG")
 
         plt.tight_layout()
         plt.savefig("{}{}_{}_results.png".format(results_folder, class_number, filename.split('.')[0]))
