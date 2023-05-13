@@ -32,9 +32,7 @@ for filename in filenames:
     if "features_" in filename:
         print("\n\n")
         print(filename)
-        # file_object.write(f'\n\n{filename}')
         for idx, class_combination in enumerate(list_combinations_classes):
-            # file_object.write(f'\n\nClass combination: {str(class_combination)}')
             dataset = pd.read_csv(main_folder+filename, sep=",", decimal=".", header=None)
             dataset = dataset[dataset.iloc[:, -1].isin(class_combination)]
             X = dataset.iloc[:, 0:-1].values
@@ -43,9 +41,6 @@ for filename in filenames:
             splits = kfold.split(X,y)
 
             model = RandomForestClassifier(max_depth=2, random_state=11) # the best
-            # model = SVC()
-            # model = GaussianNB()
-            # model = KNeighborsClassifier() #better
             ovo = OneVsOneClassifier(model)
 
             balanced_accuraccy_array = []
@@ -58,7 +53,6 @@ for filename in filenames:
                 if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
                     file_object.write(f'\nFile {filename} class combination {str(class_combination)}. Accuracy lower than {target_accuracy}, skipping...')
                     break
-                # file_object.write(f'\nRFC OvO Acc: {round(metrics.balanced_accuracy_score(y_test_fold, predict),2)}')
                 print("RFC OvO Acc: ",round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
                 balanced_accuraccy_array.append(round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
             if len(balanced_accuraccy_array) > 0:
