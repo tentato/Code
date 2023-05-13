@@ -1,5 +1,6 @@
 from sklearn import metrics
 from sklearn.multiclass import OneVsOneClassifier
+from sklearn.multiclass import OneVsRestClassifier
 import pandas as pd
 from sklearn.model_selection import RepeatedStratifiedKFold
 import os
@@ -42,6 +43,7 @@ for filename in filenames:
 
             model = RandomForestClassifier(max_depth=2, random_state=11) # the best
             ovo = OneVsOneClassifier(model)
+            # ovo = OneVsRestClassifier(model) # TRY THIS ASAP
 
             balanced_accuraccy_array = []
             for n,(train_index,test_index) in enumerate(splits):
