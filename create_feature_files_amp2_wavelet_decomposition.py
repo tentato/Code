@@ -4,24 +4,23 @@ import os
 import pysiology.electromyography as electromyography
 from itertools import combinations
 
-# This data set contains only 32 channels of EMG signals (no MMG data)
-# 8 channels * 4 decomposition levels = 32 channels
+# This data set contains 64 channels of EMG and MMG signals
+# 16 channels * 4 decomposition levels = 64 channels
 
+size = 16 * 4 + 1
 print(" ")
 
-results_folder = 'results/Barbara_13_05_2022_AB_wavdec/'
-main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/Barbara_13_05_2022_AB_wavdec/'
+results_folder = 'results/amp2/'
+main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/'
 folder_path = results_folder
 os.makedirs(folder_path, exist_ok=True)  
-classes_array = ['1', '2', '3', '4', '5']
+classes_array = ['1', '2', '3', '4', '5', '6']
 
 WL_table = []
 ZC_table = []
 VAR_table = []
 MAV_table = []
 SSC_table = []
-
-size = 33
 
 for class_number in classes_array:
     for file_index, filename in enumerate(os.listdir(main_folder+class_number)):

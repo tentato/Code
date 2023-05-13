@@ -26,6 +26,7 @@ for class_number in classes_array:
         for file_index, filename in enumerate(os.listdir(folder+class_number)):
             print(f"Processing {filename} file...")
             dataset = pd.read_csv(folder+class_number+'/'+filename, sep=";", decimal=",", header=None)
+            dataset = dataset.iloc[:, 0:16]
             new_df_arr = []
             i=0
             for (columnName, columnData) in dataset.items():
