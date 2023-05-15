@@ -5,7 +5,8 @@ import pandas as pd
 import numpy as np
 
 
-main_folder = 'results/Barbara_13_05_2022_AB_wavdec/'
+main_folder = 'results/amp2_wavdec/'
+# main_folder = 'results/Barbara_13_05_2022_AB_wavdec/'
 # main_folder = 'results/Barbara_13_05_2022_AB/'
 # main_folder = 'results/KrzysztofJ_all/'
 # main_folder = 'results/MK/'
@@ -14,8 +15,8 @@ main_folder = 'results/Barbara_13_05_2022_AB_wavdec/'
 ###
 # filename = "features_WL_MAV.csv"
 # filename = "features_WL_ZC_MAV.csv"
-filename = "features_WL_ZC_MAV_SSC.csv"
-classes = [1,4,5]
+filename = "features_WL_ZC_SSC.csv"
+classes = [1,2,3,5,6]
 ###
 
 # filename = "features_ZC_MAV_SSC.csv"
