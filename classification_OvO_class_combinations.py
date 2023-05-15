@@ -44,15 +44,17 @@ for filename in filenames:
             splits = kfold.split(X,y)
 
             model = RandomForestClassifier(max_depth=2, random_state=11) # the best
-            ovo = OneVsOneClassifier(model)
-            # ovo = OneVsRestClassifier(model) # TRY THIS ASAP
+            # ovo = OneVsOneClassifier(model)
+            ovr = OneVsRestClassifier(model) # TRY THIS ASAP
 
             balanced_accuraccy_array = []
             for n,(train_index,test_index) in enumerate(splits):
                 x_train_fold, x_test_fold = X[train_index], X[test_index]
                 y_train_fold, y_test_fold = y[train_index], y[test_index]
-                ovo.fit(x_train_fold, y_train_fold)
-                predict = ovo.predict(x_test_fold)
+                # ovo.fit(x_train_fold, y_train_fold)
+                ovr.fit(x_train_fold, y_train_fold)
+                # predict = ovo.predict(x_test_fold)
+                predict = ovr.predict(x_test_fold)
                 ###Evaluating Prediction Accuracy
                 if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
                     file_object.write(f'\nFile {filename} class combination {str(class_combination)}. Accuracy lower than {target_accuracy}, skipping...')
