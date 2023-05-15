@@ -9,15 +9,15 @@ import numpy as np
 from itertools import combinations
 print("")
 
-main_folder = 'results/amp2_wavdec/'
-# main_folder = 'results/Barbara_13_05_2022_AB_wavdec/'
+# main_folder = 'results/amp2_wavdec/'
+main_folder = 'results/Barbara_13_05_2022_AB_wavdec/'
 # main_folder = 'results/Barbara_13_05_2022_AB/'
 # main_folder = 'results/KrzysztofJ_all/'
 # main_folder = 'results/MK/'
 # filenames = ["features_MAV.csv","features_SSC.csv","features_VAR.csv","features_WL.csv","features_ZC.csv"]
 
 filenames = os.listdir(main_folder)
-classes = [1,2,3,4,5,6]
+classes = [1,2,3,4,5]
 # classes = ['1','2','3','4','5','6']
 number_of_classes = len(classes)
 
