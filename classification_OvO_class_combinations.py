@@ -18,6 +18,8 @@ main_folder = 'results/Barbara_13_05_2022_AB_wavdec/'
 
 filenames = os.listdir(main_folder)
 classes = [1,2,3,4,5]
+# classes = ['1','2','3','4','5']
+# classes = [1,2,3,4,5,6]
 # classes = ['1','2','3','4','5','6']
 number_of_classes = len(classes)
 
