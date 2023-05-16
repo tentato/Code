@@ -8,7 +8,7 @@ from itertools import combinations
 # 16 channels * 4 decomposition levels = 64 channels
 # the result should contain 64*5=320 features
 
-size = 16 * 4 + 1
+size = 16 * 4
 print(" ")
 
 results_folder = 'dataset_features/amp2_wavdec/'
@@ -22,9 +22,11 @@ ZC_table = []
 VAR_table = []
 MAV_table = []
 SSC_table = []
+y = []
 
 for class_number in classes_array:
     for file_index, filename in enumerate(os.listdir(main_folder+class_number)):
+        y = y.append(class_number)
         dataset = pd.read_csv(main_folder+class_number+'/'+filename, sep=",", decimal=".", header=None)
 
         WL_arr = np.zeros(size)
@@ -48,11 +50,11 @@ for class_number in classes_array:
             # Number of times the slope of the EMG signal changes sign.
             SSC_arr[idx] = electromyography.getSSC(y, threshold=1)
 
-        WL_arr[size-1] = int(class_number)
-        ZC_arr[size-1] = int(class_number)
-        VAR_arr[size-1] = int(class_number)
-        MAV_arr[size-1] = int(class_number)
-        SSC_arr[size-1] = int(class_number)      
+        # WL_arr[size-1] = int(class_number)
+        # ZC_arr[size-1] = int(class_number)
+        # VAR_arr[size-1] = int(class_number)
+        # MAV_arr[size-1] = int(class_number)
+        # SSC_arr[size-1] = int(class_number)      
 
         WL_table.append(WL_arr)
         ZC_table.append(ZC_arr)
@@ -107,6 +109,8 @@ comb_name = '_'.join(list_of_methods_names)
 print(comb_name)
 comb_df = pd.concat(list_of_methods_tables, axis=1)
 # comb_df = comb_df.loc[:,~comb_df.T.duplicated(keep='last')] #remove duplicate columns except last
+headers_array = [str(x) for x in range(1, size)]
+headers_array.append('class')
 comb_df.to_csv(f'{folder_path}features_{comb_name}.csv', header=False, index=False)
 
 print("\n\nFINISHED SUCCESSFULLY")

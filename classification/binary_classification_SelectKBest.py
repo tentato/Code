@@ -11,14 +11,18 @@ from sklearn.svm import SVC
 print("")
 matplotlib.style.use('ggplot')
 
-main_folder = 'results/KrzysztofJ_all/'
-filenames = ["features_MAV.csv","features_SSC.csv","features_VAR.csv","features_WL.csv","features_ZC.csv"]
+main_folder = 'dataset_features/amp2_wavdec/'
+filenames = ["features_WL_ZC_VAR_MAV_SSC.csv"]
+# main_folder = 'results/KrzysztofJ_all/'
 
 for filename in filenames:
     dataset = pd.read_csv(main_folder+filename, sep=",", decimal=".", header=None, 
         names=["c0", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "c12", "c13", "c14", "c15", "c16"])
     X = dataset.iloc[:, 0:-1].values
     y = dataset.iloc[:, -1].values.astype(int)
+    print(X)
+    print(y)
+    exit()
 
     class_pairs = []
     class_numbers = [*set(y)] # removes duplcates
