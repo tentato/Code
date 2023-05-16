@@ -64,26 +64,16 @@ for class_number in classes_array:
 
     print(f"Class {class_number} processed...")
 
-headers_array = [str(x) for x in range(1, size)]
-headers_array.append('class')
-print(headers_array)
-
-headers = headers_array
-WL_df = pd.DataFrame(columns=headers, data=WL_table)
+WL_df = pd.DataFrame(data=WL_table)
 WL_df = WL_df.astype(float)
-WL_df = WL_df.astype({"class": int})
-ZC_df = pd.DataFrame(columns=headers, data=ZC_table)
+ZC_df = pd.DataFrame(data=ZC_table)
 ZC_df = ZC_df.astype(float)
-ZC_df = ZC_df.astype({"class": int})
-VAR_df = pd.DataFrame(columns=headers, data=VAR_table)
+VAR_df = pd.DataFrame(data=VAR_table)
 VAR_df = VAR_df.astype(float)
-VAR_df = VAR_df.astype({"class": int})
-MAV_df = pd.DataFrame(columns=headers, data=MAV_table)
+MAV_df = pd.DataFrame(data=MAV_table)
 MAV_df = MAV_df.astype(float)
-MAV_df = MAV_df.astype({"class": int})
-SSC_df = pd.DataFrame(columns=headers, data=SSC_table)
+SSC_df = pd.DataFrame(data=SSC_table)
 SSC_df = SSC_df.astype(float)
-SSC_df = SSC_df.astype({"class": int})
 
 list_combinations_tables = list()
 list_combinations_names= list()
@@ -105,12 +95,14 @@ list_of_methods_names = ["WL", "ZC", "VAR", "MAV", "SSC"]
 
 
 #### JUST ALL METHODS (ONE FILE)
+
+headers_array = [str(x) for x in range(1, size)]
+headers_array.append('class')
+print(headers_array)
 comb_name = '_'.join(list_of_methods_names)
 print(comb_name)
 comb_df = pd.concat(list_of_methods_tables, axis=1)
-# comb_df = comb_df.loc[:,~comb_df.T.duplicated(keep='last')] #remove duplicate columns except last
-headers_array = [str(x) for x in range(1, size)]
-headers_array.append('class')
+
 comb_df.to_csv(f'{folder_path}features_{comb_name}.csv', header=False, index=False)
 
 print("\n\nFINISHED SUCCESSFULLY")
