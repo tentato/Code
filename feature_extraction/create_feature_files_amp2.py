@@ -6,11 +6,12 @@ from itertools import combinations
 
 # This data set contains 64 channels of EMG and MMG signals
 # 16 channels * 4 decomposition levels = 64 channels
+# the result should contain 64*5=320 features
 
 size = 16 * 4 + 1
 print(" ")
 
-results_folder = 'results/amp2/'
+results_folder = 'dataset_features/amp2_wavdec/'
 main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/'
 folder_path = results_folder
 os.makedirs(folder_path, exist_ok=True)  
@@ -87,24 +88,25 @@ list_combinations_names= list()
 list_of_methods_tables = [WL_df, ZC_df, VAR_df, MAV_df, SSC_df]
 list_of_methods_names = ["WL", "ZC", "VAR", "MAV", "SSC"]
 
-for n in range(len(list_of_methods_tables) + 1):
-    list_combinations_tables += list(combinations(list_of_methods_tables, n))
-for n in range(len(list_of_methods_names) + 1):
-    list_combinations_names += list(combinations(list_of_methods_names, n))
+# for n in range(len(list_of_methods_tables) + 1):
+#     list_combinations_tables += list(combinations(list_of_methods_tables, n))
+# for n in range(len(list_of_methods_names) + 1):
+#     list_combinations_names += list(combinations(list_of_methods_names, n))
 
-for comb_id, comb in enumerate(list_combinations_names):
-    if len(comb) >= 1:
-        comb_name = '_'.join(comb)
-        print(comb_name)
-        comb_df = pd.concat(list_combinations_tables[comb_id], axis=1)
-        comb_df = comb_df.loc[:,~comb_df.T.duplicated(keep='last')] #remove duplicate columns except last
-        comb_df.to_csv(f'{folder_path}features_{comb_name}.csv', header=False, index=False)
+# for comb_id, comb in enumerate(list_combinations_names):
+#     if len(comb) >= 1:
+#         comb_name = '_'.join(comb)
+#         print(comb_name)
+#         comb_df = pd.concat(list_combinations_tables[comb_id], axis=1)
+#         comb_df = comb_df.loc[:,~comb_df.T.duplicated(keep='last')] #remove duplicate columns except last
+#         comb_df.to_csv(f'{folder_path}features_{comb_name}.csv', header=False, index=False)
 
-# single features
-# WL_df.to_csv(f'{folder_path}features_WL.csv', header=False, index=False)
-# ZC_df.to_csv(f'{folder_path}features_ZC.csv', header=False, index=False)
-# VAR_df.to_csv(f'{folder_path}features_VAR.csv', header=False, index=False)
-# MAV_df.to_csv(f'{folder_path}features_MAV.csv', header=False, index=False)
-# SSC_df.to_csv(f'{folder_path}features_SSC.csv', header=False, index=False)
+
+#### JUST ALL METHODS (ONE FILE)
+comb_name = '_'.join(list_of_methods_names)
+print(comb_name)
+comb_df = pd.concat(list_of_methods_tables, axis=1)
+# comb_df = comb_df.loc[:,~comb_df.T.duplicated(keep='last')] #remove duplicate columns except last
+comb_df.to_csv(f'{folder_path}features_{comb_name}.csv', header=False, index=False)
 
 print("\n\nFINISHED SUCCESSFULLY")
