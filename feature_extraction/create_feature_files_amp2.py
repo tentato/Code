@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 import os
 import pysiology.electromyography as electromyography
-from itertools import combinations
 
 # This data set contains 64 channels of EMG and MMG signals
 # 16 channels * 4 decomposition levels = 64 channels
@@ -49,12 +48,6 @@ for class_number in classes_array:
             # Number of times the slope of the EMG signal changes sign.
             SSC_arr[idx] = electromyography.getSSC(y, threshold=0.1)
 
-        # WL_arr[size-1] = int(class_number)
-        # ZC_arr[size-1] = int(class_number)
-        # VAR_arr[size-1] = int(class_number)
-        # MAV_arr[size-1] = int(class_number)
-        # SSC_arr[size-1] = int(class_number)      
-
         WL_table.append(WL_arr)
         ZC_table.append(ZC_arr)
         VAR_table.append(VAR_arr)
@@ -89,10 +82,6 @@ label_df = pd.DataFrame(data=label, columns=["label"])
 
 list_of_methods_tables = [WL_df, ZC_df, VAR_df, MAV_df, SSC_df]
 
-#### JUST ALL METHODS (ONE FILE)
-
-# headers_array.append('class')
-# print(headers_array)
 comb_name = '_'.join(list_of_methods_names)
 print(comb_name)
 comb_df = pd.concat(list_of_methods_tables, axis=1)
