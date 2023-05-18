@@ -24,46 +24,46 @@ MAV_table = []
 SSC_table = []
 label = []
 
-# for class_number in classes_array:
-#     for file_index, filename in enumerate(os.listdir(main_folder+class_number)):
-#         dataset = pd.read_csv(main_folder+class_number+'/'+filename, sep=",", decimal=".", header=None)
+for class_number in classes_array:
+    for file_index, filename in enumerate(os.listdir(main_folder+class_number)):
+        dataset = pd.read_csv(main_folder+class_number+'/'+filename, sep=",", decimal=".", header=None)
 
-#         WL_arr = np.zeros(size)
-#         ZC_arr = np.zeros(size)
-#         VAR_arr = np.zeros(size)
-#         MAV_arr = np.zeros(size)
-#         SSC_arr = np.zeros(size)
+        WL_arr = np.zeros(size)
+        ZC_arr = np.zeros(size)
+        VAR_arr = np.zeros(size)
+        MAV_arr = np.zeros(size)
+        SSC_arr = np.zeros(size)
 
-#         for idx, col in enumerate(dataset.columns):
-#             column = dataset.loc[:, col]
-#             y = column.to_numpy()
+        for idx, col in enumerate(dataset.columns):
+            column = dataset.loc[:, col]
+            y = column.to_numpy()
 
-#             # Get the waveform length of the signal, a measure of complexity of the EMG Signal.
-#             WL_arr[idx] = electromyography.getWL(y)
-#             # How many times does the signal crosses the 0 (+-threshold).
-#             ZC_arr[idx] = electromyography.getZC(y, threshold=1)
-#             # Summation of average square values of the deviation of a variable.
-#             VAR_arr[idx] = electromyography.getVAR(y)
-#             # Thif functions compute the average of EMG signal Amplitude - Mean Absolute Value
-#             MAV_arr[idx] = electromyography.getMAV(y)
-#             # Number of times the slope of the EMG signal changes sign.
-#             SSC_arr[idx] = electromyography.getSSC(y, threshold=1)
+            # Get the waveform length of the signal, a measure of complexity of the EMG Signal.
+            WL_arr[idx] = electromyography.getWL(y)
+            # How many times does the signal crosses the 0 (+-threshold).
+            ZC_arr[idx] = electromyography.getZC(y, threshold=1)
+            # Summation of average square values of the deviation of a variable.
+            VAR_arr[idx] = electromyography.getVAR(y)
+            # Thif functions compute the average of EMG signal Amplitude - Mean Absolute Value
+            MAV_arr[idx] = electromyography.getMAV(y)
+            # Number of times the slope of the EMG signal changes sign.
+            SSC_arr[idx] = electromyography.getSSC(y, threshold=1)
 
-#         # WL_arr[size-1] = int(class_number)
-#         # ZC_arr[size-1] = int(class_number)
-#         # VAR_arr[size-1] = int(class_number)
-#         # MAV_arr[size-1] = int(class_number)
-#         # SSC_arr[size-1] = int(class_number)      
+        # WL_arr[size-1] = int(class_number)
+        # ZC_arr[size-1] = int(class_number)
+        # VAR_arr[size-1] = int(class_number)
+        # MAV_arr[size-1] = int(class_number)
+        # SSC_arr[size-1] = int(class_number)      
 
-#         WL_table.append(WL_arr)
-#         ZC_table.append(ZC_arr)
-#         VAR_table.append(VAR_arr)
-#         MAV_table.append(MAV_arr)
-#         SSC_table.append(SSC_arr)
-#         label.append(int(class_number))
+        WL_table.append(WL_arr)
+        ZC_table.append(ZC_arr)
+        VAR_table.append(VAR_arr)
+        MAV_table.append(MAV_arr)
+        SSC_table.append(SSC_arr)
+        label.append(int(class_number))
 
 
-#     print(f"Class {class_number} processed...")
+    print(f"Class {class_number} processed...")
 
 
 list_of_methods_names = ["WL", "ZC", "VAR", "MAV", "SSC"]
@@ -75,17 +75,17 @@ for method in list_of_methods_names:
 headers_dict = dict(zip(list_of_methods_names, headers_list))
 
 # create DataFrames
-WL_df = pd.DataFrame(data=WL_table, headers=headers_dict["WL"])
+WL_df = pd.DataFrame(data=WL_table, columns=headers_dict["WL"])
 WL_df = WL_df.astype(float)
-ZC_df = pd.DataFrame(data=ZC_table, headers=headers_dict["ZC"])
+ZC_df = pd.DataFrame(data=ZC_table, columns=headers_dict["ZC"])
 ZC_df = ZC_df.astype(float)
-VAR_df = pd.DataFrame(data=VAR_table, headers=headers_dict["VAR"])
+VAR_df = pd.DataFrame(data=VAR_table, columns=headers_dict["VAR"])
 VAR_df = VAR_df.astype(float)
-MAV_df = pd.DataFrame(data=MAV_table, headers=headers_dict["MAV"])
+MAV_df = pd.DataFrame(data=MAV_table, columns=headers_dict["MAV"])
 MAV_df = MAV_df.astype(float)
-SSC_df = pd.DataFrame(data=SSC_table, headers=headers_dict["SSC"])
+SSC_df = pd.DataFrame(data=SSC_table, columns=headers_dict["SSC"])
 SSC_df = SSC_df.astype(float)
-label_df = pd.DataFrame(data=label, headers="label")
+label_df = pd.DataFrame(data=label, columns=["label"])
 
 list_of_methods_tables = [WL_df, ZC_df, VAR_df, MAV_df, SSC_df]
 
