@@ -74,22 +74,18 @@ for method in list_of_methods_names:
     headers_list.append([(method+str(i)) for i in range(1, size+1)])
 headers_dict = dict(zip(list_of_methods_names, headers_list))
 
-print(headers_dict["WL"])
-exit()
-
 # create DataFrames
-
-WL_df = pd.DataFrame(data=WL_table)
+WL_df = pd.DataFrame(data=WL_table, headers=headers_dict["WL"])
 WL_df = WL_df.astype(float)
-ZC_df = pd.DataFrame(data=ZC_table)
+ZC_df = pd.DataFrame(data=ZC_table, headers=headers_dict["ZC"])
 ZC_df = ZC_df.astype(float)
-VAR_df = pd.DataFrame(data=VAR_table)
+VAR_df = pd.DataFrame(data=VAR_table, headers=headers_dict["VAR"])
 VAR_df = VAR_df.astype(float)
-MAV_df = pd.DataFrame(data=MAV_table)
+MAV_df = pd.DataFrame(data=MAV_table, headers=headers_dict["MAV"])
 MAV_df = MAV_df.astype(float)
-SSC_df = pd.DataFrame(data=SSC_table)
+SSC_df = pd.DataFrame(data=SSC_table, headers=headers_dict["SSC"])
 SSC_df = SSC_df.astype(float)
-label_df = pd.DataFrame(data=label)
+label_df = pd.DataFrame(data=label, headers="label")
 
 list_of_methods_tables = [WL_df, ZC_df, VAR_df, MAV_df, SSC_df]
 
