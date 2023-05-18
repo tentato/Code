@@ -35,6 +35,7 @@ scores = []
 mean_scores = []
 
 for k in range(0, size):
+    print(f"K: {k}")
     method_val = []
     mean_method_val = []
     for filename in filenames: 
