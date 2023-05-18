@@ -40,13 +40,13 @@ for class_number in classes_array:
             # Get the waveform length of the signal, a measure of complexity of the EMG Signal.
             WL_arr[idx] = electromyography.getWL(y)
             # How many times does the signal crosses the 0 (+-threshold).
-            ZC_arr[idx] = electromyography.getZC(y, threshold=0.1)
+            ZC_arr[idx] = electromyography.getZC(y, threshold=0.01)
             # Summation of average square values of the deviation of a variable.
             VAR_arr[idx] = electromyography.getVAR(y)
             # Thif functions compute the average of EMG signal Amplitude - Mean Absolute Value
             MAV_arr[idx] = electromyography.getMAV(y)
             # Number of times the slope of the EMG signal changes sign.
-            SSC_arr[idx] = electromyography.getSSC(y, threshold=0.1)
+            SSC_arr[idx] = electromyography.getSSC(y, threshold=0.01)
 
         WL_table.append(WL_arr)
         ZC_table.append(ZC_arr)
