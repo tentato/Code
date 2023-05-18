@@ -41,13 +41,13 @@ for class_number in classes_array:
             # Get the waveform length of the signal, a measure of complexity of the EMG Signal.
             WL_arr[idx] = electromyography.getWL(y)
             # How many times does the signal crosses the 0 (+-threshold).
-            ZC_arr[idx] = electromyography.getZC(y, threshold=1)
+            ZC_arr[idx] = electromyography.getZC(y, threshold=0.1)
             # Summation of average square values of the deviation of a variable.
             VAR_arr[idx] = electromyography.getVAR(y)
             # Thif functions compute the average of EMG signal Amplitude - Mean Absolute Value
             MAV_arr[idx] = electromyography.getMAV(y)
             # Number of times the slope of the EMG signal changes sign.
-            SSC_arr[idx] = electromyography.getSSC(y, threshold=1)
+            SSC_arr[idx] = electromyography.getSSC(y, threshold=0.1)
 
         # WL_arr[size-1] = int(class_number)
         # ZC_arr[size-1] = int(class_number)
@@ -98,6 +98,6 @@ print(comb_name)
 comb_df = pd.concat(list_of_methods_tables, axis=1)
 comb_df = pd.concat([comb_df, label_df], axis=1)
 
-comb_df.to_csv(f'{folder_path}features_{comb_name}.csv', header=False, index=False)
+comb_df.to_csv(f'{folder_path}features_{comb_name}.csv', header=True, index=False)
 
 print("\n\nFINISHED SUCCESSFULLY")
