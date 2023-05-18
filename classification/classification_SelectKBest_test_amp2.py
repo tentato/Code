@@ -40,6 +40,7 @@ for k in range(0, size):
     for filename in filenames: 
         if "features_" not in filename:
             print(f"{filename} is not a valid dataset...")
+            filenames = filenames.remove(filename)
             continue
         dataset = pd.read_csv(main_folder+filename, sep=",", decimal=".", header=0)
         X = dataset.iloc[:, 0:-1].values
@@ -71,7 +72,6 @@ for k in range(0, size):
     scores.append(method_val)
 
     file_object.write(f'{mean_method_val}\n')
-    break
 
 file_object.close()
 exit()
