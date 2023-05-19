@@ -15,6 +15,7 @@ from tabulate import tabulate
 from scipy.stats import ttest_rel
 print("")
 main_folder = 'dataset_features/amp2_wavdec/'
+filename = "features_WL_ZC_VAR_MAV_SSC.csv"
 
 filenames = os.listdir(main_folder)
 classes = [1,2,3,4,5,6]
@@ -34,16 +35,15 @@ model = RandomForestClassifier(max_depth=2, random_state=11)
 scores = []
 mean_scores = []
 
-for k in range(0, size):
-    print(f"K: {k}")
-    method_val = []
-    mean_method_val = []
-    for filename in filenames: 
-        if "features_" not in filename:
-            print(f"{filename} is not a valid dataset...")
-            filenames = filenames.remove(filename)
-            continue
-        dataset = pd.read_csv(main_folder+filename, sep=",", decimal=".", header=0)
+# k, file, class combination
+for idx, class_combination in enumerate(list_combinations_classes):
+    for k in range(0, size):
+        print(f"K: {k}")
+        method_val = []
+        mean_method_val = []
+
+        dataset = pd.read_csv(f"{main_folder}{filename}", sep=",", decimal=".", header=0)
+        dataset = dataset[dataset.iloc[:, -1].isin(class_combination)]
         X = dataset.iloc[:, 0:-1].values
         y = dataset.iloc[:, -1].values.astype(int)
 
@@ -60,19 +60,23 @@ for k in range(0, size):
 
         ova = OneVsRestClassifier(model)
 
-        mean_arr = []
-
+        balanced_accuraccy_array = []
         for n,(train_index,test_index) in enumerate(splits):
             x_train_fold, x_test_fold = X[train_index], X[test_index]
             y_train_fold, y_test_fold = y[train_index], y[test_index]
             ova.fit(x_train_fold, y_train_fold)
             predict = ova.predict(x_test_fold)
-            mean_arr.append(metrics.accuracy_score(y_test_fold, predict))
-        mean_method_val.append(round(np.mean(mean_arr),2))
-        method_val.append(mean_arr)
-    scores.append(method_val)
 
-    file_object.write(f'{mean_method_val}\n')
+            ###Evaluating Prediction Accuracy
+            if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
+                file_object.write(f'\nFile {filename} class combination {str(class_combination)}. Accuracy lower than {target_accuracy}, skipping...')
+                break
+            print("RFC Acc: ",round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
+            balanced_accuraccy_array.append(round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
+        if len(balanced_accuraccy_array) > 0:
+            file_object.write(f'\nFile {filename} class combination {str(class_combination)} Mean Accuracy: {round(np.mean(balanced_accuraccy_array),2)}')  
+
+        file_object.write(f'{mean_method_val}\n')
 
 file_object.close()
 exit()
