@@ -26,6 +26,8 @@ for n in range(2, len(classes) + 1):
     list_combinations_classes += list(combinations(classes, n))
 list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
 
+print(list_combinations_classes)
+
 file_object = open(f'{main_folder}results_Select_K_Best.txt', 'w')
 target_accuracy = 0.6
 size = 16 * 4
