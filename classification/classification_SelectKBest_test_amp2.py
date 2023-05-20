@@ -70,14 +70,13 @@ for idx, class_combination in enumerate(list_combinations_classes):
 
             ###Evaluating Prediction Accuracy
             if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
-                file_object.write(f'\nClass combination {str(class_combination)}. Accuracy lower than {target_accuracy}, skipping...')
+                file_object.write(f'\nClass combination;{str(class_combination)};Accuracy lower than {target_accuracy}, skipping...')
                 break
             print("RFC Acc: ",round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
             balanced_accuraccy_array.append(round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
         if len(balanced_accuraccy_array) > 0:
-            file_object.write(f'\nClass combination {str(class_combination)} Mean Accuracy: {round(np.mean(balanced_accuraccy_array),2)}')  
+            file_object.write(f'\nClass combination;{str(class_combination)};Mean Accuracy;{round(np.mean(balanced_accuraccy_array),2)};K;{k}')  
 
-        file_object.write(f'{mean_method_val}\n')
 
 file_object.close()
 exit()
