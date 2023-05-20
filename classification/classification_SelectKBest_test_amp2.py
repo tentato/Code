@@ -13,6 +13,9 @@ from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.svm import SVC
 from tabulate import tabulate
 from scipy.stats import ttest_rel
+import time
+
+start_time = time.time()
 print("")
 main_folder = 'dataset_features/amp2_wavdec/'
 filename = "features_WL_ZC_VAR_MAV_SSC.csv"
@@ -29,9 +32,9 @@ list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
 print(list_combinations_classes)
 
 file_object = open(f'{main_folder}results_Select_K_Best.txt', 'w')
-file_object.write(f'Class combination;K worst features rejected;Mean Accuracy')  
+file_object.write(f'Class combination;Number of classes;K worst features rejected;Mean Accuracy;Worst features labels')  
 target_accuracy = 0.1
-size = 16 * 4
+size = 16 * 4 * 5 # 16 signals * 4 decomposition levels * 5 feature extraction methods = 320
 
 model = RandomForestClassifier(max_depth=2, random_state=11)
 
@@ -54,6 +57,8 @@ for idx, class_combination in enumerate(list_combinations_classes):
         new_X = X_new.fit_transform(X, y)
         indexes_list = np.argpartition(X_new.scores_, k)
         worst_features_indexes = indexes_list[:k]
+        worst_features_labels = dataset.columns[worst_features_indexes].to_list()
+        # print(worst_features_labels)
         X = np.delete(X, worst_features_indexes,1)  
         # print(X.shape)
 
@@ -70,15 +75,17 @@ for idx, class_combination in enumerate(list_combinations_classes):
             predict = ova.predict(x_test_fold)
 
             ###Evaluating Prediction Accuracy
-            # if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
-            #     file_object.write(f'\n{str(class_combination)};{k};{target_accuracy}')
-            #     break
+            if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
+                file_object.write(f'\n{str(class_combination)};{len(class_combination)};{k};{round(np.mean(balanced_accuraccy_array),2)};{" ".join(worst_features_labels)}')
+                break
             print("RFC Acc: ",round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
             balanced_accuraccy_array.append(round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
         if len(balanced_accuraccy_array) > 0:
-            file_object.write(f'\n{str(class_combination)};{k};{round(np.mean(balanced_accuraccy_array),2)}')  
+            file_object.write(f'\n{str(class_combination)};{len(class_combination)};{k};{round(np.mean(balanced_accuraccy_array),2)};{" ".join(worst_features_labels)}')  
+    break #just for first combination (all classes)
 
-
+end_time = time.time()
+print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")
 file_object.close()
 exit()
 
