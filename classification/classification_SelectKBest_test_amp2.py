@@ -29,7 +29,8 @@ list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
 print(list_combinations_classes)
 
 file_object = open(f'{main_folder}results_Select_K_Best.txt', 'w')
-target_accuracy = 0.6
+file_object.write(f'Class combination;K worst features rejected;Mean Accuracy')  
+target_accuracy = 0.1
 size = 16 * 4
 
 model = RandomForestClassifier(max_depth=2, random_state=11)
@@ -69,13 +70,13 @@ for idx, class_combination in enumerate(list_combinations_classes):
             predict = ova.predict(x_test_fold)
 
             ###Evaluating Prediction Accuracy
-            if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
-                file_object.write(f'\nClass combination;{str(class_combination)};Accuracy lower than {target_accuracy}, skipping...')
-                break
+            # if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
+            #     file_object.write(f'\n{str(class_combination)};{k};{target_accuracy}')
+            #     break
             print("RFC Acc: ",round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
             balanced_accuraccy_array.append(round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
         if len(balanced_accuraccy_array) > 0:
-            file_object.write(f'\nClass combination;{str(class_combination)};Mean Accuracy;{round(np.mean(balanced_accuraccy_array),2)};K;{k}')  
+            file_object.write(f'\n{str(class_combination)};{k};{round(np.mean(balanced_accuraccy_array),2)}')  
 
 
 file_object.close()
