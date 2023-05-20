@@ -10,8 +10,10 @@ import pysiology.electromyography as electromyography
 size = 16 * 4
 print(" ")
 
-results_folder = 'dataset_features/amp2_wavdec/'
-main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/'
+# results_folder = 'dataset_features/amp2_wavdec/'
+# main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/'
+results_folder = 'dataset_features/amp2_2_wavdec/'
+main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/'
 folder_path = results_folder
 os.makedirs(folder_path, exist_ok=True)  
 classes_array = ['1', '2', '3', '4', '5', '6']
