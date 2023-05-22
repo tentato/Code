@@ -1,6 +1,10 @@
-from itertools import combinations
+import time
 import os
 import numpy as np
+import pandas as pd
+from tabulate import tabulate
+from scipy.stats import ttest_rel
+from itertools import combinations
 from sklearn import metrics
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_selection import SelectKBest
@@ -8,13 +12,10 @@ from sklearn.multiclass import OneVsOneClassifier
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
-import pandas as pd
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
-from tabulate import tabulate
-from scipy.stats import ttest_rel
-import time
+from sklearn.preprocessing import MinMaxScaler
 
 start_time = time.time()
 print("")
@@ -31,7 +32,7 @@ for n in range(2, len(classes) + 1):
     list_combinations_classes += list(combinations(classes, n))
 list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
 
-print(list_combinations_classes)
+# print(list_combinations_classes)
 
 file_object = open(f'{main_folder}results_Select_K_Best.txt', 'w')
 file_object.write(f'Class combination;Number of classes;K worst features rejected;Mean Accuracy;Worst features labels')  
@@ -39,10 +40,17 @@ target_accuracy = 0.6
 size = 16 * 4 * 5 # 16 signals * 4 decomposition levels * 5 feature extraction methods = 320
 
 model = RandomForestClassifier(random_state=11) 
-# model = MLPClassifier(max_iter=10000, random_state=11) 
+scaler = MinMaxScaler()
 
 scores = []
 mean_scores = []
+
+dataset = pd.read_csv(f"{main_folder}{filename}", sep=",", decimal=".", header=0)
+X_df = dataset.iloc[:, 0:-1]
+y_df = dataset.iloc[:, -1]
+X_scaled = scaler.fit_transform(X_df)
+X_df = pd.DataFrame(X_scaled, columns=dataset.columns[:-1])
+dataset = pd.concat([X_df, y_df], axis=1)
 
 for idx, class_combination in enumerate(list_combinations_classes):
     for k in range(0, size):
@@ -50,17 +58,17 @@ for idx, class_combination in enumerate(list_combinations_classes):
         method_val = []
         mean_method_val = []
 
-        dataset = pd.read_csv(f"{main_folder}{filename}", sep=",", decimal=".", header=0)
-        dataset = dataset[dataset.iloc[:, -1].isin(class_combination)]
-        X = dataset.iloc[:, 0:-1].values
-        y = dataset.iloc[:, -1].values.astype(int)
+        subdataset = dataset[dataset.iloc[:, -1].isin(class_combination)]
+
+        X = subdataset.iloc[:, 0:-1].values
+        y = subdataset.iloc[:, -1].values.astype(int)
 
         # remove k worst features
         X_new = SelectKBest()
         new_X = X_new.fit_transform(X, y)
         indexes_list = np.argpartition(X_new.scores_, k)
         worst_features_indexes = indexes_list[:k]
-        worst_features_labels = dataset.columns[worst_features_indexes].to_list()
+        worst_features_labels = subdataset.columns[worst_features_indexes].to_list()
         # print(worst_features_labels)
         X = np.delete(X, worst_features_indexes,1)  
         # print(X.shape)
