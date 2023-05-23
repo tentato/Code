@@ -57,7 +57,6 @@ fig = plt.figure(figsize=(7,7))
 
 for idx, class_combination in enumerate(list_combinations_classes):
     for k in range(0, size):
-        class_combination = (1, 2, 3)
         print(f"K: {k}")
         method_val = []
         mean_method_val = []
