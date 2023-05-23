@@ -2,6 +2,7 @@ import time
 import os
 import numpy as np
 import pandas as pd
+import problexity as px
 from tabulate import tabulate
 from scipy.stats import ttest_rel
 from itertools import combinations
@@ -16,6 +17,8 @@ from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+
 
 start_time = time.time()
 print("")
@@ -31,8 +34,6 @@ list_combinations_classes = list()
 for n in range(2, len(classes) + 1):
     list_combinations_classes += list(combinations(classes, n))
 list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
-
-# print(list_combinations_classes)
 
 file_object = open(f'{main_folder}results_Select_K_Best.txt', 'w')
 file_object.write(f'Class combination;Number of classes;K worst features rejected;Mean Accuracy;Worst features labels')  
@@ -52,8 +53,11 @@ X_scaled = scaler.fit_transform(X_df)
 X_df = pd.DataFrame(X_scaled, columns=dataset.columns[:-1])
 dataset = pd.concat([X_df, y_df], axis=1)
 
+fig = plt.figure(figsize=(7,7))
+
 for idx, class_combination in enumerate(list_combinations_classes):
     for k in range(0, size):
+        class_combination = (1, 2, 3)
         print(f"K: {k}")
         method_val = []
         mean_method_val = []
@@ -69,7 +73,21 @@ for idx, class_combination in enumerate(list_combinations_classes):
         indexes_list = np.argpartition(X_new.scores_, k)
         worst_features_indexes = indexes_list[:k]
         worst_features_labels = subdataset.columns[worst_features_indexes].to_list()
-        X = np.delete(X, worst_features_indexes,1)  
+        X = np.delete(X, worst_features_indexes,1)  # after removing worst features
+
+        # Begin problexity
+        strategy = "ova"
+        cc = px.ComplexityCalculator(multiclass_strategy=strategy)
+
+        # Fit model with data
+        cc.fit(X,y)
+        print(f"Report: \n{cc.report()}\n")
+        cc.plot(fig, (1,1,1))
+
+        plt.tight_layout()
+        plt.savefig(f"problexity_results/problexity_{strategy}_({','.join(map(str, class_combination))})_k={k}.png")
+
+        # End problexity
 
         kfold = RepeatedStratifiedKFold(n_splits=2, n_repeats=5,random_state=11)
         splits = kfold.split(X,y)
@@ -92,7 +110,7 @@ for idx, class_combination in enumerate(list_combinations_classes):
             balanced_accuraccy_array.append(round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
         if len(balanced_accuraccy_array) > 0:
             file_object.write(f'\n{str(class_combination)};{len(class_combination)};{k};{round(np.mean(balanced_accuraccy_array),2)};{" ".join(worst_features_labels)}')  
-    break #just for first combination (all classes)
+    # break #just for first combination (all classes)
 
 end_time = time.time()
 print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")
