@@ -69,9 +69,7 @@ for idx, class_combination in enumerate(list_combinations_classes):
         indexes_list = np.argpartition(X_new.scores_, k)
         worst_features_indexes = indexes_list[:k]
         worst_features_labels = subdataset.columns[worst_features_indexes].to_list()
-        # print(worst_features_labels)
         X = np.delete(X, worst_features_indexes,1)  
-        # print(X.shape)
 
         kfold = RepeatedStratifiedKFold(n_splits=2, n_repeats=5,random_state=11)
         splits = kfold.split(X,y)
