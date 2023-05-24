@@ -66,9 +66,9 @@ for idx, class_combination in enumerate(class_combinations):
         print(f"K: {k}")
         method_val = []
         mean_method_val = []
-
-        subdataset = dataset[dataset.iloc[:, -1].isin(class_combination)]
-        y = dataset.iloc[:, -1].values.astype(int)
+        subdataset = dataset.copy()
+        subdataset = subdataset[subdataset.iloc[:, -1].isin(class_combination)]
+        y = subdataset.iloc[:, -1].values.astype(int)
 
         X, worst_features_labels = remove_k_worst_features(subdataset, y, k)
 
