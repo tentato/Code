@@ -6,11 +6,8 @@ from itertools import combinations
 
 # This data set contains only 8 channels of EMG signals (no MMG data)
 
-print(" ")
-
-results_folder = 'results/Barbara_13_05_2022_AB/'
-main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/Barbara_13_05_2022_AB/'
-folder_path = results_folder
+folder_path = 'dataset_features/Barbara_wavdec/'
+main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/Barbara_wavdec/'
 os.makedirs(folder_path, exist_ok=True)  
 classes_array = ['1', '2', '3', '4', '5']
 
@@ -60,34 +57,35 @@ for class_number in classes_array:
 
     print(f"Class {class_number} processed...")
 
-headers = ["1", "2", "3", "4", "5", "6", "7", "8", "class"]
-WL_df = pd.DataFrame(columns=headers, data=WL_table)
-WL_df = WL_df.astype({"class": int})
-ZC_df = pd.DataFrame(columns=headers, data=ZC_table)
-ZC_df = ZC_df.astype({"class": int})
-VAR_df = pd.DataFrame(columns=headers, data=VAR_table)
-VAR_df = VAR_df.astype({"class": int})
-MAV_df = pd.DataFrame(columns=headers, data=MAV_table)
-MAV_df = MAV_df.astype({"class": int})
-SSC_df = pd.DataFrame(columns=headers, data=SSC_table)
-SSC_df = SSC_df.astype({"class": int})
 
-list_combinations_tables = list()
-list_combinations_names= list()
-list_of_methods_tables = [WL_df, ZC_df, VAR_df, MAV_df, SSC_df]
 list_of_methods_names = ["WL", "ZC", "VAR", "MAV", "SSC"]
 
-for n in range(len(list_of_methods_tables) + 1):
-    list_combinations_tables += list(combinations(list_of_methods_tables, n))
-for n in range(len(list_of_methods_names) + 1):
-    list_combinations_names += list(combinations(list_of_methods_names, n))
+# # create headers
+# headers_list = []
+# for method in list_of_methods_names:
+#     # headers_list.append([(method+str(i)) for i in range(1, size+1)])
+# headers_dict = dict(zip(list_of_methods_names, headers_list))
 
-for comb_id, comb in enumerate(list_combinations_names):
-    if len(comb) > 1:
-        comb_name = '_'.join(comb)
-        print(comb_name)
-        comb_df = pd.concat(list_combinations_tables[comb_id], axis=1)
-        comb_df = comb_df.loc[:,~comb_df.T.duplicated(keep='last')] #remove duplicate columns except last
-        comb_df.to_csv(f'{folder_path}features_{comb_name}.csv', header=False, index=False)
+# # create DataFrames
+# WL_df = pd.DataFrame(data=WL_table, columns=headers_dict["WL"])
+# WL_df = WL_df.astype(float)
+# ZC_df = pd.DataFrame(data=ZC_table, columns=headers_dict["ZC"])
+# ZC_df = ZC_df.astype(float)
+# VAR_df = pd.DataFrame(data=VAR_table, columns=headers_dict["VAR"])
+# VAR_df = VAR_df.astype(float)
+# MAV_df = pd.DataFrame(data=MAV_table, columns=headers_dict["MAV"])
+# MAV_df = MAV_df.astype(float)
+# SSC_df = pd.DataFrame(data=SSC_table, columns=headers_dict["SSC"])
+# SSC_df = SSC_df.astype(float)
+# # label_df = pd.DataFrame(data=label, columns=["label"])
 
-print("\n\nFINISHED SUCCESSFULLY")
+# list_of_methods_tables = [WL_df, ZC_df, VAR_df, MAV_df, SSC_df]
+
+# comb_name = '_'.join(list_of_methods_names)
+# print(comb_name)
+# comb_df = pd.concat(list_of_methods_tables, axis=1)
+# # comb_df = pd.concat([comb_df, label_df], axis=1)
+
+# comb_df.to_csv(f'{folder_path}features_{comb_name}.csv', header=True, index=False)
+
+# print("\n\nFINISHED SUCCESSFULLY")
