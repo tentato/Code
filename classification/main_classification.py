@@ -13,6 +13,7 @@ from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 
 def min_max_normalize(dataset):
+    scaler = MinMaxScaler()
     X_df = dataset.iloc[:, 0:-1]
     y_df = dataset.iloc[:, -1]
     X_scaled = scaler.fit_transform(X_df)
@@ -40,7 +41,6 @@ def remove_k_worst_features(dataset, y, k):
 start_time = time.time()
 
 model = RandomForestClassifier(random_state=11) 
-scaler = MinMaxScaler()
 
 # main_folder = 'dataset_features/amp2_2_wavdec/'
 # main_folder = 'dataset_features/amp2_wavdec/'
