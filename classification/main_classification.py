@@ -60,11 +60,6 @@ class_combinations = create_class_combinations(classes)
 file_object = open(f'{main_folder}results_Select_K_Best.txt', 'w')
 file_object.write(f'Class combination;Number of classes;K worst features rejected;Mean Accuracy;Worst features labels')  
 
-scores = []
-mean_scores = []
-
-fig = plt.figure(figsize=(7,7))
-
 for idx, class_combination in enumerate(class_combinations):
     for k in range(0, features):
         print(f"K: {k}")
