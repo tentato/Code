@@ -70,7 +70,7 @@ for idx, class_combination in enumerate(class_combinations):
         subdataset = dataset[dataset.iloc[:, -1].isin(class_combination)]
         y = dataset.iloc[:, -1].values.astype(int)
 
-        X, worst_features_labels = remove_k_worst_features(subdataset, k)
+        X, worst_features_labels = remove_k_worst_features(subdataset, y, k)
 
         kfold = RepeatedStratifiedKFold(n_splits=2, n_repeats=5,random_state=11)
         splits = kfold.split(X,y)
