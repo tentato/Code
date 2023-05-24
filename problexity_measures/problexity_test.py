@@ -36,3 +36,18 @@ for file in filenames:
 
     plt.tight_layout()
     plt.savefig(f"{pre}problexity_results/problexity_{strategy}_{','.join(map(str, classes))}_{filename.split('.')[0]}.png")
+
+
+# # Begin problexity
+# strategy = "ova"
+# cc = px.ComplexityCalculator(multiclass_strategy=strategy)
+
+# # Fit model with data
+# cc.fit(X,y)
+# print(f"Report: \n{cc.report()}\n")
+# cc.plot(fig, (1,1,1))
+
+# plt.tight_layout()
+# plt.savefig(f"problexity_results/problexity_{strategy}_({','.join(map(str, class_combination))})_k={k}.png")
+
+# # End problexity

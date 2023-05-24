@@ -27,6 +27,15 @@ def create_class_combinations(classes):
     list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
     return list_combinations_classes
 
+def remove_k_worst_features(X, y, k):
+    X_new = SelectKBest()
+    new_X = X_new.fit_transform(X, y)
+    indexes_list = np.argpartition(X_new.scores_, k)
+    worst_features_indexes = indexes_list[:k]
+    worst_features_labels = subdataset.columns[worst_features_indexes].to_list()
+    X = np.delete(X, worst_features_indexes,1)
+    return X, worst_features_labels
+
 start_time = time.time()
 
 model = RandomForestClassifier(random_state=11) 
@@ -67,27 +76,7 @@ for idx, class_combination in enumerate(class_combinations):
         X = subdataset.iloc[:, 0:-1].values
         y = subdataset.iloc[:, -1].values.astype(int)
 
-        # remove k worst features
-        X_new = SelectKBest()
-        new_X = X_new.fit_transform(X, y)
-        indexes_list = np.argpartition(X_new.scores_, k)
-        worst_features_indexes = indexes_list[:k]
-        worst_features_labels = subdataset.columns[worst_features_indexes].to_list()
-        X = np.delete(X, worst_features_indexes,1)  # after removing worst features
-
-        # Begin problexity
-        strategy = "ova"
-        cc = px.ComplexityCalculator(multiclass_strategy=strategy)
-
-        # Fit model with data
-        cc.fit(X,y)
-        print(f"Report: \n{cc.report()}\n")
-        cc.plot(fig, (1,1,1))
-
-        plt.tight_layout()
-        plt.savefig(f"problexity_results/problexity_{strategy}_({','.join(map(str, class_combination))})_k={k}.png")
-
-        # End problexity
+        X, worst_features_labels = remove_k_worst_features(X, y, k)
 
         kfold = RepeatedStratifiedKFold(n_splits=2, n_repeats=5,random_state=11)
         splits = kfold.split(X,y)
@@ -104,13 +93,11 @@ for idx, class_combination in enumerate(class_combinations):
             ###Evaluating Prediction Accuracy
             if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
                 print("RFC Acc: ",round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
-                # file_object.write(f'\n{str(class_combination)};{len(class_combination)};{k};{target_accuracy};{" ".join(worst_features_labels)}')
                 break
             print("RFC Acc: ",round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
             balanced_accuraccy_array.append(round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
         if len(balanced_accuraccy_array) > 0:
             file_object.write(f'\n{str(class_combination)};{len(class_combination)};{k};{round(np.mean(balanced_accuraccy_array),2)};{" ".join(worst_features_labels)}')  
-    # break #just for first combination (all classes)
 
 end_time = time.time()
 print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")
