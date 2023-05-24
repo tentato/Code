@@ -27,12 +27,13 @@ def create_class_combinations(classes):
     list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
     return list_combinations_classes
 
-def remove_k_worst_features(X, y, k):
+def remove_k_worst_features(dataset, y, k):
+    X = dataset.iloc[:, 0:-1].values
     X_new = SelectKBest()
     new_X = X_new.fit_transform(X, y)
     indexes_list = np.argpartition(X_new.scores_, k)
     worst_features_indexes = indexes_list[:k]
-    worst_features_labels = subdataset.columns[worst_features_indexes].to_list()
+    worst_features_labels = dataset.columns[worst_features_indexes].to_list()
     X = np.delete(X, worst_features_indexes,1)
     return X, worst_features_labels
 
@@ -42,8 +43,8 @@ model = RandomForestClassifier(random_state=11)
 scaler = MinMaxScaler()
 
 # main_folder = 'dataset_features/amp2_2_wavdec/'
-main_folder = 'dataset_features/amp2_wavdec/'
-# main_folder = 'dataset_features/Barbara_wavdec/'
+# main_folder = 'dataset_features/amp2_wavdec/'
+main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
 filename = "features_WL_ZC_VAR_MAV_SSC.csv"
 target_accuracy = 0.6
 
@@ -67,11 +68,9 @@ for idx, class_combination in enumerate(class_combinations):
         mean_method_val = []
 
         subdataset = dataset[dataset.iloc[:, -1].isin(class_combination)]
+        y = dataset.iloc[:, -1].values.astype(int)
 
-        X = subdataset.iloc[:, 0:-1].values
-        y = subdataset.iloc[:, -1].values.astype(int)
-
-        X, worst_features_labels = remove_k_worst_features(X, y, k)
+        X, worst_features_labels = remove_k_worst_features(subdataset, k)
 
         kfold = RepeatedStratifiedKFold(n_splits=2, n_repeats=5,random_state=11)
         splits = kfold.split(X,y)

@@ -57,9 +57,7 @@ for class_number in classes_array:
         SSC_table.append(SSC_arr)
         label.append(int(class_number))
 
-
     print(f"Class {class_number} processed...")
-
 
 list_of_methods_names = ["WL", "ZC", "VAR", "MAV", "SSC"]
 
