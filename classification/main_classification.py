@@ -46,7 +46,7 @@ model = RandomForestClassifier(random_state=11)
 # main_folder = 'dataset_features/amp2_wavdec/'
 main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
 filename = "features_WL_ZC_VAR_MAV_SSC.csv"
-target_accuracy = 0.6
+target_accuracy = 0.1
 
 dataset = pd.read_csv(f"{main_folder}{filename}", sep=",", decimal=".", header=0)
 dataset = min_max_normalize(dataset)
