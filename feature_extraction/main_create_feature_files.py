@@ -7,15 +7,17 @@ import pysiology.electromyography as electromyography
 # 16 channels * 4 decomposition levels = 64 channels
 # the result should contain 64*5=320 features
 
-# folder_path = 'dataset_features/amp2_wavdec/'
-# main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/'
 # folder_path = 'dataset_features/amp2_2_wavdec/'
 # main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/'
-folder_path = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
-main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/Barbara_wavdec/'
+
+folder_path = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
+main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/'
+classes_array = ['1', '2', '3', '4', '5', '6']
+
+# folder_path = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
+# main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/Barbara_wavdec/'
+# classes_array = ['1', '2', '3', '4', '5']
 os.makedirs(folder_path, exist_ok=True)  
-classes_array = ['1', '2', '3', '4', '5']
-# classes_array = ['1', '2', '3', '4', '5', '6']
 
 WL_table = []
 ZC_table = []
