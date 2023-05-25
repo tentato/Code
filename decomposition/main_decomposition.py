@@ -8,13 +8,20 @@ from scipy.interpolate import interp1d
 
 ###### NOT READY
 
-results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/'
-main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_2/']
-classes_array = ['1', '2', '3', '4', '5', '6']
+# results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/'
+# main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_2/']
+
+# main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2/test1/', 'C:/Users/alepa/Desktop/MGR/datasets/amp2/test2/']
+# results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/'
+# classes_array = ['1', '2', '3', '4', '5', '6']
+
+results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/Barbara_wavdec/'
+main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/Barbara/']
+classes_array = ['1', '2', '3', '4', '5']
+
 os.makedirs(results_folder, exist_ok=True)  
 for class_num in classes_array:
     os.makedirs(f"{results_folder}/{class_num}/", exist_ok=True)  
-
 
 for class_number in classes_array:
     print(f"Processing files for class {class_number}")
@@ -24,20 +31,22 @@ for class_number in classes_array:
                 continue
             print(f"Processing {filename} file...")
             dataset = pd.read_csv(folder+class_number+'/'+filename, sep=";", decimal=",", header=None)
-            dataset = dataset.iloc[:, 0:16]
+            if "amp2" in folder:
+                dataset = dataset.iloc[:, 0:16]
+            rows_number, columns_number = dataset.shape
             new_df_arr = []
             i=0
             for (columnName, columnData) in dataset.items():
                 coeffs = pywt.wavedec(columnData, 'db1', level=3)
-                new_len = 2000
+                # new_len = 2000
                 f1 = interp1d(np.linspace(0, 1, len(coeffs[0])), coeffs[0], kind='linear')
-                rescaled_arr1 = f1(np.linspace(0, 1, new_len))
+                rescaled_arr1 = f1(np.linspace(0, 1, rows_number))
                 f2 = interp1d(np.linspace(0, 1, len(coeffs[1])), coeffs[1], kind='linear')
-                rescaled_arr2 = f2(np.linspace(0, 1, new_len))
+                rescaled_arr2 = f2(np.linspace(0, 1, rows_number))
                 f3 = interp1d(np.linspace(0, 1, len(coeffs[2])), coeffs[2], kind='linear')
-                rescaled_arr3 = f3(np.linspace(0, 1, new_len))
+                rescaled_arr3 = f3(np.linspace(0, 1, rows_number))
                 f4 = interp1d(np.linspace(0, 1, len(coeffs[3])), coeffs[3], kind='linear')
-                rescaled_arr4 = f4(np.linspace(0, 1, new_len))
+                rescaled_arr4 = f4(np.linspace(0, 1, rows_number))
                 
                 ##### PRINTING SIGNALS #####
                 # fig, ax = plt.subplots(5, 1, figsize=(10, 13))
