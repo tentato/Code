@@ -23,7 +23,7 @@ def min_max_normalize(dataset):
 
 def create_class_combinations(classes):
     list_combinations_classes = list()
-    for n in range(2, len(classes) + 1):
+    for n in range(3, len(classes) + 1):
         list_combinations_classes += list(combinations(classes, n))
     list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
     return list_combinations_classes
@@ -42,9 +42,9 @@ start_time = time.time()
 
 model = RandomForestClassifier(random_state=11) 
 
-# main_folder = 'dataset_features/amp2_2_wavdec/'
-# main_folder = 'dataset_features/amp2_wavdec/'
-main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
+# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
+main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
+# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
 filename = "features_WL_ZC_VAR_MAV_SSC.csv"
 target_accuracy = 0.1
 
@@ -64,6 +64,9 @@ file_object.write(f'Class combination;Number of classes;K worst features rejecte
 for idx, class_combination in enumerate(class_combinations):
     for k in range(0, features):
         print(f"K: {k}")
+        # feature reduction
+        if k == int(features/3):
+            k = int(features*2/3)
         method_val = []
         mean_method_val = []
         subdataset = dataset.copy()
