@@ -26,17 +26,32 @@ def remove_k_worst_features(dataset, y, k):
 
 experiment_combinations = [
     # [<classes>, <k>],
-    [[2,3,4,5], 1],
-    [[2,3,4,5], 84],
-    [[2,3,4,5], 156],
     [[1,2,3,4,5], 5],
     [[1,2,3,4,5], 10],
+    [[1,2,3,4,5], 12],
+    [[1,2,3,4,5], 25],
+    [[1,2,3,4,5], 27],
+    [[1,2,3,4,5], 60],
+    [[1,2,3,4,5], 0],
+    [[1,2,3,4,5], 3],
+    [[1,2,3,4,5], 4],
+    [[1,2,3,4,5], 7],
+    [[1,2,3,4,5], 158],
+    [[1,2,3,4,5], 159],
+    [[1,2,3,4,5], 157],
+    [[1,2,3,4,5], 156],
     [[1,2,3,4,5], 155],
-    [[1,2,3,4,5], 152],
+    [[1,2,3,4,5], 154],
+    [[1,2,3,4,5], 153],
+    [[1,2,3,4,5], 151],
+    [[1,2,3,4,5], 144],
+    [[1,2,3,4,5], 146],
 ]
 
 filename = "features_WL_ZC_VAR_MAV_SSC.csv"
 main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
+results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/Barbara_wavdec/'
+file_object = open(f'{results_folder}results_problexity.txt', 'w')
 
 strategy = 'ova'
 
@@ -47,7 +62,9 @@ dataset = min_max_normalize(dataset)
 
 for combination in experiment_combinations:
     classes, k = combination
-    print("\n")
+    print(f"{classes} {k}\n")
+    file_object.write(f"{classes} {k}\n")
+
     subdataset = dataset[dataset.iloc[:, -1].isin(classes)]
     y = subdataset.iloc[:, -1].values.astype(int)
 
@@ -55,7 +72,10 @@ for combination in experiment_combinations:
 
     cc = px.ComplexityCalculator(multiclass_strategy=strategy)
     cc.fit(X,y)
-    print(f"Report: \n{cc.report()}\n")
+    report = cc.report()
+    print(f"Complexities: {report['complexities']}")
+    file_object.write(f"Complexities: {report['complexities']}\n\n")
+    
     cc.plot(fig, (1,1,1))
 
     plt.tight_layout()

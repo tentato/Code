@@ -9,6 +9,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_selection import SelectKBest
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.model_selection import RepeatedStratifiedKFold
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 
@@ -40,7 +41,8 @@ def remove_k_worst_features(dataset, y, k):
 
 start_time = time.time()
 
-model = RandomForestClassifier(random_state=11) 
+# model = RandomForestClassifier(random_state=11) 
+model = KNeighborsClassifier() 
 
 # main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
 main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
@@ -91,10 +93,10 @@ for idx, class_combination in enumerate(class_combinations):
             if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
                 print("RFC Acc: ",round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
                 break
-            print("RFC Acc: ",round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
             balanced_accuraccy_array.append(round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
         if len(balanced_accuraccy_array) > 0:
             file_object.write(f'\n{str(class_combination)};{len(class_combination)};{k};{round(np.mean(balanced_accuraccy_array),2)};{" ".join(worst_features_labels)}')  
+            print(f"RFC Mean Accuracy: {round(metrics.balanced_accuracy_score(y_test_fold, predict),2)}")
 
 end_time = time.time()
 print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")
