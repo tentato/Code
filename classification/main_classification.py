@@ -11,6 +11,7 @@ from sklearn.multiclass import OneVsRestClassifier
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.svm import SVC
 import matplotlib.pyplot as plt
 
 def min_max_normalize(dataset):
@@ -42,7 +43,8 @@ def remove_k_worst_features(dataset, y, k):
 start_time = time.time()
 
 # model = RandomForestClassifier(random_state=11) 
-model = KNeighborsClassifier() 
+# model = KNeighborsClassifier() 
+model = SVC() 
 
 # main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
 main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
@@ -67,8 +69,6 @@ for idx, class_combination in enumerate(class_combinations):
     for k in range(0, features):
         print(f"K: {k}")
         # feature reduction
-        if k == int(features/3):
-            k = int(features*2/3)
         method_val = []
         mean_method_val = []
         subdataset = dataset.copy()
@@ -77,17 +77,15 @@ for idx, class_combination in enumerate(class_combinations):
 
         X, worst_features_labels = remove_k_worst_features(subdataset, y, k)
 
-        kfold = RepeatedStratifiedKFold(n_splits=2, n_repeats=5,random_state=11)
+        kfold = RepeatedStratifiedKFold(n_splits=5, n_repeats=2,random_state=11)
         splits = kfold.split(X,y)
-
-        ova = OneVsRestClassifier(model)
 
         balanced_accuraccy_array = []
         for n,(train_index,test_index) in enumerate(splits):
             x_train_fold, x_test_fold = X[train_index], X[test_index]
             y_train_fold, y_test_fold = y[train_index], y[test_index]
-            ova.fit(x_train_fold, y_train_fold)
-            predict = ova.predict(x_test_fold)
+            model.fit(x_train_fold, y_train_fold)
+            predict = model.predict(x_test_fold)
 
             ###Evaluating Prediction Accuracy
             if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
