@@ -42,12 +42,12 @@ def remove_k_worst_features(dataset, y, k):
 
 start_time = time.time()
 
-# model = RandomForestClassifier(random_state=11) 
+model = RandomForestClassifier(random_state=11) 
 # model = KNeighborsClassifier() 
-model = SVC() 
+# model = SVC() ### SVC the best
 
-# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
-main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
+main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
+# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
 # main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
 filename = "features_WL_ZC_VAR_MAV_SSC.csv"
 target_accuracy = 0.1
@@ -68,7 +68,6 @@ file_object.write(f'Class combination;Number of classes;K worst features rejecte
 for idx, class_combination in enumerate(class_combinations):
     for k in range(0, features):
         print(f"K: {k}")
-        # feature reduction
         method_val = []
         mean_method_val = []
         subdataset = dataset.copy()
@@ -87,14 +86,13 @@ for idx, class_combination in enumerate(class_combinations):
             model.fit(x_train_fold, y_train_fold)
             predict = model.predict(x_test_fold)
 
-            ###Evaluating Prediction Accuracy
             if round(metrics.balanced_accuracy_score(y_test_fold, predict),2) < target_accuracy:
                 print("RFC Acc: ",round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
                 break
             balanced_accuraccy_array.append(round(metrics.balanced_accuracy_score(y_test_fold, predict),2))
         if len(balanced_accuraccy_array) > 0:
             file_object.write(f'\n{str(class_combination)};{len(class_combination)};{k};{round(np.mean(balanced_accuraccy_array),2)};{" ".join(worst_features_labels)}')  
-            print(f"RFC Mean Accuracy: {round(metrics.balanced_accuracy_score(y_test_fold, predict),2)}")
+            print(f"{class_combination} - Mean Accuracy: {round(metrics.balanced_accuracy_score(y_test_fold, predict),2)}")
 
 end_time = time.time()
 print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")
