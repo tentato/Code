@@ -25,7 +25,7 @@ def min_max_normalize(dataset):
 
 def create_class_combinations(classes):
     list_combinations_classes = list()
-    for n in range(3, len(classes) + 1):
+    for n in range(2, len(classes) + 1):
         list_combinations_classes += list(combinations(classes, n))
     list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
     return list_combinations_classes
@@ -62,7 +62,7 @@ number_of_classes = len(classes)
 
 class_combinations = create_class_combinations(classes)
 
-file_object = open(f'{main_folder}results_Select_K_Best.txt', 'w')
+file_object = open(f'{main_folder}classification_results.txt', 'w')
 file_object.write(f'Class combination;Number of classes;K worst features rejected;Mean Accuracy;Worst features labels')  
 
 for idx, class_combination in enumerate(class_combinations):

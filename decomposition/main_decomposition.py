@@ -8,11 +8,11 @@ from scipy.interpolate import interp1d
 
 ###### NOT READY
 
-# results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/'
-# main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_2/']
+results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/'
+main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_2/']
 
-main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2/test1/', 'C:/Users/alepa/Desktop/MGR/datasets/amp2/test2/']
-results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/'
+# main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2/test1/', 'C:/Users/alepa/Desktop/MGR/datasets/amp2/test2/']
+# results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/'
 classes_array = ['1', '2', '3', '4', '5', '6']
 
 # results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/Barbara_wavdec/'
@@ -34,13 +34,11 @@ for class_number in classes_array:
             if "amp2" in folder:
                 dataset = dataset.iloc[:, 0:16]
                 ##
-                channel_indexes = [dataset.columns.get_loc(c) for c in dataset.columns if c in dataset]
-                MMG_channels_indexes = [channel_index for channel_index in channel_indexes if channel_index % 2 == 1]
-                dataset = np.delete(dataset, MMG_channels_indexes,1)
+                # channel_indexes = [dataset.columns.get_loc(c) for c in dataset.columns if c in dataset]
+                # MMG_channels_indexes = [channel_index for channel_index in channel_indexes if channel_index % 2 == 1]
+                # dataset = dataset.drop(MMG_channels_indexes, axis=1)
             
             rows_number, columns_number = dataset.shape
-            print(rows_number, columns_number)
-            exit()
             new_df_arr = []
             i=0
             for (columnName, columnData) in dataset.items():
