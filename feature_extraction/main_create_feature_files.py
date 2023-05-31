@@ -7,15 +7,16 @@ import pysiology.electromyography as electromyography
 # 16 channels * 4 decomposition levels = 64 channels
 # the result should contain 64*5=320 features
 
-folder_path = 'dataset_features/amp2_2_wavdec/'
-main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/'
-
-# folder_path = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
-# main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/'
 classes_array = ['1', '2', '3', '4', '5', '6']
+folder_path = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp3_wavdec/'
+main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/', 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/']
+# folder_path = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
+# main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/']
+# folder_path = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
+# main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/']
 
 # folder_path = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
-# main_folder = 'C:/Users/alepa/Desktop/MGR/datasets/Barbara_wavdec/'
+# main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/Barbara_wavdec/']
 # classes_array = ['1', '2', '3', '4', '5']
 os.makedirs(folder_path, exist_ok=True)  
 
@@ -27,37 +28,38 @@ SSC_table = []
 label = []
 
 for class_number in classes_array:
-    for file_index, filename in enumerate(os.listdir(main_folder+class_number)):
-        dataset = pd.read_csv(main_folder+class_number+'/'+filename, sep=",", decimal=".", header=None)
-        rows_number, columns_number = dataset.shape
+    for fi, folder in enumerate(main_folder):
+        for file_index, filename in enumerate(os.listdir(main_folder+class_number)):
+            dataset = pd.read_csv(main_folder+class_number+'/'+filename, sep=",", decimal=".", header=None)
+            rows_number, columns_number = dataset.shape
 
-        WL_arr = np.zeros(columns_number)
-        ZC_arr = np.zeros(columns_number)
-        VAR_arr = np.zeros(columns_number)
-        MAV_arr = np.zeros(columns_number)
-        SSC_arr = np.zeros(columns_number)
+            WL_arr = np.zeros(columns_number)
+            ZC_arr = np.zeros(columns_number)
+            VAR_arr = np.zeros(columns_number)
+            MAV_arr = np.zeros(columns_number)
+            SSC_arr = np.zeros(columns_number)
 
-        for idx, col in enumerate(dataset.columns):
-            column = dataset.loc[:, col]
-            y = column.to_numpy()
+            for idx, col in enumerate(dataset.columns):
+                column = dataset.loc[:, col]
+                y = column.to_numpy()
 
-            # Get the waveform length of the signal, a measure of complexity of the EMG Signal.
-            WL_arr[idx] = electromyography.getWL(y)
-            # How many times does the signal crosses the 0 (+-threshold).
-            ZC_arr[idx] = electromyography.getZC(y, threshold=0.01)
-            # Summation of average square values of the deviation of a variable.
-            VAR_arr[idx] = electromyography.getVAR(y)
-            # Thif functions compute the average of EMG signal Amplitude - Mean Absolute Value
-            MAV_arr[idx] = electromyography.getMAV(y)
-            # Number of times the slope of the EMG signal changes sign.
-            SSC_arr[idx] = electromyography.getSSC(y, threshold=0.01)
+                # Get the waveform length of the signal, a measure of complexity of the EMG Signal.
+                WL_arr[idx] = electromyography.getWL(y)
+                # How many times does the signal crosses the 0 (+-threshold).
+                ZC_arr[idx] = electromyography.getZC(y, threshold=0.01)
+                # Summation of average square values of the deviation of a variable.
+                VAR_arr[idx] = electromyography.getVAR(y)
+                # Thif functions compute the average of EMG signal Amplitude - Mean Absolute Value
+                MAV_arr[idx] = electromyography.getMAV(y)
+                # Number of times the slope of the EMG signal changes sign.
+                SSC_arr[idx] = electromyography.getSSC(y, threshold=0.01)
 
-        WL_table.append(WL_arr)
-        ZC_table.append(ZC_arr)
-        VAR_table.append(VAR_arr)
-        MAV_table.append(MAV_arr)
-        SSC_table.append(SSC_arr)
-        label.append(int(class_number))
+            WL_table.append(WL_arr)
+            ZC_table.append(ZC_arr)
+            VAR_table.append(VAR_arr)
+            MAV_table.append(MAV_arr)
+            SSC_table.append(SSC_arr)
+            label.append(int(class_number))
 
     print(f"Class {class_number} processed...")
 
