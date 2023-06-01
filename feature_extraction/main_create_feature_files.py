@@ -10,6 +10,8 @@ import pysiology.electromyography as electromyography
 classes_array = ['1', '2', '3', '4', '5', '6']
 folder_path = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp3_wavdec/'
 main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/', 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/']
+# folder_path = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_first_20_wavdec/'
+# main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_2_first_20_wavdec/']
 # folder_path = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
 # main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/']
 # folder_path = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
@@ -29,8 +31,8 @@ label = []
 
 for class_number in classes_array:
     for fi, folder in enumerate(main_folder):
-        for file_index, filename in enumerate(os.listdir(main_folder+class_number)):
-            dataset = pd.read_csv(main_folder+class_number+'/'+filename, sep=",", decimal=".", header=None)
+        for file_index, filename in enumerate(os.listdir(folder+class_number)):
+            dataset = pd.read_csv(folder+class_number+'/'+filename, sep=",", decimal=".", header=None)
             rows_number, columns_number = dataset.shape
 
             WL_arr = np.zeros(columns_number)

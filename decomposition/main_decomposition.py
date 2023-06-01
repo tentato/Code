@@ -8,6 +8,9 @@ from scipy.interpolate import interp1d
 
 ###### NOT READY
 
+# results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_first_20_wavdec/'
+# main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_2_first_20/']
+
 results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/'
 main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_2/']
 

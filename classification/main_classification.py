@@ -44,9 +44,11 @@ start_time = time.time()
 
 model = RandomForestClassifier(random_state=11) 
 # model = KNeighborsClassifier() 
-# model = SVC() ### SVC the best
+# model = SVC()
 
-main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
+main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp3_wavdec/'
+# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_first_20_wavdec/'
+# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
 # main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
 # main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
 filename = "features_WL_ZC_VAR_MAV_SSC.csv"
