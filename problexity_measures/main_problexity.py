@@ -1,3 +1,5 @@
+from itertools import combinations
+import time
 import problexity as px
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -24,52 +26,14 @@ def remove_k_worst_features(dataset, y, k):
     X = np.delete(X, worst_features_indexes,1)
     return X, worst_features_labels
 
-experiment_combinations = [
-#     # [<classes>, <k>],
-#     [[1,2,4,5], 0],
-#     [[1,2,4,5], 1],
-#     [[1,2,4,5], 2],
-#     [[1,2,4,5], 3],
-#     [[1,2,4,5], 4],
-#     [[1,2,4,5], 5],
-#     [[1,2,4,5], 6],
-#     [[1,2,4,5], 15],
-#     [[1,2,4,5], 20],
-#     [[1,2,4,5], 47],
-#     [[1,2,4,5], 150],
-#     [[1,2,4,5], 151],
-#     [[1,2,4,5], 152],
-#     [[1,2,4,5], 153],
-#     [[1,2,4,5], 154],
-#     [[1,2,4,5], 155],
-#     [[1,2,4,5], 156],
-#     [[1,2,4,5], 157],
-#     [[1,2,4,5], 158],
-#     [[1,2,4,5], 159],
-]
-experiment_combinations = [
-#     # [<classes>, <k>],
-    [[1,2,3,4], 23],
-    [[1,2,3,4], 0],
-    [[1,2,3,4], 5],
-    [[1,2,3,4], 6],
-    [[1,2,3,4], 10],
-    [[1,2,3,4], 12],
-    [[1,2,3,4], 13],
-    [[1,2,3,4], 15],
-    [[1,2,3,4], 16],
-    [[1,2,3,4], 21],
-    [[1,2,3,4], 159],
-    [[1,2,3,4], 158],
-    [[1,2,3,4], 157],
-    [[1,2,3,4], 152],
-    [[1,2,3,4], 153],
-    [[1,2,3,4], 154],
-    [[1,2,3,4], 156],
-    [[1,2,3,4], 155],
-    [[1,2,3,4], 150],
-    [[1,2,3,4], 151],
-]
+def create_class_combinations(classes):
+    list_combinations_classes = list()
+    for n in range(2, len(classes) + 1):
+        list_combinations_classes += list(combinations(classes, n))
+    list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
+    return list_combinations_classes
+
+start_time = time.time()
 
 filename = "features_WL_ZC_VAR_MAV_SSC.csv"
 main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
@@ -78,28 +42,39 @@ file_object = open(f'{results_folder}results_problexity.txt', 'w')
 
 strategy = 'ova'
 
-fig = plt.figure(figsize=(7,7))
+# fig = plt.figure(figsize=(7,7))
 
 dataset = pd.read_csv(main_folder+filename, sep=",", decimal=".", header=0)
 dataset = min_max_normalize(dataset)
 
-for combination in experiment_combinations:
-    classes, k = combination
-    print(f"{classes} {k}\n")
-    file_object.write(f"{classes} {k}\n")
+rows, columns = dataset.shape
+features = columns - 1
 
-    subdataset = dataset[dataset.iloc[:, -1].isin(classes)]
-    y = subdataset.iloc[:, -1].values.astype(int)
+classes = np.unique(np.array(dataset.iloc[:, -1].values))
+number_of_classes = len(classes)
+class_combinations = create_class_combinations(classes)
 
-    X, worst_features_labels = remove_k_worst_features(subdataset, y, k)
+for idx, class_combination in enumerate(class_combinations):
+    for k in range(0, features):
+        method_val = []
+        mean_method_val = []
+        subdataset = dataset.copy()
+        subdataset = subdataset[subdataset.iloc[:, -1].isin(class_combination)]
+        y = subdataset.iloc[:, -1].values.astype(int)
 
-    cc = px.ComplexityCalculator(multiclass_strategy=strategy)
-    cc.fit(X,y)
-    report = cc.report()
-    print(f"Complexities: {report['complexities']}")
-    file_object.write(f"Complexities: {report['complexities']}\n\n")
-    
-    cc.plot(fig, (1,1,1))
+        X, worst_features_labels = remove_k_worst_features(subdataset, y, k)
 
-    plt.tight_layout()
-    plt.savefig(f"C:/Users/alepa/Desktop/MGR/problexity_results/problexity_{strategy}_({','.join(map(str, classes))})_k={k}.png")
+        cc = px.ComplexityCalculator(multiclass_strategy=strategy)
+        cc.fit(X,y)
+        report = cc.report()
+        print(f"Complexities: {report['complexities']}")
+        file_object.write(f"Complexities: {report['complexities']}\n\n")
+        
+        # cc.plot(fig, (1,1,1))
+
+        # plt.tight_layout()
+        # plt.savefig(f"C:/Users/alepa/Desktop/MGR/problexity_results/problexity_{strategy}_({','.join(map(str, classes))})_k={k}.png")
+
+end_time = time.time()
+print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")
+file_object.close()
