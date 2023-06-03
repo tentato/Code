@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 from sklearn.feature_selection import SelectKBest
 from sklearn.preprocessing import MinMaxScaler
+import problexity.classification as pc
 
 def min_max_normalize(dataset):
     scaler = MinMaxScaler()
@@ -64,11 +65,13 @@ for idx, class_combination in enumerate(class_combinations):
 
         X, worst_features_labels = remove_k_worst_features(subdataset, y, k)
 
-        cc = px.ComplexityCalculator(multiclass_strategy=strategy)
+        cc = px.ComplexityCalculator(metrics=[pc.f4], colors=['#FD0100'], ranges={'FB': 1}, weights=np.ones((1)), multiclass_strategy=strategy)
+        # cc = px.ComplexityCalculator(metrics=[pc.f1, pc.f1v, pc.f2, pc.f3, pc.f4], colors=['#FD0100'], ranges={'FB': 5}, weights=np.ones((5)), multiclass_strategy=strategy)
         cc.fit(X,y)
         report = cc.report()
         print(f"Complexities: {report['complexities']}")
-        file_object.write(f"Complexities: {report['complexities']}\n\n")
+        file_object.write(f"comb: {class_combination} k: {k}, complexities: {report['complexities']}\n\n")
+        # print("test")
         
         # cc.plot(fig, (1,1,1))
 

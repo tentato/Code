@@ -1,60 +1,516 @@
-[1, 2, 3, 4] 23
-Complexities: {'f1': 0.68, 'f1v': 0.027, 'f2': 0.0, 'f3': 0.674, 'f4': 0.004, 'l1': 0.021, 'l2': 0.02, 'l3': 0.007, 'n1': 0.039, 'n2': 0.616, 'n3': 0.065, 'n4': 0.051, 't1': 0.862, 'lsc': 0.945, 'density': 0.875, 'clsCoef': 0.33, 'hubs': 0.732, 't2': 0.571, 't3': 0.154, 't4': 0.27, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 0, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 0
-Complexities: {'f1': 0.68, 'f1v': 0.018, 'f2': 0.0, 'f3': 0.674, 'f4': 0.0, 'l1': 0.011, 'l2': 0.01, 'l3': 0.003, 'n1': 0.045, 'n2': 0.617, 'n3': 0.075, 'n4': 0.052, 't1': 0.923, 'lsc': 0.949, 'density': 0.882, 'clsCoef': 0.339, 'hubs': 0.742, 't2': 0.667, 't3': 0.196, 't4': 0.294, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 1, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 5
-Complexities: {'f1': 0.68, 'f1v': 0.019, 'f2': 0.0, 'f3': 0.674, 'f4': 0.0, 'l1': 0.012, 'l2': 0.011, 'l3': 0.005, 'n1': 0.038, 'n2': 0.616, 'n3': 0.06, 'n4': 0.061, 't1': 0.907, 'lsc': 0.947, 'density': 0.874, 'clsCoef': 0.328, 'hubs': 0.729, 't2': 0.646, 't3': 0.188, 't4': 0.29, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 2, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 6
-Complexities: {'f1': 0.68, 'f1v': 0.019, 'f2': 0.0, 'f3': 0.674, 'f4': 0.0, 'l1': 0.011, 'l2': 0.01, 'l3': 0.001, 'n1': 0.039, 'n2': 0.616, 'n3': 0.056, 'n4': 0.055, 't1': 0.904, 'lsc': 0.947, 'density': 0.875, 'clsCoef': 0.325, 'hubs': 0.73, 't2': 0.642, 't3': 0.183, 't4': 0.286, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 3, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 10
-Complexities: {'f1': 0.68, 'f1v': 0.021, 'f2': 0.0, 'f3': 0.674, 'f4': 0.0, 'l1': 0.012, 'l2': 0.011, 'l3': 0.001, 'n1': 0.04, 'n2': 0.616, 'n3': 0.054, 'n4': 0.04, 't1': 0.9, 'lsc': 0.947, 'density': 0.875, 'clsCoef': 0.321, 'hubs': 0.732, 't2': 0.625, 't3': 0.179, 't4': 0.287, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 4, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 12
-Complexities: {'f1': 0.68, 'f1v': 0.023, 'f2': 0.0, 'f3': 0.674, 'f4': 0.004, 'l1': 0.013, 'l2': 0.012, 'l3': 0.003, 'n1': 0.041, 'n2': 0.616, 'n3': 0.058, 'n4': 0.045, 't1': 0.89, 'lsc': 0.946, 'density': 0.874, 'clsCoef': 0.328, 'hubs': 0.732, 't2': 0.617, 't3': 0.179, 't4': 0.291, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 5, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 13
-Complexities: {'f1': 0.68, 'f1v': 0.023, 'f2': 0.0, 'f3': 0.674, 'f4': 0.004, 'l1': 0.016, 'l2': 0.015, 'l3': 0.002, 'n1': 0.04, 'n2': 0.616, 'n3': 0.062, 'n4': 0.054, 't1': 0.892, 'lsc': 0.946, 'density': 0.869, 'clsCoef': 0.325, 'hubs': 0.724, 't2': 0.612, 't3': 0.175, 't4': 0.286, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 6, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 15
-Complexities: {'f1': 0.68, 'f1v': 0.024, 'f2': 0.0, 'f3': 0.674, 'f4': 0.004, 'l1': 0.015, 'l2': 0.015, 'l3': 0.005, 'n1': 0.041, 'n2': 0.616, 'n3': 0.062, 'n4': 0.041, 't1': 0.881, 'lsc': 0.947, 'density': 0.88, 'clsCoef': 0.346, 'hubs': 0.74, 't2': 0.604, 't3': 0.171, 't4': 0.283, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 7, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 16
-Complexities: {'f1': 0.68, 'f1v': 0.024, 'f2': 0.0, 'f3': 0.674, 'f4': 0.004, 'l1': 0.015, 'l2': 0.015, 'l3': 0.006, 'n1': 0.041, 'n2': 0.616, 'n3': 0.062, 'n4': 0.049, 't1': 0.881, 'lsc': 0.947, 'density': 0.885, 'clsCoef': 0.344, 'hubs': 0.747, 't2': 0.6, 't3': 0.171, 't4': 0.285, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 8, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 21
-Complexities: {'f1': 0.68, 'f1v': 0.026, 'f2': 0.0, 'f3': 0.674, 'f4': 0.004, 'l1': 0.019, 'l2': 0.018, 'l3': 0.005, 'n1': 0.04, 'n2': 0.616, 'n3': 0.06, 'n4': 0.06, 't1': 0.873, 'lsc': 0.946, 'density': 0.878, 'clsCoef': 0.347, 'hubs': 0.736, 't2': 0.579, 't3': 0.162, 't4': 0.281, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 9, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 159
-Complexities: {'f1': 0.81, 'f1v': 0.668, 'f2': 0.665, 'f3': 0.818, 'f4': 0.818, 'l1': 0.236, 'l2': 0.224, 'l3': 0.23, 'n1': 0.147, 'n2': 0.597, 'n3': 0.31, 'n4': 0.238, 't1': 0.548, 'lsc': 0.971, 'density': 0.765, 'clsCoef': 0.192, 'hubs': 0.549, 't2': 0.004, 't3': 0.004, 't4': 1.0, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 10, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 158
-Complexities: {'f1': 0.81, 'f1v': 0.654, 'f2': 0.432, 'f3': 0.801, 'f4': 0.745, 'l1': 0.243, 'l2': 0.234, 'l3': 0.217, 'n1': 0.135, 'n2': 0.599, 'n3': 0.246, 'n4': 0.225, 't1': 0.397, 'lsc': 0.96, 'density': 0.793, 'clsCoef': 0.24, 'hubs': 0.628, 't2': 0.008, 't3': 0.008, 't4': 1.0, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 11, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 157
-Complexities: {'f1': 0.802, 'f1v': 0.618, 'f2': 0.317, 'f3': 0.801, 'f4': 0.722, 'l1': 0.242, 'l2': 0.235, 'l3': 0.233, 'n1': 0.129, 'n2': 0.599, 'n3': 0.265, 'n4': 0.199, 't1': 0.427, 'lsc': 0.959, 'density': 0.783, 'clsCoef': 0.221, 'hubs': 0.634, 't2': 0.012, 't3': 0.008, 't4': 0.667, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 12, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 152
-Complexities: {'f1': 0.732, 'f1v': 0.371, 'f2': 0.018, 'f3': 0.789, 'f4': 0.472, 'l1': 0.202, 'l2': 0.193, 'l3': 0.176, 'n1': 0.116, 'n2': 0.602, 'n3': 0.21, 'n4': 0.143, 't1': 0.483, 'lsc': 0.951, 'density': 0.826, 'clsCoef': 0.283, 'hubs': 0.675, 't2': 0.033, 't3': 0.017, 't4': 0.5, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 13, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 153
-Complexities: {'f1': 0.737, 'f1v': 0.4, 'f2': 0.035, 'f3': 0.789, 'f4': 0.547, 'l1': 0.206, 'l2': 0.195, 'l3': 0.195, 'n1': 0.11, 'n2': 0.602, 'n3': 0.215, 'n4': 0.16, 't1': 0.499, 'lsc': 0.951, 'density': 0.833, 'clsCoef': 0.287, 'hubs': 0.686, 't2': 0.029, 't3': 0.012, 't4': 0.429, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 14, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 154
-Complexities: {'f1': 0.746, 'f1v': 0.42, 'f2': 0.089, 'f3': 0.801, 'f4': 0.575, 'l1': 0.206, 'l2': 0.195, 'l3': 0.192, 'n1': 0.111, 'n2': 0.602, 'n3': 0.219, 'n4': 0.146, 't1': 0.501, 'lsc': 0.952, 'density': 0.82, 'clsCoef': 0.265, 'hubs': 0.674, 't2': 0.025, 't3': 0.012, 't4': 0.5, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 15, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 156
-Complexities: {'f1': 0.746, 'f1v': 0.443, 'f2': 0.197, 'f3': 0.801, 'f4': 0.612, 'l1': 0.207, 'l2': 0.194, 'l3': 0.191, 'n1': 0.114, 'n2': 0.601, 'n3': 0.21, 'n4': 0.152, 't1': 0.418, 'lsc': 0.949, 'density': 0.843, 'clsCoef': 0.293, 'hubs': 0.704, 't2': 0.017, 't3': 0.012, 't4': 0.75, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 16, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 155
-Complexities: {'f1': 0.746, 'f1v': 0.421, 'f2': 0.132, 'f3': 0.801, 'f4': 0.602, 'l1': 0.207, 'l2': 0.196, 'l3': 0.193, 'n1': 0.102, 'n2': 0.601, 'n3': 0.21, 'n4': 0.173, 't1': 0.435, 'lsc': 0.949, 'density': 0.838, 'clsCoef': 0.28, 'hubs': 0.7, 't2': 0.021, 't3': 0.012, 't4': 0.6, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 17, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 150
-Complexities: {'f1': 0.732, 'f1v': 0.332, 'f2': 0.004, 'f3': 0.762, 'f4': 0.457, 'l1': 0.193, 'l2': 0.184, 'l3': 0.19, 'n1': 0.098, 'n2': 0.603, 'n3': 0.219, 'n4': 0.127, 't1': 0.539, 'lsc': 0.951, 'density': 0.846, 'clsCoef': 0.306, 'hubs': 0.7, 't2': 0.042, 't3': 0.021, 't4': 0.5, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 18, complexities: {'f4': 0.0}
 
-[1, 2, 3, 4] 151
-Complexities: {'f1': 0.732, 'f1v': 0.335, 'f2': 0.006, 'f3': 0.762, 'f4': 0.468, 'l1': 0.195, 'l2': 0.188, 'l3': 0.175, 'n1': 0.114, 'n2': 0.602, 'n3': 0.21, 'n4': 0.131, 't1': 0.489, 'lsc': 0.951, 'density': 0.831, 'clsCoef': 0.291, 'hubs': 0.679, 't2': 0.038, 't3': 0.017, 't4': 0.444, 'c1': 0.189, 'c2': 0.4}
+comb: (1, 2, 3, 4, 5) k: 19, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 20, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 21, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 22, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 23, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 24, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 25, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 26, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 27, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 28, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 29, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 30, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 31, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 32, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 33, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 34, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 35, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 36, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 37, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 38, complexities: {'f4': 0.004}
+
+comb: (1, 2, 3, 4, 5) k: 39, complexities: {'f4': 0.004}
+
+comb: (1, 2, 3, 4, 5) k: 40, complexities: {'f4': 0.004}
+
+comb: (1, 2, 3, 4, 5) k: 41, complexities: {'f4': 0.004}
+
+comb: (1, 2, 3, 4, 5) k: 42, complexities: {'f4': 0.004}
+
+comb: (1, 2, 3, 4, 5) k: 43, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 44, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 45, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 46, complexities: {'f4': 0.004}
+
+comb: (1, 2, 3, 4, 5) k: 47, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 48, complexities: {'f4': 0.004}
+
+comb: (1, 2, 3, 4, 5) k: 49, complexities: {'f4': 0.001}
+
+comb: (1, 2, 3, 4, 5) k: 50, complexities: {'f4': 0.004}
+
+comb: (1, 2, 3, 4, 5) k: 51, complexities: {'f4': 0.004}
+
+comb: (1, 2, 3, 4, 5) k: 52, complexities: {'f4': 0.004}
+
+comb: (1, 2, 3, 4, 5) k: 53, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 54, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 55, complexities: {'f4': 0.004}
+
+comb: (1, 2, 3, 4, 5) k: 56, complexities: {'f4': 0.004}
+
+comb: (1, 2, 3, 4, 5) k: 57, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 58, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 59, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 60, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 61, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 62, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 63, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 64, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 65, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 66, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 67, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 68, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 69, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 70, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 71, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 72, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 73, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 74, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 75, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 76, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 77, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 78, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 79, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 80, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 81, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 82, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 83, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 84, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 85, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 86, complexities: {'f4': 0.002}
+
+comb: (1, 2, 3, 4, 5) k: 87, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 88, complexities: {'f4': 0.002}
+
+comb: (1, 2, 3, 4, 5) k: 89, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 90, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 91, complexities: {'f4': 0.002}
+
+comb: (1, 2, 3, 4, 5) k: 92, complexities: {'f4': 0.002}
+
+comb: (1, 2, 3, 4, 5) k: 93, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 94, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 95, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 96, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 97, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 98, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 99, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 100, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 101, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 102, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 103, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 104, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 105, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 106, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 107, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 108, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 109, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 110, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 111, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 112, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 113, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 114, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 115, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 116, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 117, complexities: {'f4': 0.003}
+
+comb: (1, 2, 3, 4, 5) k: 118, complexities: {'f4': 0.003}
+
+comb: (1, 2, 3, 4, 5) k: 119, complexities: {'f4': 0.001}
+
+comb: (1, 2, 3, 4, 5) k: 120, complexities: {'f4': 0.001}
+
+comb: (1, 2, 3, 4, 5) k: 121, complexities: {'f4': 0.001}
+
+comb: (1, 2, 3, 4, 5) k: 122, complexities: {'f4': 0.002}
+
+comb: (1, 2, 3, 4, 5) k: 123, complexities: {'f4': 0.006}
+
+comb: (1, 2, 3, 4, 5) k: 124, complexities: {'f4': 0.005}
+
+comb: (1, 2, 3, 4, 5) k: 125, complexities: {'f4': 0.001}
+
+comb: (1, 2, 3, 4, 5) k: 126, complexities: {'f4': 0.001}
+
+comb: (1, 2, 3, 4, 5) k: 127, complexities: {'f4': 0.0}
+
+comb: (1, 2, 3, 4, 5) k: 128, complexities: {'f4': 0.001}
+
+comb: (1, 2, 3, 4, 5) k: 129, complexities: {'f4': 0.003}
+
+comb: (1, 2, 3, 4, 5) k: 130, complexities: {'f4': 0.004}
+
+comb: (1, 2, 3, 4, 5) k: 131, complexities: {'f4': 0.003}
+
+comb: (1, 2, 3, 4, 5) k: 132, complexities: {'f4': 0.009}
+
+comb: (1, 2, 3, 4, 5) k: 133, complexities: {'f4': 0.011}
+
+comb: (1, 2, 3, 4, 5) k: 134, complexities: {'f4': 0.011}
+
+comb: (1, 2, 3, 4, 5) k: 135, complexities: {'f4': 0.047}
+
+comb: (1, 2, 3, 4, 5) k: 136, complexities: {'f4': 0.065}
+
+comb: (1, 2, 3, 4, 5) k: 137, complexities: {'f4': 0.073}
+
+comb: (1, 2, 3, 4, 5) k: 138, complexities: {'f4': 0.08}
+
+comb: (1, 2, 3, 4, 5) k: 139, complexities: {'f4': 0.111}
+
+comb: (1, 2, 3, 4, 5) k: 140, complexities: {'f4': 0.123}
+
+comb: (1, 2, 3, 4, 5) k: 141, complexities: {'f4': 0.163}
+
+comb: (1, 2, 3, 4, 5) k: 142, complexities: {'f4': 0.178}
+
+comb: (1, 2, 3, 4, 5) k: 143, complexities: {'f4': 0.173}
+
+comb: (1, 2, 3, 4, 5) k: 144, complexities: {'f4': 0.228}
+
+comb: (1, 2, 3, 4, 5) k: 145, complexities: {'f4': 0.236}
+
+comb: (1, 2, 3, 4, 5) k: 146, complexities: {'f4': 0.243}
+
+comb: (1, 2, 3, 4, 5) k: 147, complexities: {'f4': 0.261}
+
+comb: (1, 2, 3, 4, 5) k: 148, complexities: {'f4': 0.287}
+
+comb: (1, 2, 3, 4, 5) k: 149, complexities: {'f4': 0.299}
+
+comb: (1, 2, 3, 4, 5) k: 150, complexities: {'f4': 0.345}
+
+comb: (1, 2, 3, 4, 5) k: 151, complexities: {'f4': 0.405}
+
+comb: (1, 2, 3, 4, 5) k: 152, complexities: {'f4': 0.446}
+
+comb: (1, 2, 3, 4, 5) k: 153, complexities: {'f4': 0.47}
+
+comb: (1, 2, 3, 4, 5) k: 154, complexities: {'f4': 0.506}
+
+comb: (1, 2, 3, 4, 5) k: 155, complexities: {'f4': 0.579}
+
+comb: (1, 2, 3, 4, 5) k: 156, complexities: {'f4': 0.611}
+
+comb: (1, 2, 3, 4, 5) k: 157, complexities: {'f4': 0.737}
+
+comb: (1, 2, 3, 4, 5) k: 158, complexities: {'f4': 0.787}
+
+comb: (1, 2, 3, 4, 5) k: 159, complexities: {'f4': 0.813}
+
+comb: (2, 3, 4, 5) k: 0, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 1, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 2, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 3, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 4, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 5, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 6, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 7, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 8, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 9, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 10, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 11, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 12, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 13, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 14, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 15, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 16, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 17, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 18, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 19, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 20, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 21, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 22, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 23, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 24, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 25, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 26, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 27, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 28, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 29, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 30, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 31, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 32, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 33, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 34, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 35, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 36, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 37, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 38, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 39, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 40, complexities: {'f4': 0.009}
+
+comb: (2, 3, 4, 5) k: 41, complexities: {'f4': 0.009}
+
+comb: (2, 3, 4, 5) k: 42, complexities: {'f4': 0.009}
+
+comb: (2, 3, 4, 5) k: 43, complexities: {'f4': 0.009}
+
+comb: (2, 3, 4, 5) k: 44, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 45, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 46, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 47, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 48, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 49, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 50, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 51, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 52, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 53, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 54, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 55, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 56, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 57, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 58, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 59, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 60, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 61, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 62, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 63, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 64, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 65, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 66, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 67, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 68, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 69, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 70, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 71, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 72, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 73, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 74, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 75, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 76, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 77, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 78, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 79, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 80, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 81, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 82, complexities: {'f4': 0.005}
+
+comb: (2, 3, 4, 5) k: 83, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 84, complexities: {'f4': 0.002}
+
+comb: (2, 3, 4, 5) k: 85, complexities: {'f4': 0.002}
+
+comb: (2, 3, 4, 5) k: 86, complexities: {'f4': 0.002}
+
+comb: (2, 3, 4, 5) k: 87, complexities: {'f4': 0.002}
+
+comb: (2, 3, 4, 5) k: 88, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 89, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 90, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 91, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 92, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 93, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 94, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 95, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 96, complexities: {'f4': 0.0}
+
+comb: (2, 3, 4, 5) k: 97, complexities: {'f4': 0.0}
 
