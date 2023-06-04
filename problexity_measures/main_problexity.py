@@ -56,16 +56,15 @@ features = columns - 1
 
 classes = np.unique(np.array(dataset.iloc[:, -1].values))
 class_combinations = create_class_combinations(classes)
-# metrics_array = [pc.f1, pc.f2, pc.f3, pc.f4, pc.l1, pc.l2, pc.l3, pc.n1, pc.n2, pc.n3, pc.n4, pc.t1, pc.lsc, pc.t2, pc.t3, pc.t4, pc.density, pc.clsCoef, pc.hubs] # FB - skipped:  pc.f1v,
+metrics_array = [pc.f1, pc.f2, pc.f3, pc.f4, pc.l1, pc.l2, pc.l3, pc.n1, pc.n2, pc.n4, pc.t1, pc.lsc, pc.t2, pc.t3, pc.t4, pc.density, pc.clsCoef, pc.hubs] # FB - skipped:  pc.f1v,
 # metrics_array = [pc.f1, pc.f2, pc.f3, pc.f4] # FB - skipped:  pc.f1v,
 # metrics_array = [pc.l1, pc.l2, pc.l3] # LI
-metrics_array = [pc.n1, pc.n2, pc.n3, pc.n4, pc.t1, pc.lsc] # NG neigh
+# metrics_array = [pc.n1, pc.n2, pc.n4, pc.t1, pc.lsc] # NG neigh - skipped:  , pc.n3
 # metrics_array = [pc.t2, pc.t3, pc.t4] # DM dimen
 # metrics_array = [pc.density, pc.clsCoef, pc.hubs] # NE
 
 for idx, class_combination in enumerate(class_combinations):
     number_of_classes = len(class_combination)
-
     for metric in metrics_array:
         for k in range(0, features):
             method_val = []
@@ -80,7 +79,7 @@ for idx, class_combination in enumerate(class_combinations):
             report = cc.report()
             measure, measure_score = list(report["complexities"].items())[0]
             file_object.write(f'\n{str(class_combination)};{len(class_combination)};{k};{measure};{measure_score}')  
-            print(f'\n{str(class_combination)};{len(class_combination)};{k};{measure};{measure_score}')
+            print(f'{str(class_combination)};{len(class_combination)};{k};{measure};{measure_score}')
 
 end_time = time.time()
 print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")
