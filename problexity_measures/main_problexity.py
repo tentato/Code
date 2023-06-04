@@ -29,7 +29,7 @@ def remove_k_worst_features(dataset, y, k):
 
 def create_class_combinations(classes):
     list_combinations_classes = list()
-    for n in range(2, len(classes) + 1):
+    for n in range(3, len(classes) + 1):
         list_combinations_classes += list(combinations(classes, n))
     list_combinations_classes = list_combinations_classes[::-1] # reverse tuple
     return list_combinations_classes
@@ -42,6 +42,8 @@ filename = "features_WL_ZC_VAR_MAV_SSC.csv"
 main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
 results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/Barbara_wavdec/'
 file_object = open(f'{results_folder}results_problexity.txt', 'w')
+file_object.write(f'Class combination;Number of classes;K worst features rejected;Measure name;Measure score')  
+
 
 strategy = 'ova'
 
@@ -54,16 +56,17 @@ rows, columns = dataset.shape
 features = columns - 1
 
 classes = np.unique(np.array(dataset.iloc[:, -1].values))
-number_of_classes = len(classes)
 class_combinations = create_class_combinations(classes)
-metrics_array = [pc.f1, pc.f1v, pc.f2, pc.f3, pc.f4] # FB
-# metrics_array = [pc.l1, pc.l2, pc.l3] # LI
-# metrics_array = [pc.n1, pc.n2, pc.n3, pc.n4, pc.t1, pc.lsc] # NG neigh
-# metrics_array = [pc.t2, pc.t3, pc.t4] # DM dimen
-# metrics_array = [pc.density, pc.clsCoef, pc.hubs] # NE
+# metrics_array_FB = [pc.f1, pc.f2, pc.f3, pc.f4] # FB - skipped:  pc.f1v,
+metrics_array_LI = [pc.l1, pc.l2, pc.l3] # LI
+# metrics_array_NG = [pc.n1, pc.n2, pc.n3, pc.n4, pc.t1, pc.lsc] # NG neigh
+# metrics_array_DM = [pc.t2, pc.t3, pc.t4] # DM dimen
+# metrics_array_NE = [pc.density, pc.clsCoef, pc.hubs] # NE
 
 for idx, class_combination in enumerate(class_combinations):
-    for metric in metrics_array:
+    number_of_classes = len(class_combination)
+
+    for metric in metrics_array_LI:
         for k in range(0, features):
             method_val = []
             mean_method_val = []
@@ -72,12 +75,12 @@ for idx, class_combination in enumerate(class_combinations):
             y = subdataset.iloc[:, -1].values.astype(int)
 
             X, worst_features_labels = remove_k_worst_features(subdataset, y, k)
-
-            cc = px.ComplexityCalculator(metrics=[metric], colors=['#FD0100'], ranges={'FB': 1}, weights=np.ones((1)), multiclass_strategy=strategy)
+            cc = px.ComplexityCalculator(metrics=[metric], colors=['#FD0100'], ranges={'LI': 1}, weights=np.ones((1)), mode='classification', multiclass_strategy='ova')
             cc.fit(X,y)
             report = cc.report()
-            print(f"comb: {class_combination} k: {k}, comp: {report['complexities']}")
-            file_object.write(f"comb: {class_combination} k: {k}, comp: {report['complexities']}\n")
+            measure, measure_score = list(report["complexities"].items())[0]
+            file_object.write(f'\n{str(class_combination)};{len(class_combination)};{k};{measure};{measure_score}')  
+            print(f'\n{str(class_combination)};{len(class_combination)};{k};{measure};{measure_score}')
             
             # cc.plot(fig, (1,1,1))
             # plt.tight_layout()
