@@ -11,7 +11,7 @@ import problexity.classification as pc
 start_time = time.time()
 
 measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/barb.txt"
-classification_filename = "C:/Users/alepa/Desktop/MGR/final results/barb rfc.txt"
+classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
 # main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp3_wavdec/'
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp3_wavdec/'
 # main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
@@ -19,7 +19,11 @@ classification_filename = "C:/Users/alepa/Desktop/MGR/final results/barb rfc.txt
 # main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp2_wavdec/'
 # main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
-results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/'
+results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_wavdec/'
+
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/'
+# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/barb.txt"
+# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/barb rfc.txt"
 
 measures_ds = pd.read_csv(measures_filename, sep=";", decimal=".", header=0)
 clsf_ds = pd.read_csv(classification_filename, sep=";", decimal=".", header=0)
@@ -47,6 +51,7 @@ for idx, class_combination in enumerate(class_combinations):
         sub_meas_single_ds = sub_meas_ds.copy()
         sub_meas_single_ds = sub_meas_single_ds[sub_meas_single_ds["Measure name"] == measure_name]
         scores = sub_meas_single_ds["Measure score"].values
+        ### add min max
         ax[measure_idx+1].scatter(x, scores, s=3, c='red', marker='o')
         ax[measure_idx+1].set_title(measure_name)
 

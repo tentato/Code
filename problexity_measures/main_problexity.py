@@ -41,10 +41,11 @@ filename = "features_WL_ZC_VAR_MAV_SSC.csv"
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp3_wavdec/'
 # main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp2_2_wavdec/'
-# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
-# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp2_wavdec/'
-main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
-results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/Barbara_wavdec/'
+main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
+results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp2_wavdec/'
+# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/Barbara_wavdec/'
+
 file_object = open(f'{results_folder}results_problexity.txt', 'w')
 file_object.write(f'Class combination;Number of classes;K worst features rejected;Measure name;Measure score')  
 
@@ -57,7 +58,7 @@ features = columns - 1
 classes = np.unique(np.array(dataset.iloc[:, -1].values))
 class_combinations = create_class_combinations(classes)
 # metrics_array = [pc.f1, pc.f2, pc.f3, pc.f4, pc.l1, pc.l2, pc.l3, pc.lsc, pc.t4, pc.density, pc.clsCoef, pc.hubs] # FB - skipped:  pc.f1v,
-metrics_array = [pc.f1, pc.f2, pc.f3, pc.f4, pc.l1, pc.l2, pc.l3, pc.n1, pc.n2, pc.n4, pc.t1, pc.lsc, pc.t2, pc.t3, pc.t4, pc.density, pc.clsCoef, pc.hubs] # FB - skipped:  pc.f1v,
+metrics_array = [pc.f1, pc.f2, pc.f3, pc.f4, pc.l1, pc.l2, pc.l3, pc.n1, pc.n2, pc.n4, pc.t1, pc.lsc, pc.t2, pc.t3, pc.t4, pc.density, pc.clsCoef, pc.hubs]
 # metrics_array = [pc.f1, pc.f2, pc.f3, pc.f4] # FB - skipped:  pc.f1v,
 # metrics_array = [pc.l1, pc.l2, pc.l3] # LI
 # metrics_array = [pc.n1, pc.n2, pc.n4, pc.t1, pc.lsc] # NG neigh - skipped:  , pc.n3
