@@ -27,7 +27,8 @@ clsf_ds = pd.read_csv(classification_filename, sep=";", decimal=".", header=0)
 class_combinations = np.unique(np.array(clsf_ds["Class combination"].values))
 measure_names = np.unique(np.array(measures_ds["Measure name"].values))
 
-fig, ax = plt.subplots(10, 2, figsize=(2, 10))
+fig, ax = plt.subplots(10, 2, figsize=(10, 20))
+ax = ax.reshape(-1)
 
 for idx, class_combination in enumerate(class_combinations):
     sub_clsf_ds = clsf_ds.copy()
@@ -36,21 +37,23 @@ for idx, class_combination in enumerate(class_combinations):
 
     x = sub_clsf_ds["K worst features rejected"].values
     accuracy = sub_clsf_ds["Mean Accuracy"].values
-    ax[0,0].scatter(x, accuracy, s=3, c='red', marker='o')
+    ax[0].scatter(x, accuracy, s=3, c='red', marker='o')
+    ax[0].set_title("balanced_accuracy")
 
     sub_meas_ds = measures_ds.copy()
     sub_meas_ds = sub_meas_ds[sub_meas_ds["Class combination"] == class_combination]
     for measure_idx, measure_name in enumerate(measure_names):
         sub_meas_single_ds = sub_meas_ds.copy()
         sub_meas_single_ds = sub_meas_single_ds[sub_meas_single_ds["Measure name"] == measure_name]
-
-
-
-
+        scores = sub_meas_single_ds["Measure score"].values
+        ax[measure_idx+1].scatter(x, scores, s=3, c='red', marker='o')
+        ax[measure_idx+1].set_title(measure_name)
 
     plt.tight_layout()
     plt.savefig(f"{results_folder}{class_combination}.png")
-    ax[0].cla()
+
+    for i in range(0, 20):
+        ax[i].cla()
 
 end_time = time.time()
 print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")
