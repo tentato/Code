@@ -37,6 +37,8 @@ def create_class_combinations(classes):
 start_time = time.time()
 
 filename = "features_WL_ZC_VAR_MAV_SSC.csv"
+# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp2_wavdec/'
 main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
 results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/Barbara_wavdec/'
 file_object = open(f'{results_folder}results_problexity.txt', 'w')
@@ -54,29 +56,32 @@ features = columns - 1
 classes = np.unique(np.array(dataset.iloc[:, -1].values))
 number_of_classes = len(classes)
 class_combinations = create_class_combinations(classes)
+metrics_array = [pc.f1, pc.f1v, pc.f2, pc.f3, pc.f4] # FB
+# metrics_array = [pc.l1, pc.l2, pc.l3] # LI
+# metrics_array = [pc.n1, pc.n2, pc.n3, pc.n4, pc.t1, pc.lsc] # NG neigh
+# metrics_array = [pc.t2, pc.t3, pc.t4] # DM dimen
+# metrics_array = [pc.density, pc.clsCoef, pc.hubs] # NE
 
 for idx, class_combination in enumerate(class_combinations):
-    for k in range(0, features):
-        method_val = []
-        mean_method_val = []
-        subdataset = dataset.copy()
-        subdataset = subdataset[subdataset.iloc[:, -1].isin(class_combination)]
-        y = subdataset.iloc[:, -1].values.astype(int)
+    for metric in metrics_array:
+        for k in range(0, features):
+            method_val = []
+            mean_method_val = []
+            subdataset = dataset.copy()
+            subdataset = subdataset[subdataset.iloc[:, -1].isin(class_combination)]
+            y = subdataset.iloc[:, -1].values.astype(int)
 
-        X, worst_features_labels = remove_k_worst_features(subdataset, y, k)
+            X, worst_features_labels = remove_k_worst_features(subdataset, y, k)
 
-        cc = px.ComplexityCalculator(metrics=[pc.f4], colors=['#FD0100'], ranges={'FB': 1}, weights=np.ones((1)), multiclass_strategy=strategy)
-        # cc = px.ComplexityCalculator(metrics=[pc.f1, pc.f1v, pc.f2, pc.f3, pc.f4], colors=['#FD0100'], ranges={'FB': 5}, weights=np.ones((5)), multiclass_strategy=strategy)
-        cc.fit(X,y)
-        report = cc.report()
-        print(f"Complexities: {report['complexities']}")
-        file_object.write(f"comb: {class_combination} k: {k}, complexities: {report['complexities']}\n\n")
-        # print("test")
-        
-        # cc.plot(fig, (1,1,1))
-
-        # plt.tight_layout()
-        # plt.savefig(f"C:/Users/alepa/Desktop/MGR/problexity_results/problexity_{strategy}_({','.join(map(str, classes))})_k={k}.png")
+            cc = px.ComplexityCalculator(metrics=[metric], colors=['#FD0100'], ranges={'FB': 1}, weights=np.ones((1)), multiclass_strategy=strategy)
+            cc.fit(X,y)
+            report = cc.report()
+            print(f"comb: {class_combination} k: {k}, comp: {report['complexities']}")
+            file_object.write(f"comb: {class_combination} k: {k}, comp: {report['complexities']}\n")
+            
+            # cc.plot(fig, (1,1,1))
+            # plt.tight_layout()
+            # plt.savefig(f"C:/Users/alepa/Desktop/MGR/problexity_results/problexity_{strategy}_({','.join(map(str, classes))})_k={k}.png")
 
 end_time = time.time()
 print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")
