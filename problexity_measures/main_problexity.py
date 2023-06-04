@@ -56,6 +56,7 @@ features = columns - 1
 
 classes = np.unique(np.array(dataset.iloc[:, -1].values))
 class_combinations = create_class_combinations(classes)
+# metrics_array = [pc.f1, pc.f2, pc.f3, pc.f4, pc.l1, pc.l2, pc.l3, pc.lsc, pc.t4, pc.density, pc.clsCoef, pc.hubs] # FB - skipped:  pc.f1v,
 metrics_array = [pc.f1, pc.f2, pc.f3, pc.f4, pc.l1, pc.l2, pc.l3, pc.n1, pc.n2, pc.n4, pc.t1, pc.lsc, pc.t2, pc.t3, pc.t4, pc.density, pc.clsCoef, pc.hubs] # FB - skipped:  pc.f1v,
 # metrics_array = [pc.f1, pc.f2, pc.f3, pc.f4] # FB - skipped:  pc.f1v,
 # metrics_array = [pc.l1, pc.l2, pc.l3] # LI

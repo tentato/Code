@@ -37,8 +37,9 @@ for idx, class_combination in enumerate(class_combinations):
 
     x = sub_clsf_ds["K worst features rejected"].values
     accuracy = sub_clsf_ds["Mean Accuracy"].values
+    max_accuracy = np.sort(accuracy)[-1]
     ax[0].scatter(x, accuracy, s=3, c='red', marker='o')
-    ax[0].set_title("balanced_accuracy")
+    ax[0].set_title(f"balanced_accuracy, best={max_accuracy}")
 
     sub_meas_ds = measures_ds.copy()
     sub_meas_ds = sub_meas_ds[sub_meas_ds["Class combination"] == class_combination]
