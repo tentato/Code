@@ -1,25 +1,22 @@
-from itertools import combinations
 import time
-import problexity as px
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-from sklearn.feature_selection import SelectKBest
-from sklearn.preprocessing import MinMaxScaler
-import problexity.classification as pc
+from scipy import stats
 
 start_time = time.time()
 
-# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp3_wavdec/'
-# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp3_wavdec/'
-# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
-# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp2_2_wavdec/'
-# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
-# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp2_wavdec/'
-# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
-results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_wavdec/'
-measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2.txt"
-classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp3_wavdec/'
+# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp3.txt"
+# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp3 rfc.txt"
+
+results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_2_wavdec/'
+measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2_2.txt"
+classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2_2 rfc.txt"
+
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_wavdec/'
+# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2.txt"
+# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
 
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/'
 # measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/barb.txt"
@@ -35,6 +32,8 @@ fig, ax = plt.subplots(10, 2, figsize=(10, 20))
 ax = ax.reshape(-1)
 
 for idx, class_combination in enumerate(class_combinations):
+    if len(class_combination) < 7:
+        continue
     sub_clsf_ds = clsf_ds.copy()
     sub_clsf_ds = sub_clsf_ds[sub_clsf_ds["Class combination"] == class_combination]
     rows, columns = sub_clsf_ds.shape
@@ -57,12 +56,18 @@ for idx, class_combination in enumerate(class_combinations):
         ax[measure_idx+1].scatter(x, scores, s=3, c='red', marker='o')
         ax[measure_idx+1].set_title(f"{measure_name}, min={min_score}, max={max_score}")
 
+        pearsonr_correlation = stats.pearsonr(accuracy, scores)
+        spearman_correlation = stats.spearmanr(accuracy, scores)
+        print(f"{measure_name} - Pearsonr correlation: s={round(pearsonr_correlation.statistic, 3)} p_value={round(pearsonr_correlation.pvalue, 3)}")
+        print(f"{measure_name} - Spearman correlation: s={round(spearman_correlation.statistic, 3)} p_value={round(spearman_correlation.pvalue, 3)}")
+
     plt.tight_layout()
     plt.savefig(f"{results_folder}{class_combination}.png")
 
     for i in range(0, 20):
         ax[i].cla()
-    print(f"{class_combination} processed...")
+    print(f"{class_combination} processed...\n")
+    exit()
 
 end_time = time.time()
 print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")
