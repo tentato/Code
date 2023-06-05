@@ -10,26 +10,31 @@ start_time = time.time()
 # measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp3.txt"
 # classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp3 rfc.txt"
 
-results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_2_wavdec/'
-measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2_2.txt"
-classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2_2 rfc.txt"
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_2_wavdec/'
+# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2_2.txt"
+# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2_2 rfc.txt"
 
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_wavdec/'
 # measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2.txt"
 # classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
 
-# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/'
-# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/barb.txt"
-# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/barb rfc.txt"
+results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/'
+measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/barb.txt"
+classification_filename = "C:/Users/alepa/Desktop/MGR/final results/barb rfc.txt"
 
 measures_ds = pd.read_csv(measures_filename, sep=";", decimal=".", header=0)
 clsf_ds = pd.read_csv(classification_filename, sep=";", decimal=".", header=0)
 
 class_combinations = np.unique(np.array(clsf_ds["Class combination"].values))
+
 measure_names = np.unique(np.array(measures_ds["Measure name"].values))
 
 fig, ax = plt.subplots(10, 2, figsize=(10, 20))
 ax = ax.reshape(-1)
+
+file_object = open(f'{results_folder}pearson_correlation.txt', 'w')
+# file_object = open(f'{results_folder}spearman_correlation.txt', 'w')
+file_object.write(f'Class combination;Number of classes;max_accuracy;clsCoef_s;clsCoef_p;density_s;density_p;f1_s;f1_p;f2_s;f2_p;f3_s;f3_p;f4_s;f4_p;hubs_s;hubs_p;l1_s;l1_p;l2_s;l2_p;l3_s;l3_p;lsc_s;lsc_p;n1_s;n1_p;n2_s;n2_p;n4_s;n4_p;t1_s;t1_p;t2_s;t2_p;t3_s;t3_p;t4_s;t4_p')  
 
 for idx, class_combination in enumerate(class_combinations):
     if len(class_combination) < 7:
@@ -37,6 +42,7 @@ for idx, class_combination in enumerate(class_combinations):
     sub_clsf_ds = clsf_ds.copy()
     sub_clsf_ds = sub_clsf_ds[sub_clsf_ds["Class combination"] == class_combination]
     rows, columns = sub_clsf_ds.shape
+    number_of_classes = np.array(sub_clsf_ds["Number of classes"].values)[0]
 
     x = sub_clsf_ds["K worst features rejected"].values
     accuracy = sub_clsf_ds["Mean Accuracy"].values
@@ -47,6 +53,7 @@ for idx, class_combination in enumerate(class_combinations):
 
     sub_meas_ds = measures_ds.copy()
     sub_meas_ds = sub_meas_ds[sub_meas_ds["Class combination"] == class_combination]
+    measure_correlation_score_pvalue = []
     for measure_idx, measure_name in enumerate(measure_names):
         sub_meas_single_ds = sub_meas_ds.copy()
         sub_meas_single_ds = sub_meas_single_ds[sub_meas_single_ds["Measure name"] == measure_name]
@@ -55,19 +62,20 @@ for idx, class_combination in enumerate(class_combinations):
         min_score = np.min(scores)
         ax[measure_idx+1].scatter(x, scores, s=3, c='red', marker='o')
         ax[measure_idx+1].set_title(f"{measure_name}, min={min_score}, max={max_score}")
+        correlation = stats.pearsonr(accuracy, scores)
+        # correlation = stats.spearmanr(accuracy, scores)
+        measure_correlation_score_pvalue.append(str(round(correlation.statistic, 3)))
+        measure_correlation_score_pvalue.append(str(round(correlation.pvalue, 3)))
+        print(f"{measure_name} - Correlation: s={round(correlation.statistic, 3)} p_value={round(correlation.pvalue, 3)}")
 
-        pearsonr_correlation = stats.pearsonr(accuracy, scores)
-        spearman_correlation = stats.spearmanr(accuracy, scores)
-        print(f"{measure_name} - Pearsonr correlation: s={round(pearsonr_correlation.statistic, 3)} p_value={round(pearsonr_correlation.pvalue, 3)}")
-        print(f"{measure_name} - Spearman correlation: s={round(spearman_correlation.statistic, 3)} p_value={round(spearman_correlation.pvalue, 3)}")
-
-    plt.tight_layout()
-    plt.savefig(f"{results_folder}{class_combination}.png")
+    # plt.tight_layout()
+    # plt.savefig(f"{results_folder}{class_combination}.png")
 
     for i in range(0, 20):
         ax[i].cla()
     print(f"{class_combination} processed...\n")
-    exit()
+
+    file_object.write(f"\n{class_combination};{number_of_classes};{str(max_accuracy).replace('.', ',')};{';'.join(measure_correlation_score_pvalue).replace('.', ',')}")
 
 end_time = time.time()
 print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")
