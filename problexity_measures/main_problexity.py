@@ -39,10 +39,10 @@ start_time = time.time()
 filename = "features_WL_ZC_VAR_MAV_SSC.csv"
 # main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp3_wavdec/'
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp3_wavdec/'
-# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
-# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp2_2_wavdec/'
-main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
-results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp2_wavdec/'
+main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_2_wavdec/'
+results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp2_2_wavdec/'
+# main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/amp2_wavdec/'
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/amp2_wavdec/'
 # main_folder = 'C:/Users/alepa/Desktop/MGR/dataset_features/Barbara_wavdec/'
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/problexity_measures/Barbara_wavdec/'
 
