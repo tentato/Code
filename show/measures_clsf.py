@@ -34,7 +34,7 @@ ax = ax.reshape(-1)
 
 file_object = open(f'{results_folder}pearson_correlation.txt', 'w')
 # file_object = open(f'{results_folder}spearman_correlation.txt', 'w')
-file_object.write(f'Class combination;Number of classes;max_accuracy;clsCoef;density;f1;f2;f3;f4;hubs;l1;l2;l3;lsc;n1;n2;n4;t1;t2;t3;t4')  
+file_object.write(f'Class combination;Number of classes;mean_good_accuracy;clsCoef;density;f1;min_f1;f2;f3;f4;hubs;l1;l2;l3;lsc;n1;n2;n4;t1;t2;t3;t4')  
 
 for idx, class_combination in enumerate(class_combinations):
     if len(class_combination) < 7:
@@ -63,8 +63,11 @@ for idx, class_combination in enumerate(class_combinations):
         ax[measure_idx+1].scatter(x, scores, s=3, c='red', marker='o')
         ax[measure_idx+1].set_title(f"{measure_name}, min={min_score}, max={max_score}")
         # correlation = stats.pearsonr(accuracy, scores)
-        correlation = stats.spearmanr(accuracy, scores)
+        # correlation = stats.spearmanr(accuracy, scores)
+        correlation = np.corrcoef(accuracy, scores)
         measure_correlation_score_pvalue.append(str(round(correlation.statistic, 3)))
+        if measure_name == 'f1':
+            measure_correlation_score_pvalue.append(str(min_score))
         print(f"{measure_name} - Correlation: s={round(correlation.statistic, 3)}")
 
     # plt.tight_layout()
@@ -74,7 +77,7 @@ for idx, class_combination in enumerate(class_combinations):
         ax[i].cla()
     print(f"{class_combination} processed...\n")
 
-    file_object.write(f"\n{class_combination};{number_of_classes};{str(max_accuracy).replace('.', ',')};{';'.join(measure_correlation_score_pvalue).replace('.', ',')}")
+    file_object.write(f"\n{class_combination};{number_of_classes};{str(np.mean(np.sort(accuracy[0:20]))).replace('.', ',')};{';'.join(measure_correlation_score_pvalue).replace('.', ',')}")
 
 end_time = time.time()
 print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")
