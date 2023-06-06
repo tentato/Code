@@ -34,7 +34,7 @@ ax = ax.reshape(-1)
 
 file_object = open(f'{results_folder}pearson_correlation.txt', 'w')
 # file_object = open(f'{results_folder}spearman_correlation.txt', 'w')
-file_object.write(f'Class combination;Number of classes;max_accuracy;clsCoef_s;clsCoef_p;density_s;density_p;f1_s;f1_p;f2_s;f2_p;f3_s;f3_p;f4_s;f4_p;hubs_s;hubs_p;l1_s;l1_p;l2_s;l2_p;l3_s;l3_p;lsc_s;lsc_p;n1_s;n1_p;n2_s;n2_p;n4_s;n4_p;t1_s;t1_p;t2_s;t2_p;t3_s;t3_p;t4_s;t4_p')  
+file_object.write(f'Class combination;Number of classes;max_accuracy;clsCoef;density;f1;f2;f3;f4;hubs;l1;l2;l3;lsc;n1;n2;n4;t1;t2;t3;t4')  
 
 for idx, class_combination in enumerate(class_combinations):
     if len(class_combination) < 7:
@@ -62,11 +62,10 @@ for idx, class_combination in enumerate(class_combinations):
         min_score = np.min(scores)
         ax[measure_idx+1].scatter(x, scores, s=3, c='red', marker='o')
         ax[measure_idx+1].set_title(f"{measure_name}, min={min_score}, max={max_score}")
-        correlation = stats.pearsonr(accuracy, scores)
-        # correlation = stats.spearmanr(accuracy, scores)
+        # correlation = stats.pearsonr(accuracy, scores)
+        correlation = stats.spearmanr(accuracy, scores)
         measure_correlation_score_pvalue.append(str(round(correlation.statistic, 3)))
-        measure_correlation_score_pvalue.append(str(round(correlation.pvalue, 3)))
-        print(f"{measure_name} - Correlation: s={round(correlation.statistic, 3)} p_value={round(correlation.pvalue, 3)}")
+        print(f"{measure_name} - Correlation: s={round(correlation.statistic, 3)}")
 
     # plt.tight_layout()
     # plt.savefig(f"{results_folder}{class_combination}.png")
