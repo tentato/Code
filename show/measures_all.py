@@ -7,17 +7,17 @@ from scipy import spatial
 
 start_time = time.time()
 
-# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp3_wavdec/'
-# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp3.txt"
-# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp3 rfc.txt"
+results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp3_wavdec/'
+measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp3.txt"
+classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp3 rfc.txt"
 
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_2_wavdec/'
 # measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2_2.txt"
 # classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2_2 rfc.txt"
 
-results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_wavdec/'
-measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2.txt"
-classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_wavdec/'
+# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2.txt"
+# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
 
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/'
 # measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/barb.txt"
@@ -46,7 +46,9 @@ for idx, class_combination in enumerate(class_combinations):
     number_of_classes = np.array(sub_clsf_ds["Number of classes"].values)[0]
 
     x = sub_clsf_ds["K worst features rejected"].values
+    # x = x[0:len(x) - int(len(x)/16)]
     accuracy = sub_clsf_ds["Mean Accuracy"].values
+    # accuracy = accuracy[0:len(accuracy) - int(len(accuracy)/16)]
     max_accuracy = np.max(accuracy)
     min_accuracy = np.min(accuracy)
     best_accuracies = np.sort(accuracy[0:int(len(accuracy)*0.1)])
@@ -61,18 +63,17 @@ for idx, class_combination in enumerate(class_combinations):
     for measure_idx, measure_name in enumerate(measure_names):
         sub_meas_single_ds = sub_meas_ds.copy()
         sub_meas_single_ds = sub_meas_single_ds[sub_meas_single_ds["Measure name"] == measure_name]
-        scores = sub_meas_single_ds["Measure score"].values            
+        scores = sub_meas_single_ds["Measure score"].values
+        # scores = scores[0:len(scores) - int(len(scores)/16)]
         max_score = np.max(scores)
         min_score = np.min(scores)
-        avg_score = np.mean(np.sort(scores[0:int(len(scores)*0.1)])) # 20% DODAĆ ODNAJDOWANIE INDEKSÓW
+        avg_score = np.mean(np.sort(scores[0:int(len(scores)*0.1)])) # DODAĆ ODNAJDOWANIE INDEKSÓW
         ax[measure_idx+1].scatter(x, scores, s=3, c='red', marker='o')
         ax[measure_idx+1].set_title(f"{measure_name}, best_avg={avg_score}")
         correlation = abs(np.corrcoef(accuracy, scores)[0, 1])
         measure_correlation_score_pvalue.append(str(correlation))
-        # measure_correlation_score_pvalue.append(str(avg_score))
         measures_avg_scores.append(avg_score)
         print(f"{measure_name} - Correlation: s={correlation}")
-        print(f"{measure_name} - score: s={avg_score}")
 
     plt.tight_layout()
     plt.savefig(f"{results_folder}{class_combination}.png")
