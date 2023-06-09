@@ -3,12 +3,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from scipy import stats
+from scipy import spatial
 
 start_time = time.time()
 
-# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp3_wavdec/'
-# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp3.txt"
-# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp3 rfc.txt"
+results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp3_wavdec/'
+measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp3.txt"
+classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp3 rfc.txt"
 
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_2_wavdec/'
 # measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2_2.txt"
@@ -18,9 +19,9 @@ start_time = time.time()
 # measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2.txt"
 # classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
 
-results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/'
-measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/barb.txt"
-classification_filename = "C:/Users/alepa/Desktop/MGR/final results/barb rfc.txt"
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/'
+# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/barb.txt"
+# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/barb rfc.txt"
 
 measures_ds = pd.read_csv(measures_filename, sep=";", decimal=".", header=0)
 clsf_ds = pd.read_csv(classification_filename, sep=";", decimal=".", header=0)
@@ -32,9 +33,9 @@ measure_names = np.unique(np.array(measures_ds["Measure name"].values))
 fig, ax = plt.subplots(10, 2, figsize=(10, 20))
 ax = ax.reshape(-1)
 
-file_object = open(f'{results_folder}pearson_correlation.txt', 'w')
+file_object = open(f'{results_folder}correlation.txt', 'w')
 # file_object = open(f'{results_folder}spearman_correlation.txt', 'w')
-file_object.write(f'Class combination;Number of classes;mean_good_accuracy;clsCoef;density;f1;min_f1;f2;f3;f4;hubs;l1;l2;l3;lsc;n1;n2;n4;t1;t2;t3;t4')  
+file_object.write(f'Class combination;Number of classes;mean_good_accuracy;clsCoef;density;f1;min_f1;f2;f3;f4;hubs;l1;min_l1;l2;min_l2;l3;min_l3;lsc;n1;min_n1;n2;min_n2;n4;min_n4;t1;t2;t3;t4')  
 
 for idx, class_combination in enumerate(class_combinations):
     if len(class_combination) < 7:
@@ -62,16 +63,17 @@ for idx, class_combination in enumerate(class_combinations):
         min_score = np.min(scores)
         ax[measure_idx+1].scatter(x, scores, s=3, c='red', marker='o')
         ax[measure_idx+1].set_title(f"{measure_name}, min={min_score}, max={max_score}")
-        # correlation = stats.pearsonr(accuracy, scores)
-        # correlation = stats.spearmanr(accuracy, scores)
-        correlation = np.corrcoef(accuracy, scores)
-        measure_correlation_score_pvalue.append(str(round(correlation.statistic, 3)))
-        if measure_name == 'f1':
-            measure_correlation_score_pvalue.append(str(min_score))
-        print(f"{measure_name} - Correlation: s={round(correlation.statistic, 3)}")
+        # ax[measure_idx+1].scatter(scores, accuracy, s=3, c='green', marker='x')
+        # ax[measure_idx+1].set_title(f"scatter accuracy and {measure_name}")
+        correlation = abs(np.corrcoef(accuracy, scores)[0, 1])
+        measure_correlation_score_pvalue.append(str(round(correlation, 3)))
+        if measure_name == 'f1' or measure_name == 'l1' or measure_name == 'l2' or measure_name == 'l3' or measure_name == 'n1' or measure_name == 'n2' or measure_name == 'n4':
+            measure_correlation_score_pvalue.append(str(np.mean(np.sort(scores[0:20]))))
+        print(f"{measure_name} - Correlation: s={round(correlation, 3)}")
 
-    # plt.tight_layout()
-    # plt.savefig(f"{results_folder}{class_combination}.png")
+    plt.tight_layout()
+    plt.savefig(f"{results_folder}{class_combination}.png")
+    # plt.savefig(f"{results_folder}{class_combination}_scatter.png")
 
     for i in range(0, 20):
         ax[i].cla()
