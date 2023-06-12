@@ -49,10 +49,12 @@ for idx, class_combination in enumerate(class_combinations):
     accuracy = sub_clsf_ds["Mean Accuracy"].values
     max_accuracy = np.max(accuracy)
     min_accuracy = np.min(accuracy)
-    best_accuracies = np.sort(accuracy[0:int(len(accuracy)*0.1)])
+    best_accuracies = np.sort(accuracy)[len(accuracy)-5:len(accuracy)]
     avg_best_accuracy = np.mean(best_accuracies)
     ax[0].scatter(x, accuracy, s=3, c='red', marker='o')
-    ax[0].set_title(f"balanced_accuracy, min={min_accuracy}, max={max_accuracy}")
+    # ax[0].set_title(f"balanced_accuracy, min={min_accuracy}, max={max_accuracy}")
+    ax[0].set_title(f"balanced_accuracy, best_avg={round(avg_best_accuracy, 3)}")
+
 
     sub_meas_ds = measures_ds.copy()
     sub_meas_ds = sub_meas_ds[sub_meas_ds["Class combination"] == class_combination]
@@ -64,9 +66,10 @@ for idx, class_combination in enumerate(class_combinations):
         scores = sub_meas_single_ds["Measure score"].values
         max_score = np.max(scores)
         min_score = np.min(scores)
-        avg_score = np.mean(np.sort(scores[0:int(len(scores)*0.1)])) # DODAĆ ODNAJDOWANIE INDEKSÓW
+        # avg_score = np.mean(np.sort(scores[0:int(len(scores)*0.1)])) # DODAĆ ODNAJDOWANIE INDEKSÓW
+        avg_score = np.mean(np.sort(scores)[0:5]) # DODAĆ ODNAJDOWANIE INDEKSÓW
         ax[measure_idx+1].scatter(x, scores, s=3, c='red', marker='o')
-        ax[measure_idx+1].set_title(f"{measure_name}, best_avg={avg_score}")
+        ax[measure_idx+1].set_title(f"{measure_name}, best_avg={round(avg_score,3)}")
         correlation = abs(np.corrcoef(accuracy, scores)[0, 1])
         measure_correlation_score_pvalue.append(str(correlation))
         measures_avg_scores.append(avg_score)

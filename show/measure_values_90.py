@@ -7,9 +7,9 @@ from scipy import spatial
 
 start_time = time.time()
 
-results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp3_wavdec/'
-measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp3.txt"
-classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp3 rfc.txt"
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp3_wavdec/'
+# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp3.txt"
+# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp3 rfc.txt"
 
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_2_wavdec/'
 # measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2_2.txt"
@@ -19,9 +19,9 @@ classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp3 rfc.txt
 # measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2.txt"
 # classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
 
-# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/'
-# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/barb.txt"
-# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/barb rfc.txt"
+results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/'
+measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/barb.txt"
+classification_filename = "C:/Users/alepa/Desktop/MGR/final results/barb rfc.txt"
 
 measures_ds = pd.read_csv(measures_filename, sep=";", decimal=".", header=0)
 clsf_ds = pd.read_csv(classification_filename, sep=";", decimal=".", header=0)
@@ -34,7 +34,7 @@ fig, ax = plt.subplots(10, 2, figsize=(10, 20))
 ax = ax.reshape(-1)
 
 file_object = open(f'{results_folder}correlation_values.txt', 'w')
-csv_header = 'Class combination;Number of classes;mean_good_accuracy;l1;l2;l3;n1;n2;n4;sum_measures;mean_measures'
+csv_header = 'Class combination;Number of classes;mean_good_accuracy;l2;l3;n1;n4;sum_measures;mean_measures'
 file_object.write(csv_header)  
 
 for idx, class_combination in enumerate(class_combinations):
@@ -49,10 +49,12 @@ for idx, class_combination in enumerate(class_combinations):
     accuracy = sub_clsf_ds["Mean Accuracy"].values
     max_accuracy = np.max(accuracy)
     min_accuracy = np.min(accuracy)
-    best_accuracies = np.sort(accuracy[0:int(len(accuracy)*0.1)])
+    best_accuracies = np.sort(accuracy)[len(accuracy)-5:len(accuracy)]
+    print(best_accuracies)
+    # best_accuracies = np.sort(accuracy[0:int(len(accuracy)*0.1)])
     avg_best_accuracy = np.mean(best_accuracies)
     ax[0].scatter(x, accuracy, s=3, c='red', marker='o')
-    ax[0].set_title(f"balanced_accuracy, best_avg={avg_best_accuracy}")
+    ax[0].set_title(f"balanced_accuracy, best_avg={round(avg_best_accuracy, 3)}")
 
     sub_meas_ds = measures_ds.copy()
     sub_meas_ds = sub_meas_ds[sub_meas_ds["Class combination"] == class_combination]
@@ -65,12 +67,13 @@ for idx, class_combination in enumerate(class_combinations):
             scores = sub_meas_single_ds["Measure score"].values
             max_score = np.max(scores)
             min_score = np.min(scores)
-            avg_score = np.mean(np.sort(scores[0:int(len(scores)*0.1)])) # DODAĆ ODNAJDOWANIE INDEKSÓW
+            avg_score = np.mean(np.sort(scores)[0:5]) # DODAĆ ODNAJDOWANIE INDEKSÓW
+            # avg_score = np.mean(np.sort(scores[0:int(len(scores)*0.1)])) # DODAĆ ODNAJDOWANIE INDEKSÓW
             ax[measure_idx+1].scatter(x, scores, s=3, c='red', marker='o')
             ax[measure_idx+1].set_title(f"{measure_name}, best_avg={avg_score}")
             measure_correlation_score_pvalue.append(str(avg_score))
             measures_avg_scores.append(avg_score)
-            print(f"{measure_name} - score: s={avg_score}")
+            # print(f"{measure_name} - score: s={avg_score}")
 
     plt.tight_layout()
     plt.savefig(f"{results_folder}{class_combination}.png")
