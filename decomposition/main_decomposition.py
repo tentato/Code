@@ -11,11 +11,11 @@ from scipy.interpolate import interp1d
 # results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_first_20_wavdec/'
 # main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_2_first_20/']
 
-results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/'
-main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_2/']
+# results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_2_wavdec/'
+# main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2_2/']
 
-# main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2/test1/', 'C:/Users/alepa/Desktop/MGR/datasets/amp2/test2/']
-# results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/'
+main_folder = ['C:/Users/alepa/Desktop/MGR/datasets/amp2/test1/', 'C:/Users/alepa/Desktop/MGR/datasets/amp2/test2/']
+results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/amp2_wavdec/'
 classes_array = ['1', '2', '3', '4', '5', '6']
 
 # results_folder = 'C:/Users/alepa/Desktop/MGR/datasets/Barbara_wavdec/'
@@ -37,7 +37,7 @@ for class_number in classes_array:
             if "amp2" in folder:
                 dataset = dataset.iloc[:, 0:16]
                 channel_indexes = [dataset.columns.get_loc(c) for c in dataset.columns if c in dataset]
-                MMG_channels_indexes = [channel_index for channel_index in channel_indexes if channel_index % 2 == 1]
+                MMG_channels_indexes = [channel_index for channel_index in channel_indexes if channel_index % 2 == 0]
                 dataset = dataset.drop(MMG_channels_indexes, axis=1)
             
             rows_number, columns_number = dataset.shape
@@ -45,7 +45,6 @@ for class_number in classes_array:
             i=0
             for (columnName, columnData) in dataset.items():
                 coeffs = pywt.wavedec(columnData, 'db1', level=3)
-                # new_len = 2000
                 f1 = interp1d(np.linspace(0, 1, len(coeffs[0])), coeffs[0], kind='linear')
                 rescaled_arr1 = f1(np.linspace(0, 1, rows_number))
                 f2 = interp1d(np.linspace(0, 1, len(coeffs[1])), coeffs[1], kind='linear')
