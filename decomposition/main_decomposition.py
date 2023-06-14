@@ -36,10 +36,9 @@ for class_number in classes_array:
             dataset = pd.read_csv(folder+class_number+'/'+filename, sep=";", decimal=",", header=None)
             if "amp2" in folder:
                 dataset = dataset.iloc[:, 0:16]
-                ##
-                # channel_indexes = [dataset.columns.get_loc(c) for c in dataset.columns if c in dataset]
-                # MMG_channels_indexes = [channel_index for channel_index in channel_indexes if channel_index % 2 == 1]
-                # dataset = dataset.drop(MMG_channels_indexes, axis=1)
+                channel_indexes = [dataset.columns.get_loc(c) for c in dataset.columns if c in dataset]
+                MMG_channels_indexes = [channel_index for channel_index in channel_indexes if channel_index % 2 == 1]
+                dataset = dataset.drop(MMG_channels_indexes, axis=1)
             
             rows_number, columns_number = dataset.shape
             new_df_arr = []
