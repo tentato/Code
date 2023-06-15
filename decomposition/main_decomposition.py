@@ -53,23 +53,33 @@ for class_number in classes_array:
                 rescaled_arr3 = f3(np.linspace(0, 1, rows_number))
                 f4 = interp1d(np.linspace(0, 1, len(coeffs[3])), coeffs[3], kind='linear')
                 rescaled_arr4 = f4(np.linspace(0, 1, rows_number))
+
+                print(len(coeffs[0]))
+                print(len(coeffs[1]))
+                print(len(coeffs[2]))
+                print(len(coeffs[3]))
                 
-                ##### PRINTING SIGNALS #####
-                # fig, ax = plt.subplots(5, 1, figsize=(10, 13))
-                # x = np.linspace(start = 0, stop = 1000, num = 1000) # for AB
-                # ax[0].plot(x, columnData)
-                # ax[1].plot(x, rescaled_arr1)
-                # ax[2].plot(x, rescaled_arr2)
-                # ax[3].plot(x, rescaled_arr3)
-                # ax[4].plot(x, rescaled_arr4)
-                # ax[0].set_title("EMG")
-                # plt.tight_layout()
-                # plt.savefig("test.png")
+                #### PRINTING SIGNALS #####
+                fig, ax = plt.subplots(5, 1, figsize=(10, 13))
+                x = np.linspace(start = 0, stop = 2000, num = 2000) # for AB
+                ax[0].plot(x, columnData)
+                ax[0].set_title("EMG 1000Hz")
+                ax[1].plot(x, rescaled_arr1)
+                ax[1].set_title("0Hz - 125Hz")
+                ax[2].plot(x, rescaled_arr2)
+                ax[2].set_title("125Hz - 250Hz")
+                ax[3].plot(x, rescaled_arr3)
+                ax[3].set_title("250Hz - 500Hz")
+                ax[4].plot(x, rescaled_arr4)
+                ax[4].set_title("500Hz - 1000Hz")
+                plt.tight_layout()
+                plt.savefig("dec_visualization.png")
 
                 new_df_arr.append(rescaled_arr1)
                 new_df_arr.append(rescaled_arr2)
                 new_df_arr.append(rescaled_arr3)
                 new_df_arr.append(rescaled_arr4)
+                exit()
             
             new_df_arr = np.array(new_df_arr)
             new_df_arr = np.transpose(new_df_arr)
