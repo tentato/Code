@@ -7,16 +7,14 @@ from math import floor, ceil
 
 start_time = time.time()
 
-# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp3_wavdec/'
-# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp3.txt"
-# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp3 rfc.txt"
+results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp3_wavdec/clsf_res/'
+classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp3 rfc.txt"
 
-# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_2_wavdec/'
-# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2_2.txt"
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_2_wavdec/clsf_res/'
 # classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2_2 rfc.txt"
 
-results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_wavdec/clsf_res/'
-classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_wavdec/clsf_res/'
+# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
 
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/clsf_res/'
 # classification_filename = "C:/Users/alepa/Desktop/MGR/final results/barb rfc.txt"

@@ -8,17 +8,17 @@ from scipy import spatial
 
 start_time = time.time()
 
-# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp3_wavdec/corr70/'
-# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp3.txt"
-# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp3 rfc.txt"
+results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp3_wavdec/corr70/'
+measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp3.txt"
+classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp3 rfc.txt"
 
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_2_wavdec/corr70/'
 # measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2_2.txt"
 # classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2_2 rfc.txt"
 
-results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_wavdec/corr70/'
-measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2.txt"
-classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_wavdec/corr70/'
+# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2.txt"
+# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
 
 # results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/corr70/'
 # measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/barb.txt"
@@ -33,16 +33,16 @@ class_combinations = np.unique(np.array(clsf_ds["Class combination"].values))
 
 measure_names = np.unique(np.array(measures_ds["Measure name"].values))
 
-fig, ax = plt.subplots(10, 2, figsize=(10, 20))
+fig, ax = plt.subplots(9, 2, figsize=(10, 20))
 ax = ax.reshape(-1)
 
 file_object = open(f'{results_folder}correlation_values_70.txt', 'w')
 # barb
-# csv_header = 'Class combination;Number of classes;mean_good_accuracy;f2;f3;f4;l1;l2;l3;n1;n2;n4;t4;sum_measures'
+# csv_header = 'Class combination;Number of classes;mean_good_accuracy;f1;f2;f3;f4;l1;l2;l3;n1;n2;n4;t4;sum_measures'
 # amp2
-csv_header = 'Class combination;Number of classes;mean_good_accuracy;f3;l1;l2;l3;n1;n4;sum_measures'
-# amp2_2
-# csv_header = 'Class combination;Number of classes;mean_good_accuracy;f3;l1;l2;l3;n1;n4;sum_measures'
+# csv_header = 'Class combination;Number of classes;mean_good_accuracy;clsCoef;density;f1;f3;f4;l1;l2;l3;n1;n2;n4;sum_measures'
+# amp2_2 i 3
+csv_header = 'Class combination;Number of classes;mean_good_accuracy;clsCoef;density;f1;f2;f3;f4;hubs;l1;l2;l3;lsc;n1;n2;n4;t1;t2;t3;t4;sum_measures'
 
 
 
@@ -58,12 +58,9 @@ for idx, class_combination in enumerate(class_combinations):
 
     x = sub_clsf_ds["K worst features rejected"].values
     accuracy = sub_clsf_ds["Mean Accuracy"].values
-    max_accuracy = np.max(accuracy)
-    min_accuracy = np.min(accuracy)
-    best_accuracies = np.sort(accuracy)[len(accuracy)-5:len(accuracy)]
+    best_accuracies_indices = np.argsort(accuracy)[-10:] # top 10 numbers
+    best_accuracies = [accuracy[i] for i in best_accuracies_indices]
     avg_best_accuracy = np.mean(best_accuracies)
-    ax[0].scatter(x, accuracy, s=3, c='red', marker='o')
-    ax[0].set_title(f"balanced_accuracy, best_avg={avg_best_accuracy}")
 
     sub_meas_ds = measures_ds.copy()
     sub_meas_ds = sub_meas_ds[sub_meas_ds["Class combination"] == class_combination]
@@ -76,9 +73,10 @@ for idx, class_combination in enumerate(class_combinations):
             scores = sub_meas_single_ds["Measure score"].values
             if measure_name in 'clsCoef;density;hubs;lsc;n2;t1;t2;t3':
                 scores = 1 - scores # revert
-            avg_score = np.mean(np.sort(scores)[0:5]) # DODAĆ ODNAJDOWANIE INDEKSÓW
-            ax[measure_idx+1].scatter(x, scores, s=3, c='red', marker='o')
-            ax[measure_idx+1].set_title(f"{measure_name}, best_avg={avg_score}")
+            best_scores = [scores[i] for i in best_accuracies_indices] ### znajdowanie najlepszych dodane
+            avg_score = np.mean(best_scores)
+            # ax[measure_idx].scatter(x, scores, s=3, c='red', marker='o')
+            # ax[measure_idx].set_title(f"{measure_name}, best_avg={avg_score}")
             measure_correlation_score_pvalue.append(str(avg_score))
             measures_avg_scores.append(avg_score)
             print(f"{measure_name} - score: s={avg_score}")
@@ -86,11 +84,11 @@ for idx, class_combination in enumerate(class_combinations):
     # plt.tight_layout()
     # plt.savefig(f"{results_folder}{class_combination}.png")
 
-    for i in range(0, 20):
+    for i in range(0, 18):
         ax[i].cla()
     print(f"{class_combination} processed...\n")
 
-    file_object.write(f"\n{class_combination};{number_of_classes};{str(avg_best_accuracy).replace('.', ',')};{';'.join(measure_correlation_score_pvalue).replace('.', ',')};{str(round(np.sum(measures_avg_scores), 3)).replace('.', ',')}")
+    file_object.write(f"\n{class_combination};{number_of_classes};{str(avg_best_accuracy).replace('.', ',')};{';'.join(measure_correlation_score_pvalue).replace('.', ',')};{str(np.sum(measures_avg_scores)).replace('.', ',')}")
 
 end_time = time.time()
 print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")

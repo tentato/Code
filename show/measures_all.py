@@ -16,13 +16,13 @@ start_time = time.time()
 # measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2_2.txt"
 # classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2_2 rfc.txt"
 
-results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_wavdec/problexity/'
-measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2.txt"
-classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
+# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/amp2_wavdec/problexity/'
+# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/amp2.txt"
+# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/amp2 rfc.txt"
 
-# results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/problexity/'
-# measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/barb.txt"
-# classification_filename = "C:/Users/alepa/Desktop/MGR/final results/barb rfc.txt"
+results_folder = 'C:/Users/alepa/Desktop/MGR/Code/show/Barbara_wavdec/problexity/'
+measures_filename = "C:/Users/alepa/Desktop/MGR/final results/problexity/barb.txt"
+classification_filename = "C:/Users/alepa/Desktop/MGR/final results/barb rfc.txt"
 
 os.makedirs(results_folder, exist_ok=True)  
 
@@ -33,11 +33,11 @@ class_combinations = np.unique(np.array(clsf_ds["Class combination"].values))
 
 measure_names = np.unique(np.array(measures_ds["Measure name"].values))
 
-fig, ax = plt.subplots(10, 2, figsize=(10, 20))
+fig, ax = plt.subplots(6, 3, figsize=(15, 20))
 ax = ax.reshape(-1)
 
 file_object = open(f'{results_folder}correlation_all.txt', 'w')
-file_object.write(f'Class combination;Number of classes;mean_good_accuracy;clsCoef;density;f1;f2;f3;f4;hubs;l1;l2;l3;lsc;n1;n2;n4;t1;t2;t3;t4;sum_measures')  
+file_object.write(f'Class combination;Number of classes;mean_good_accuracy;clsCoef;density;f1;f2;f3;f4;hubs;l1;l2;l3;lsc;n1;n2;n4;t1;t2;t3;t4')  
 
 for idx, class_combination in enumerate(class_combinations):
     if len(class_combination) < 7:
@@ -49,12 +49,9 @@ for idx, class_combination in enumerate(class_combinations):
 
     x = sub_clsf_ds["K worst features rejected"].values
     accuracy = sub_clsf_ds["Mean Accuracy"].values
-    max_accuracy = np.max(accuracy)
-    min_accuracy = np.min(accuracy)
-    best_accuracies = np.sort(accuracy)[len(accuracy)-5:len(accuracy)]
+    best_accuracies_indices = np.argsort(accuracy)[-10:] # top 10 numbers
+    best_accuracies = [accuracy[i] for i in best_accuracies_indices]
     avg_best_accuracy = np.mean(best_accuracies)
-    ax[0].scatter(x, accuracy, s=3, c='red', marker='o')
-    ax[0].set_title(f"{class_combination}, average_of_10_best={round(avg_best_accuracy, 3)}")
 
     sub_meas_ds = measures_ds.copy()
     sub_meas_ds = sub_meas_ds[sub_meas_ds["Class combination"] == class_combination]
@@ -66,23 +63,23 @@ for idx, class_combination in enumerate(class_combinations):
         scores = sub_meas_single_ds["Measure score"].values
         if measure_name in 'clsCoef;density;hubs;lsc;n2;t1;t2;t3':
             scores = 1 - scores # revert
-        avg_score = np.mean(np.sort(scores)[0:5]) # DODAĆ ODNAJDOWANIE INDEKSÓW
-        ax[measure_idx+1].scatter(x, scores, s=3, c='red', marker='o')
-        ax[measure_idx+1].set_title(f"{measure_name}, best_avg={round(avg_score,3)}")
+        best_scores = [scores[i] for i in best_accuracies_indices] ### znajdowanie najlepszych dodane
+        avg_score = np.mean(best_scores)
+        ax[measure_idx].scatter(x, scores, s=3, c='red', marker='o')
+        ax[measure_idx].set_title(f"{measure_name}, {class_combination}, average_of_10_best={round(avg_score, 3)}")
         correlation = abs(np.corrcoef(accuracy, scores)[0, 1])
         measure_correlation_score_pvalue.append(str(correlation))
         measures_avg_scores.append(avg_score)
         print(f"{measure_name} - Correlation: s={correlation}")
 
-    plt.tight_layout()
-    plt.savefig(f"{results_folder}{class_combination}.png")
+    # plt.tight_layout()
+    # plt.savefig(f"{results_folder}{class_combination}.png")
 
-    for i in range(0, 20):
+    for i in range(0, 18):
         ax[i].cla()
     print(f"{class_combination} processed...\n")
 
-    file_object.write(f"\n{class_combination};{number_of_classes};{str(avg_best_accuracy).replace('.', ',')};{';'.join(measure_correlation_score_pvalue).replace('.', ',')};{str(round(np.sum(measures_avg_scores), 3)).replace('.', ',')}")
-
+    file_object.write(f"\n{class_combination};{number_of_classes};{str(avg_best_accuracy).replace('.', ',')};{';'.join(measure_correlation_score_pvalue).replace('.', ',')}")
 
 end_time = time.time()
 print(f"Execution time: {round((end_time-start_time)/60,2)} minutes")

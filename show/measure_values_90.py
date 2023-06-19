@@ -32,7 +32,7 @@ class_combinations = np.unique(np.array(clsf_ds["Class combination"].values))
 
 measure_names = np.unique(np.array(measures_ds["Measure name"].values))
 
-fig, ax = plt.subplots(10, 2, figsize=(10, 20))
+fig, ax = plt.subplots(9, 2, figsize=(10, 20))
 ax = ax.reshape(-1)
 
 file_object = open(f'{results_folder}correlation_values_90.txt', 'w')
